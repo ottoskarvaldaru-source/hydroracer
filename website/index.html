@@ -170,14 +170,15 @@
     ============================================================ */
     .reveal {
       opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
+      transform: translateY(32px);
+      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .reveal.visible { opacity: 1; transform: none; }
     .reveal-delay-1 { transition-delay: 0.10s; }
-    .reveal-delay-2 { transition-delay: 0.20s; }
-    .reveal-delay-3 { transition-delay: 0.30s; }
-    .reveal-delay-4 { transition-delay: 0.40s; }
+    .reveal-delay-2 { transition-delay: 0.22s; }
+    .reveal-delay-3 { transition-delay: 0.36s; }
+    .reveal-delay-4 { transition-delay: 0.52s; }
 
     /* ============================================================
        NAVIGATION
@@ -1774,16 +1775,34 @@
   window.addEventListener('scroll', updateActiveNav, { passive: true });
 
   // === SCROLL REVEAL ===
+  // Auto-stagger: list-like groups get cascading delays
+  ['.subteams-list', '.partners-list', '.news-list', '.mission-goals', '.timeline-steps'].forEach(sel => {
+    const container = document.querySelector(sel);
+    if (!container) return;
+    container.querySelectorAll('.reveal').forEach((el, i) => {
+      el.dataset.entryDelay = (i * 0.09).toFixed(2);
+    });
+  });
+
   const revealEls = document.querySelectorAll('.reveal');
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
+        // Apply stagger delay if set, otherwise fall back to CSS class delay
+        const d = e.target.dataset.entryDelay;
+        e.target.style.transitionDelay = d ? `${d}s` : '';
         e.target.classList.add('visible');
-        observer.unobserve(e.target);
+      } else {
+        // Only reset if element has scrolled above the viewport
+        // (so elements below can still animate in on scroll-down)
+        if (e.boundingClientRect.bottom < 0) {
+          e.target.style.transitionDelay = '0s';
+          e.target.classList.remove('visible');
+        }
       }
     });
-  }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 
   revealEls.forEach(el => observer.observe(el));
 
