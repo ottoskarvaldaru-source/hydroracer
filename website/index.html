@@ -66,19 +66,19 @@
       --cyan:         #3CC8E8;
       --orange:       #E8682C;
 
-      /* Dark palette */
-      --dark:         #07090C;
-      --dark-s:       #0D1117;
-      --dark-border:  rgba(255,255,255,0.07);
-      --dark-text:    #D6DBE2;
-      --dark-muted:   #555E6A;
+      /* Ocean abyss — darkest sections */
+      --dark:         #06090D;
+      --dark-s:       #0A1018;
+      --dark-border:  rgba(60,200,232,0.09);
+      --dark-text:    #C8D4DC;
+      --dark-muted:   #4C5E6C;
 
-      /* Light palette */
-      --light:        #F4F2EE;
-      --light-s:      #ECEAE5;
-      --light-border: rgba(0,0,0,0.09);
-      --light-text:   #171819;
-      --light-muted:  #797570;
+      /* Ocean depth — mid sections (was warm light) */
+      --light:        #0D1B28;
+      --light-s:      #111F2E;
+      --light-border: rgba(60,200,232,0.09);
+      --light-text:   #C8D4DC;
+      --light-muted:  #4D6070;
 
       --transition:   0.25s ease;
     }
@@ -91,6 +91,7 @@
       color: var(--dark-text);
       line-height: 1.65;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
     img { max-width: 100%; height: auto; display: block; }
@@ -187,7 +188,7 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: rgba(7,9,12,0.88);
+      background: rgba(6,9,13,0.90);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--dark-border);
@@ -255,7 +256,7 @@
         top: 60px; left: 0; right: 0;
         flex-direction: column;
         align-items: flex-start;
-        background: rgba(7,9,12,0.97);
+        background: rgba(6,9,13,0.98);
         padding: 24px 32px;
         gap: 20px;
         border-bottom: 1px solid var(--dark-border);
@@ -283,12 +284,12 @@
       position: absolute;
       inset: 0;
       background: linear-gradient(180deg,
-        rgba(7,9,12,0.68) 0%,
-        rgba(7,9,12,0.44) 18%,
-        rgba(7,9,12,0.97) 36%,
-        rgba(7,9,12,0.98) 64%,
-        rgba(7,9,12,0.88) 76%,
-        rgba(7,9,12,0.99) 100%
+        rgba(6,9,13,0.65) 0%,
+        rgba(6,9,13,0.40) 18%,
+        rgba(6,9,13,0.96) 36%,
+        rgba(6,9,13,0.97) 64%,
+        rgba(6,9,13,0.86) 76%,
+        rgba(6,9,13,0.99) 100%
       );
     }
 
