@@ -250,16 +250,6 @@
       font-weight: 700;
       letter-spacing: 0.16em;
       color: var(--cyan);
-      -webkit-mask-image: repeating-linear-gradient(
-        -65deg,
-        #000 0px, #000 4.5px,
-        rgba(0,0,0,0.08) 4.5px, rgba(0,0,0,0.08) 5.5px
-      );
-      mask-image: repeating-linear-gradient(
-        -65deg,
-        #000 0px, #000 4.5px,
-        rgba(0,0,0,0.08) 4.5px, rgba(0,0,0,0.08) 5.5px
-      );
     }
     .brand-logo-sm .o { color: var(--orange); }
 
@@ -372,16 +362,6 @@
       letter-spacing: 0.16em;
       color: var(--cyan);
       line-height: 1;
-      -webkit-mask-image: repeating-linear-gradient(
-        -65deg,
-        #000 0px, #000 12px,
-        rgba(0,0,0,0.08) 12px, rgba(0,0,0,0.08) 14px
-      );
-      mask-image: repeating-linear-gradient(
-        -65deg,
-        #000 0px, #000 12px,
-        rgba(0,0,0,0.08) 12px, rgba(0,0,0,0.08) 14px
-      );
     }
     .brand-logo-lg .o { color: var(--orange); }
 
@@ -422,6 +402,10 @@
       color: #fff;
       margin-bottom: 28px;
       max-width: 860px;
+    }
+    .hero-title sub {
+      font-size: 0.55em;
+      vertical-align: sub;
     }
 
     .ocean-clip {
@@ -479,6 +463,8 @@
       padding: 32px 24px;
       text-align: center;
       border-right: 1px solid var(--dark-border);
+      position: relative;
+      overflow: hidden;
     }
     .hero-stat:last-child { border-right: none; }
 
@@ -490,6 +476,8 @@
       color: #fff;
       line-height: 1;
       margin-bottom: 7px;
+      position: relative;
+      z-index: 1;
     }
 
     .hero-stat-label {
@@ -497,7 +485,10 @@
       color: var(--dark-muted);
       letter-spacing: 0.01em;
       line-height: 1.4;
+      position: relative;
+      z-index: 1;
     }
+
 
     @media (max-width: 600px) {
       .hero-stats { flex-wrap: wrap; }
@@ -1290,13 +1281,11 @@
 
     <h1 class="hero-title">
       Eesti esimene<br>
-      <span class="ocean-clip">vesinikuvõistluspaat</span>
+      <span class="ocean-clip">H<sub>2</sub> võistluspaat</span>
     </h1>
 
     <p class="hero-subtitle">
-      TalTechi üliõpilasmeeskond arendab maailmatasemel vesinikupaati,
-      mis kasutab metallhüdriidtehnoloogiat ja hüdrofoile.
-      Sihtmärk: Monaco Energy Boat Challenge 2027.
+      HydroRacer on TalTechi tudengimeeskonna poolt nullist ehitatav vesinikuvõistluspaat Monaco Energy Boat Challenge'ile.
     </p>
 
     <div class="hero-actions">
@@ -1308,7 +1297,7 @@
 
   <div class="hero-stats" aria-label="Projekti statistika">
     <div class="hero-stat">
-      <div class="hero-stat-num" data-count="16">16</div>
+      <div class="hero-stat-num" data-count="40">40</div>
       <div class="hero-stat-label">Meeskonnaliiget</div>
     </div>
     <div class="hero-stat">
@@ -1320,8 +1309,8 @@
       <div class="hero-stat-label">Monaco Energy Boat Challenge</div>
     </div>
     <div class="hero-stat">
-      <div class="hero-stat-num" data-count="0" data-suffix=" CO₂">0 CO₂</div>
-      <div class="hero-stat-label">Heitmed käitamisel</div>
+      <div class="hero-stat-num" data-count="9">9</div>
+      <div class="hero-stat-label">Partnerit</div>
     </div>
   </div>
 </section>
@@ -1340,15 +1329,10 @@
       </div>
       <div class="team-intro-right reveal reveal-delay-1">
         <p>
-          HydroRacer on 16-liikmeline TalTechi üliõpilasmeeskond, kelle südames põleb kirg
-          puhta energia ja innovatsiooni vastu. Meie liikmed esindavad elektroenergeetikat,
-          meretehnikat, tootearendust, materjalitehnoloogiat ja ärirahandust — koos loome
-          midagi, mida Eestis varem tehtud pole.
+          Merendussektor on liigselt sõltuv fossiilkütustest, kuigi maailm pürgib üha enam süsinikuvabade lahenduste suunas. Samuti pole Eesti mereriigina rakendanud oma potentsiaali meretehnoloogiate innovatsiooni eestvedajana rahvusvahelisel tasandil, samal ajal kui noored inseneritudengid otsivad võimalusi töötada päris probleemidega tegelevate projektide kallal. HydroRaceri eesmärk on need lüngad täita, tuues kokku ambitsioonikad tudengid ja komplekssed insenertehnilised väljakutsed ning seeläbi kujundada meretehnoloogiate arengu tulevikku.
         </p>
         <p>
-          Projekt sai hoo sisse 2025. aasta novembris toimunud Hydraton 2025 häkkatonil,
-          kus pandi paika paadi algkontept ja meeskond. Oleme TalTechi vesinikuorganisatsiooni
-          TiVo tiib ning kasutame meie enda arendatud HydroSave metallhüdriidtehnoloogiat.
+          HydroRacer on TalTechi tudengimeeskond, kelle südames põleb kirg inseneeria, rohetehnoloogiate ja innovatsiooni vastu. Projektis kohtuvad elektroenergeetika, laevamehaanika, tootearenduse ning majanduse eriala tudengid.
         </p>
       </div>
     </div>
