@@ -609,6 +609,45 @@
       .monaco-photo img { height: 240px; }
     }
 
+    /* Monaco section — 2-column layout */
+    .monaco-grid {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: 80px;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .monaco-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+    .monaco-intro-text {
+      font-size: 15px;
+      line-height: 1.78;
+      color: rgba(236,242,247,0.75);
+      margin-top: 24px;
+    }
+    .monaco-right > p {
+      font-size: 16px;
+      line-height: 1.75;
+      color: rgba(236,242,247,0.78);
+      margin-top: 20px;
+    }
+    .monaco-right > p:first-child { margin-top: 0; }
+    .monaco-classes {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .monaco-bullet {
+      width: 8px;
+      height: 8px;
+      min-width: 8px;
+      border-radius: 50%;
+      background: rgba(0,212,255,0.55);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
     /* Sub-teams heading */
     .subteams-heading {
       margin-bottom: 0;
@@ -710,18 +749,18 @@
     .mission-goals {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-auto-rows: 1fr;
       gap: 12px;
-      align-content: start;
     }
 
     @media (max-width: 640px) {
-      .mission-goals { grid-template-columns: 1fr; }
+      .mission-goals { grid-template-columns: 1fr; grid-auto-rows: auto; }
     }
 
     .mission-goal {
       display: flex;
-      gap: 20px;
-      padding: 20px 24px;
+      gap: 16px;
+      padding: 24px 20px;
       border-bottom: none;
       border-left: 2px solid rgba(0,212,255,0.20);
       background: rgba(0,212,255,0.03);
@@ -738,29 +777,36 @@
 
     .mission-goal-num {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--cyan);
-      letter-spacing: 0.05em;
-      padding-top: 3px;
+      font-size: 28px;
+      font-weight: 800;
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(0,212,255,0.35);
+      letter-spacing: -0.03em;
+      line-height: 1;
       flex-shrink: 0;
-      width: 26px;
-      opacity: 1;
+      width: 36px;
+      padding-top: 2px;
+      transition: -webkit-text-stroke-color 0.25s ease;
+    }
+
+    .mission-goal:hover .mission-goal-num {
+      -webkit-text-stroke-color: rgba(0,212,255,0.75);
     }
 
     .mission-goal-content h4 {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 15px;
-      font-weight: 600;
+      font-weight: 700;
       color: #ffffff;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
       letter-spacing: -0.01em;
+      white-space: nowrap;
     }
 
     .mission-goal-content p {
       font-size: 13px;
       color: rgba(236,242,247,0.72);
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
     /* Mission right — key technologies */
@@ -864,205 +910,208 @@
     }
 
     /* ============================================================
-       ROADMAP TIMELINE — Ajakava section
+       AJAKAVA — 2-column editorial layout
     ============================================================ */
-    .roadmap-scroll {
-      overflow-x: auto;
-      margin-top: 72px;
-      padding-bottom: 16px;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255,255,255,0.08) transparent;
+    .ajakava-grid {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: 80px;
+      align-items: start;
     }
-    .roadmap-scroll::-webkit-scrollbar { height: 3px; }
-    .roadmap-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
-
-    .roadmap-track {
+    @media (max-width: 768px) {
+      .ajakava-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+    .ajakava-intro-text {
+      font-size: 15px;
+      line-height: 1.78;
+      color: rgba(236,242,247,0.65);
+      margin-top: 24px;
+    }
+    .ajakava-steps {
       display: flex;
-      min-width: 900px;
-      position: relative;
-      padding-bottom: 8px;
+      flex-direction: column;
     }
-
-    /* Grey background track line */
-    .roadmap-track::before {
-      content: '';
-      position: absolute;
-      top: 31px;
-      left: calc(100% / 12);
-      right: calc(100% / 12);
-      height: 2px;
-      background: rgba(255,255,255,0.07);
-      border-radius: 1px;
-      z-index: 0;
+    .ajakava-step {
+      display: flex;
+      gap: 20px;
     }
-
-    /* Animated orange progress fill (step 1 → step 2 = 1/5 of line = 16.67%) */
-    .roadmap-track::after {
-      content: '';
-      position: absolute;
-      top: 31px;
-      left: calc(100% / 12);
-      width: 0;
-      height: 2px;
-      background: linear-gradient(to right, var(--orange), rgba(232,104,44,0.55));
-      border-radius: 1px;
-      z-index: 1;
-      transition: width 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
-    }
-    .roadmap-scroll.visible .roadmap-track::after { width: 16.67%; }
-
-    .roadmap-step {
-      flex: 1;
+    .ajakava-step-track {
       display: flex;
       flex-direction: column;
       align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-
-    /* Fixed-height wrapper so all circles align to same track height */
-    .roadmap-node-wrap {
-      width: 64px;
-      height: 64px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 22px;
       flex-shrink: 0;
+      width: 44px;
     }
-
-    .roadmap-node {
-      width: 48px;
-      height: 48px;
+    .ajakava-node {
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
+      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid rgba(255,255,255,0.1);
-      background: var(--dark);
+      border: 2px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.03);
       position: relative;
-      transition: border-color 0.3s ease, background 0.3s ease;
+      z-index: 1;
     }
-
-    /* Done: orange fill with checkmark */
-    .step--done .roadmap-node {
-      background: var(--orange);
-      border-color: var(--orange);
+    .ajakava-line {
+      width: 1px;
+      flex: 1;
+      min-height: 16px;
+      background: rgba(255,255,255,0.08);
+      margin: 5px 0;
     }
-    .step--done .roadmap-node::after {
-      content: '';
-      display: block;
-      width: 11px;
-      height: 7px;
-      border-left: 2.5px solid rgba(255,255,255,0.95);
-      border-bottom: 2.5px solid rgba(255,255,255,0.95);
-      transform: rotate(-45deg) translate(1px, -1px);
+    .ajakava-step:last-child .ajakava-line { display: none; }
+    .ajakava-step-body {
+      flex: 1;
+      padding-bottom: 24px;
+      padding-top: 4px;
     }
-
-    /* Active: larger, orange, pulsing glow */
-    .step--active .roadmap-node {
-      width: 60px;
-      height: 60px;
-      background: var(--orange);
-      border: none;
-      box-shadow:
-        0 0 0 7px rgba(232,104,44,0.18),
-        0 0 0 16px rgba(232,104,44,0.07),
-        0 6px 40px rgba(232,104,44,0.45);
-      animation: roadmap-pulse 2.8s ease-in-out infinite;
-    }
-    .step--active .roadmap-node::after {
-      content: '';
-      display: block;
-      width: 14px;
-      height: 14px;
-      background: rgba(255,255,255,0.92);
-      border-radius: 50%;
-    }
-
-    /* Final step: cyan accent */
-    .step--final .roadmap-node {
-      border-color: rgba(60,200,232,0.45);
-      background: rgba(60,200,232,0.05);
-    }
-    .step--final .roadmap-node::after {
-      content: '★';
-      font-size: 16px;
-      color: rgba(60,200,232,0.55);
-      line-height: 1;
-    }
-
-    @keyframes roadmap-pulse {
-      0%, 100% {
-        box-shadow:
-          0 0 0 7px rgba(232,104,44,0.18),
-          0 0 0 16px rgba(232,104,44,0.07),
-          0 6px 40px rgba(232,104,44,0.45);
-      }
-      50% {
-        box-shadow:
-          0 0 0 11px rgba(232,104,44,0.13),
-          0 0 0 24px rgba(232,104,44,0.04),
-          0 6px 56px rgba(232,104,44,0.6);
-      }
-    }
-
-    .roadmap-info { text-align: center; padding: 0 4px; }
-
-    .roadmap-date {
+    .ajakava-step:last-child .ajakava-step-body { padding-bottom: 0; }
+    .ajakava-step-date {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.10em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.2);
-      margin-bottom: 5px;
+      color: rgba(255,255,255,0.28);
+      margin-bottom: 3px;
     }
-    .step--done .roadmap-date { color: rgba(232,104,44,0.65); }
-    .step--active .roadmap-date { color: var(--orange); }
-    .step--final .roadmap-date { color: rgba(60,200,232,0.65); }
-
-    .roadmap-title {
+    .ajakava-step-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 600;
-      color: rgba(255,255,255,0.22);
+      color: rgba(255,255,255,0.42);
       letter-spacing: -0.01em;
-      margin-bottom: 7px;
+      margin-bottom: 3px;
     }
-    .step--done .roadmap-title { color: rgba(255,255,255,0.6); }
-    .step--active .roadmap-title {
-      font-size: 15px;
+    .ajakava-step-desc {
+      font-size: 12px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.26);
+    }
+
+    /* Done */
+    .ajakava-step.step--done .ajakava-node {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+    .ajakava-step.step--done .ajakava-node::after {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 5px;
+      border-left: 2px solid rgba(255,255,255,0.95);
+      border-bottom: 2px solid rgba(255,255,255,0.95);
+      transform: rotate(-45deg) translate(1px, -1px);
+    }
+    .ajakava-step.step--done .ajakava-step-date { color: rgba(232,104,44,0.60); }
+    .ajakava-step.step--done .ajakava-step-title { color: rgba(255,255,255,0.55); }
+    .ajakava-step.step--done .ajakava-step-desc { color: rgba(255,255,255,0.32); }
+    .ajakava-step.step--done .ajakava-line {
+      background: linear-gradient(to bottom, var(--orange), rgba(255,255,255,0.08));
+    }
+
+    /* Active */
+    .ajakava-step.step--active .ajakava-node {
+      width: 40px;
+      height: 40px;
+      background: var(--orange);
+      border: none;
+      box-shadow:
+        0 0 0 6px rgba(232,104,44,0.18),
+        0 0 0 12px rgba(232,104,44,0.07),
+        0 4px 28px rgba(232,104,44,0.50);
+      animation: ajakava-pulse 2.8s ease-in-out infinite;
+    }
+    .ajakava-step.step--active .ajakava-node::after {
+      content: '';
+      display: block;
+      width: 10px;
+      height: 10px;
+      background: rgba(255,255,255,0.92);
+      border-radius: 50%;
+    }
+    .ajakava-step.step--active .ajakava-step-body {
+      background: rgba(232,104,44,0.06);
+      border: 1px solid rgba(232,104,44,0.20);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: -4px;
+    }
+    .ajakava-step.step--active .ajakava-step-date { color: var(--orange); }
+    .ajakava-step.step--active .ajakava-step-title {
+      font-size: 16px;
       font-weight: 700;
-      color: var(--dark-text);
+      color: #ffffff;
       letter-spacing: -0.02em;
+      margin-bottom: 6px;
     }
-    .step--final .roadmap-title { color: rgba(255,255,255,0.55); }
-
-    .roadmap-desc {
-      font-size: 11px;
-      line-height: 1.55;
-      color: rgba(255,255,255,0.14);
-      max-width: 100px;
-      margin: 0 auto;
+    .ajakava-step.step--active .ajakava-step-desc {
+      color: rgba(236,242,247,0.60);
+      font-size: 13px;
     }
-    .step--done .roadmap-desc { color: rgba(255,255,255,0.28); }
-    .step--active .roadmap-desc { color: rgba(255,255,255,0.48); font-size: 12px; max-width: 120px; }
-    .step--final .roadmap-desc { color: rgba(60,200,232,0.38); }
 
-    .roadmap-badge {
+    /* Final */
+    .ajakava-step.step--final .ajakava-node {
+      border: 2px solid rgba(0,212,255,0.55);
+      background: rgba(0,212,255,0.06);
+      box-shadow: 0 0 0 4px rgba(0,212,255,0.08), 0 4px 20px rgba(0,212,255,0.22);
+    }
+    .ajakava-step.step--final .ajakava-node::after {
+      content: '★';
+      font-size: 12px;
+      color: rgba(0,212,255,0.85);
+      line-height: 1;
+    }
+    .ajakava-step.step--final .ajakava-step-body {
+      background: rgba(0,212,255,0.04);
+      border: 1px solid rgba(0,212,255,0.20);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: -4px;
+    }
+    .ajakava-step.step--final .ajakava-step-date { color: rgba(0,212,255,0.65); }
+    .ajakava-step.step--final .ajakava-step-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .ajakava-step.step--final .ajakava-step-desc {
+      color: rgba(0,212,255,0.50);
+      font-size: 13px;
+    }
+
+    .ajakava-badge {
       display: inline-block;
-      margin-top: 6px;
       margin-bottom: 7px;
-      padding: 3px 10px;
+      padding: 2px 9px;
       background: rgba(232,104,44,0.12);
-      border: 1px solid rgba(232,104,44,0.3);
+      border: 1px solid rgba(232,104,44,0.30);
       border-radius: 20px;
       font-size: 9px;
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--orange);
+    }
+
+    @keyframes ajakava-pulse {
+      0%, 100% {
+        box-shadow:
+          0 0 0 6px rgba(232,104,44,0.18),
+          0 0 0 12px rgba(232,104,44,0.07),
+          0 4px 28px rgba(232,104,44,0.50);
+      }
+      50% {
+        box-shadow:
+          0 0 0 9px rgba(232,104,44,0.13),
+          0 0 0 18px rgba(232,104,44,0.04),
+          0 4px 40px rgba(232,104,44,0.65);
+      }
     }
 
     /* ============================================================
@@ -1369,104 +1418,79 @@
     }
     .social-text-link:hover { color: var(--dark-text); }
 
-    /* Contact form */
-    .contact-form-area {
+    /* Contact card */
+    .contact-card {
       background: var(--dark-s);
       border: 1px solid var(--dark-border);
+      border-radius: 4px;
       padding: 40px;
     }
-
     @media (max-width: 480px) {
-      .contact-form-area { padding: 28px 24px; }
+      .contact-card { padding: 28px 24px; }
     }
-
-    .form-title {
+    .contact-card-title {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 17px;
       font-weight: 600;
       color: var(--dark-text);
-      margin-bottom: 32px;
       letter-spacing: -0.01em;
+      margin-bottom: 14px;
     }
-
-    .form-group {
-      margin-bottom: 20px;
+    .contact-card-text {
+      font-size: 15px;
+      line-height: 1.72;
+      color: rgba(236,242,247,0.60);
+      margin-bottom: 32px;
     }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    @media (max-width: 480px) {
-      .form-row { grid-template-columns: 1fr; }
-    }
-
-    .form-group label {
+    .contact-card-email {
       display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(17px, 2vw, 22px);
+      font-weight: 700;
+      color: var(--cyan);
+      letter-spacing: -0.01em;
+      padding-bottom: 28px;
+      margin-bottom: 28px;
+      border-bottom: 1px solid rgba(0,212,255,0.15);
+      transition: color var(--transition);
+    }
+    .contact-card-email:hover { color: #2CDEFF; }
+    .contact-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    .contact-tag {
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.08em;
-      color: var(--dark-muted);
       text-transform: uppercase;
-      margin-bottom: 8px;
+      color: rgba(236,242,247,0.45);
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 5px 12px;
+      border-radius: 20px;
     }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--dark-border);
-      color: var(--dark-text);
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      padding: 12px 16px;
-      border-radius: 0;
-      outline: none;
-      transition: border-color var(--transition);
-      -webkit-appearance: none;
-    }
-
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: var(--dark-muted);
-      opacity: 0.5;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: rgba(60,200,232,0.35);
-    }
-
-    .form-group textarea { min-height: 120px; resize: vertical; }
-    .form-group select { cursor: pointer; }
-    .form-group select option { background: #1a2030; }
-
-    .btn-submit {
-      width: 100%;
-      background: var(--cyan);
-      color: #080D14;
+    .contact-card-btn {
+      display: inline-flex;
+      align-items: center;
       font-family: 'Space Grotesk', sans-serif;
       font-size: 13px;
       font-weight: 700;
-      letter-spacing: 0.09em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      border: none;
-      padding: 16px 24px;
-      cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      color: #080D14;
+      background: var(--cyan);
+      padding: 14px 28px;
       border-radius: 4px;
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .btn-submit:hover {
-      opacity: 1;
+    .contact-card-btn:hover {
       background: #2CDEFF;
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(0,212,255,0.45);
+      box-shadow: 0 8px 32px rgba(0,212,255,0.40);
     }
-    .btn-submit:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
 
     /* Toast */
     .toast {
@@ -1686,29 +1710,29 @@
         <div class="mission-goal">
           <div class="mission-goal-num">01</div>
           <div class="mission-goal-content">
-            <h4>Projekti väärtuspakkumise arendamine</h4>
-            <p>Tõestame, et vesinikutehnoloogia ja hüdrofoilid on täna toimiv kombinatsioon — mitte ainult visioon, vaid reaalne prototüüp.</p>
+            <h4>Tõestame</h4>
+            <p>Vesinikutehnoloogia ja hüdrofoilid koos — toimiv prototüüp, mitte ainult pabervisioon.</p>
           </div>
         </div>
         <div class="mission-goal">
           <div class="mission-goal-num">02</div>
           <div class="mission-goal-content">
-            <h4>Inseneride arendamine</h4>
-            <p>Anname Eesti üliõpilastele võimaluse lahendada maailmatasemel inseneeriprobleeme päriselt, mitte ainult õpikust.</p>
+            <h4>Kasvatame</h4>
+            <p>Üliõpilased lahendavad päris inseneeriprobleeme — käed küljes, tulemused reaalsed ja mõõdetavad.</p>
           </div>
         </div>
         <div class="mission-goal">
           <div class="mission-goal-num">03</div>
           <div class="mission-goal-content">
-            <h4>Tehnoloogia arendus</h4>
-            <p>Arendame HydroSave metallhüdriidsalvestustehnoloogiat, millel on patendipotentsiaal ja rakendused väljaspool võistlussporti.</p>
+            <h4>Leiutame</h4>
+            <p>HydroSave metallhüdriidsalvestus — patenteeritav lahendus, millel on rakendusi kaugelt väljaspool sporti.</p>
           </div>
         </div>
         <div class="mission-goal">
           <div class="mission-goal-num">04</div>
           <div class="mission-goal-content">
-            <h4>Eesti kui mereriigi reputatsioon</h4>
-            <p>Viime Eesti inseneeria Monaco Energy Boat Challenge'i kaardile — maailma prestiižseimale väikelaevade energiavõistlusele.</p>
+            <h4>Jõuame Monaconi</h4>
+            <p>Eesti inseneeria Monaco Energy Boat Challenge'il — maailmakaardil 2027.</p>
           </div>
         </div>
       </div>
@@ -1843,12 +1867,19 @@
 <section class="section section--light" id="monaco" aria-labelledby="monaco-heading">
   <div class="container">
 
-    <div class="team-intro-grid">
-      <div class="team-intro-left reveal-left">
+    <div class="monaco-grid">
+
+      <div class="monaco-left reveal-left">
         <span class="section-label">Monaco Energy Boat Challenge</span>
         <h2 class="section-title" id="monaco-heading">Maailma parimad<br>ühel rajal</h2>
+        <p class="monaco-intro-text">
+          Monaco Energy Boat Challenge toob samale areenile maailma juhtivad ülikoolid,
+          inseneritiimid ja meretehnoloogia arendajad. See ei ole ainult võidusõit,
+          vaid tulevikulahenduste katsepolügoon päris mereoludes.
+        </p>
       </div>
-      <div class="team-intro-right reveal-right reveal-delay-1">
+
+      <div class="monaco-right reveal-right reveal-delay-1">
         <p>
           Monaco Energy Boat Challenge on maailma prestiižseim null-emissiooniga laevade võistlus,
           mida korraldab Yacht Club de Monaco alates 2014. aastast. Igal suvel koguneb Monacose
@@ -1856,28 +1887,29 @@
           päris merel.
         </p>
         <p>HydroRacer osaleb kahes võistlusklassis:</p>
-        <div class="mission-goals" style="margin-top: 16px;">
+        <div class="monaco-classes">
           <div class="mission-goal reveal reveal-delay-1">
-            <div class="mission-goal-num" style="font-size: 0.7em; letter-spacing: 0.05em;">E</div>
+            <div class="monaco-bullet"></div>
             <div class="mission-goal-content">
               <h4>Energy Endurance</h4>
               <p>Vastupidavusvõistlus, kus võidab kõige energiatõhusam paat.</p>
             </div>
           </div>
           <div class="mission-goal reveal reveal-delay-2">
-            <div class="mission-goal-num" style="font-size: 0.7em; letter-spacing: 0.05em;">S</div>
+            <div class="monaco-bullet"></div>
             <div class="mission-goal-content">
               <h4>Speed Challenge</h4>
               <p>Kiirussõit, kus mõõdetakse maksimaalset jõudlust.</p>
             </div>
           </div>
         </div>
-        <p style="margin-top: 24px;">
+        <p>
           Võistlus ei ole pelgalt sport. See on rahvusvaheline valideerimisplatvorm, kus uued
           meretehnoloogiad saavad esimest korda reaalse meretesti. Üritust jälgivad aktiivselt
           Euroopa merendus- ja energeetikasektori investorid ja tööstuspartnerid.
         </p>
       </div>
+
     </div>
 
     <div class="monaco-photo reveal reveal-delay-2">
@@ -1894,70 +1926,97 @@
 <section class="section section--dark" id="ajakava" aria-labelledby="ajakava-heading">
   <div class="container">
 
-    <div class="reveal">
-      <span class="section-label">Ajakava</span>
-      <h2 class="section-title" id="ajakava-heading">Tee Monaconi</h2>
-    </div>
+    <div class="ajakava-grid">
 
-    <div class="roadmap-scroll reveal reveal-delay-1">
-      <div class="roadmap-track">
-
-        <div class="roadmap-step step--done">
-          <div class="roadmap-node-wrap"><div class="roadmap-node"></div></div>
-          <div class="roadmap-info">
-            <div class="roadmap-date">Veebr 2026</div>
-            <div class="roadmap-title">Kontsept</div>
-            <div class="roadmap-desc">Meeskond, esialgne kontseptsioon, teostatavuse analüüs</div>
-          </div>
-        </div>
-
-        <div class="roadmap-step step--active">
-          <div class="roadmap-node-wrap"><div class="roadmap-node"></div></div>
-          <div class="roadmap-info">
-            <div class="roadmap-date">Märts–Mai 2026</div>
-            <div class="roadmap-title">Disainperiood</div>
-            <div class="roadmap-badge">Praegu</div>
-            <div class="roadmap-desc">CAD mudel, hüdrofoilid, elektrisüsteemid</div>
-          </div>
-        </div>
-
-        <div class="roadmap-step">
-          <div class="roadmap-node-wrap"><div class="roadmap-node"></div></div>
-          <div class="roadmap-info">
-            <div class="roadmap-date">Juuni–Aug 2026</div>
-            <div class="roadmap-title">Ehitusperiood</div>
-            <div class="roadmap-desc">Kere valmistamine, komponentide koostamine</div>
-          </div>
-        </div>
-
-        <div class="roadmap-step">
-          <div class="roadmap-node-wrap"><div class="roadmap-node"></div></div>
-          <div class="roadmap-info">
-            <div class="roadmap-date">Sept 2026</div>
-            <div class="roadmap-title">Hooaja algus</div>
-            <div class="roadmap-desc">Esimene veekatsetus, süsteemide valideerimine</div>
-          </div>
-        </div>
-
-        <div class="roadmap-step">
-          <div class="roadmap-node-wrap"><div class="roadmap-node"></div></div>
-          <div class="roadmap-info">
-            <div class="roadmap-date">Sept–Nov 2026</div>
-            <div class="roadmap-title">Testid</div>
-            <div class="roadmap-desc">Jõudlustestid, optimeerimine, viimistlus</div>
-          </div>
-        </div>
-
-        <div class="roadmap-step step--final">
-          <div class="roadmap-node-wrap"><div class="roadmap-node"></div></div>
-          <div class="roadmap-info">
-            <div class="roadmap-date">Juuli 2027</div>
-            <div class="roadmap-title">Monaco EBC</div>
-            <div class="roadmap-desc">Monaco Energy Boat Challenge 2027</div>
-          </div>
-        </div>
-
+      <div class="ajakava-left reveal-left">
+        <span class="section-label">Ajakava</span>
+        <h2 class="section-title" id="ajakava-heading">Tee Monaconi</h2>
+        <p class="ajakava-intro-text">
+          HydroRaceri areng on üles ehitatud selge etapiloogika järgi. Kontseptsioonist disaini,
+          ehitusest testideni viib iga samm meeskonna lähemale Monaco Energy Boat Challenge
+          2027 stardijoonele.
+        </p>
       </div>
+
+      <div class="ajakava-right reveal-right reveal-delay-1">
+        <div class="ajakava-steps">
+
+          <div class="ajakava-step step--done">
+            <div class="ajakava-step-track">
+              <div class="ajakava-node"></div>
+              <div class="ajakava-line"></div>
+            </div>
+            <div class="ajakava-step-body">
+              <div class="ajakava-step-date">Veebr 2026</div>
+              <div class="ajakava-step-title">Kontsept</div>
+              <div class="ajakava-step-desc">Meeskond, esialgne kontseptsioon, teostatavuse analüüs</div>
+            </div>
+          </div>
+
+          <div class="ajakava-step step--active">
+            <div class="ajakava-step-track">
+              <div class="ajakava-node"></div>
+              <div class="ajakava-line"></div>
+            </div>
+            <div class="ajakava-step-body">
+              <div class="ajakava-badge">Praegu</div>
+              <div class="ajakava-step-date">Märts–Mai 2026</div>
+              <div class="ajakava-step-title">Disainperiood</div>
+              <div class="ajakava-step-desc">CAD mudel, hüdrofoilid, elektrisüsteemid</div>
+            </div>
+          </div>
+
+          <div class="ajakava-step">
+            <div class="ajakava-step-track">
+              <div class="ajakava-node"></div>
+              <div class="ajakava-line"></div>
+            </div>
+            <div class="ajakava-step-body">
+              <div class="ajakava-step-date">Juuni–Aug 2026</div>
+              <div class="ajakava-step-title">Ehitusperiood</div>
+              <div class="ajakava-step-desc">Kere valmistamine, komponentide koostamine</div>
+            </div>
+          </div>
+
+          <div class="ajakava-step">
+            <div class="ajakava-step-track">
+              <div class="ajakava-node"></div>
+              <div class="ajakava-line"></div>
+            </div>
+            <div class="ajakava-step-body">
+              <div class="ajakava-step-date">Sept 2026</div>
+              <div class="ajakava-step-title">Hooaja algus</div>
+              <div class="ajakava-step-desc">Esimene veekatsetus, süsteemide valideerimine</div>
+            </div>
+          </div>
+
+          <div class="ajakava-step">
+            <div class="ajakava-step-track">
+              <div class="ajakava-node"></div>
+              <div class="ajakava-line"></div>
+            </div>
+            <div class="ajakava-step-body">
+              <div class="ajakava-step-date">Sept–Nov 2026</div>
+              <div class="ajakava-step-title">Testid</div>
+              <div class="ajakava-step-desc">Jõudlustestid, optimeerimine, viimistlus</div>
+            </div>
+          </div>
+
+          <div class="ajakava-step step--final">
+            <div class="ajakava-step-track">
+              <div class="ajakava-node"></div>
+              <div class="ajakava-line"></div>
+            </div>
+            <div class="ajakava-step-body">
+              <div class="ajakava-step-date">Juuli 2027</div>
+              <div class="ajakava-step-title">Monaco EBC</div>
+              <div class="ajakava-step-desc">Monaco Energy Boat Challenge 2027</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -2037,9 +2096,9 @@
           <div>
             <span class="contact-detail-label">Sotsiaalmeedia</span>
             <div class="social-text-links">
-              <a href="#" class="social-text-link" aria-label="HydroRacer LinkedInis">LinkedIn</a>
-              <a href="#" class="social-text-link" aria-label="HydroRacer Instagramis">Instagram</a>
-              <a href="#" class="social-text-link" aria-label="HydroRacer Facebookis">Facebook</a>
+              <a href="https://www.linkedin.com/company/hydroracer/" target="_blank" rel="noopener noreferrer" class="social-text-link" aria-label="HydroRacer LinkedInis">LinkedIn</a>
+              <a href="https://www.instagram.com/taltechtivo/" target="_blank" rel="noopener noreferrer" class="social-text-link" aria-label="HydroRacer Instagramis">Instagram</a>
+              <a href="https://www.facebook.com/TalTechTiVo/" target="_blank" rel="noopener noreferrer" class="social-text-link" aria-label="HydroRacer Facebookis">Facebook</a>
             </div>
           </div>
           <div>
@@ -2051,36 +2110,24 @@
         </div>
       </div>
 
-      <div class="contact-form-area reveal reveal-delay-2" role="form" aria-label="Kontaktvorm">
-        <p class="form-title">Saada sõnum</p>
-        <form id="contactForm" novalidate>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Nimi *</label>
-              <input type="text" id="name" name="name" placeholder="Sinu nimi" required autocomplete="name">
-            </div>
-            <div class="form-group">
-              <label for="email">E-post *</label>
-              <input type="email" id="email" name="email" placeholder="sinu@email.ee" required autocomplete="email">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="subject">Teema</label>
-            <select id="subject" name="subject">
-              <option value="">Vali teema</option>
-              <option value="partnership">Partnerlus</option>
-              <option value="media">Meediapäring</option>
-              <option value="sponsorship">Sponsorlus</option>
-              <option value="join">Liitu meeskonnaga</option>
-              <option value="other">Muu</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="message">Sõnum *</label>
-            <textarea id="message" name="message" placeholder="Kirjuta siia..." required></textarea>
-          </div>
-          <button type="submit" class="btn-submit">Saada sõnum</button>
-        </form>
+      <div class="contact-card reveal reveal-delay-2">
+        <p class="contact-card-title">Kirjuta meile</p>
+        <p class="contact-card-text">
+          Kui soovid rääkida partnerlusest, koostööst, meediakajastusest
+          või projekti toetamisest, võta meiega ühendust e-posti teel.
+        </p>
+        <a href="mailto:hydroracer@taltech.ee" class="contact-card-email">
+          hydroracer@taltech.ee
+        </a>
+        <div class="contact-card-tags">
+          <span class="contact-tag">Partnerlus</span>
+          <span class="contact-tag">Koostöö</span>
+          <span class="contact-tag">Meedia</span>
+          <span class="contact-tag">TalTech TiVo</span>
+        </div>
+        <a href="mailto:hydroracer@taltech.ee" class="contact-card-btn">
+          Ava e-post →
+        </a>
       </div>
 
     </div>
