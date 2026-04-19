@@ -63,22 +63,22 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cyan:         #3CC8E8;
-      --orange:       #E8682C;
+      --cyan:         #00D4FF;
+      --orange:       #FF6B35;
 
       /* Ocean abyss — darkest sections */
-      --dark:         #06090D;
-      --dark-s:       #0A1018;
-      --dark-border:  rgba(60,200,232,0.09);
-      --dark-text:    #C8D4DC;
-      --dark-muted:   #4C5E6C;
+      --dark:         #080D14;
+      --dark-s:       #0C1520;
+      --dark-border:  rgba(0,212,255,0.13);
+      --dark-text:    #ECF2F7;
+      --dark-muted:   #7A9BB0;
 
-      /* Ocean depth — mid sections (was warm light) */
-      --light:        #0D1B28;
-      --light-s:      #111F2E;
-      --light-border: rgba(60,200,232,0.09);
-      --light-text:   #C8D4DC;
-      --light-muted:  #4D6070;
+      /* Ocean depth — mid sections */
+      --light:        #0D1C2E;
+      --light-s:      #101E2E;
+      --light-border: rgba(0,212,255,0.13);
+      --light-text:   #ECF2F7;
+      --light-muted:  #7A9BB0;
 
       --transition:   0.25s ease;
     }
@@ -119,7 +119,7 @@
     }
 
     .section {
-      padding: 128px 0;
+      padding: 160px 0;
       position: relative;
     }
 
@@ -127,17 +127,23 @@
     .section > .container { position: relative; z-index: 1; }
 
     .section--light {
-      background: var(--light);
+      background:
+        radial-gradient(ellipse 90% 50% at 50% 0%, rgba(0,212,255,0.07) 0%, transparent 65%),
+        linear-gradient(180deg, #0D1C2E 0%, #0F2035 100%);
       color: var(--light-text);
     }
 
     .section--light-alt {
-      background: var(--light-s);
+      background:
+        radial-gradient(ellipse 90% 50% at 50% 0%, rgba(0,212,255,0.06) 0%, transparent 65%),
+        linear-gradient(180deg, #101E2E 0%, #0D1C2E 100%);
       color: var(--light-text);
     }
 
     .section--dark {
-      background: var(--dark);
+      background:
+        radial-gradient(ellipse 90% 50% at 50% 0%, rgba(0,212,255,0.05) 0%, transparent 60%),
+        linear-gradient(180deg, #080D14 0%, #0A1018 100%);
       color: var(--dark-text);
     }
 
@@ -173,16 +179,17 @@
     .section-label {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
+      font-weight: 700;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       margin-bottom: 20px;
       display: block;
+      color: var(--cyan);
     }
 
-    .section--light .section-label  { color: var(--light-muted); }
-    .section--light-alt .section-label { color: var(--light-muted); }
-    .section--dark .section-label   { color: var(--dark-muted); }
+    .section--light .section-label  { color: var(--cyan); }
+    .section--light-alt .section-label { color: var(--cyan); }
+    .section--dark .section-label   { color: var(--cyan); }
 
     .section-title {
       font-family: 'Space Grotesk', sans-serif;
@@ -191,11 +198,16 @@
       letter-spacing: -0.025em;
       line-height: 1.08;
       margin-bottom: 24px;
+      background: linear-gradient(135deg, #ffffff 0%, #B8E8F8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: #ffffff;
     }
 
-    .section--light .section-title  { color: var(--light-text); }
-    .section--light-alt .section-title { color: var(--light-text); }
-    .section--dark .section-title   { color: var(--dark-text); }
+    .section--light .section-title  { color: #ffffff; }
+    .section--light-alt .section-title { color: #ffffff; }
+    .section--dark .section-title   { color: #ffffff; }
 
     .section-text {
       font-size: 17px;
@@ -203,20 +215,34 @@
       max-width: 520px;
     }
 
-    .section--light .section-text  { color: var(--light-muted); }
-    .section--light-alt .section-text { color: var(--light-muted); }
-    .section--dark .section-text   { color: var(--dark-muted); }
+    .section--light .section-text  { color: rgba(236,242,247,0.80); }
+    .section--light-alt .section-text { color: rgba(236,242,247,0.80); }
+    .section--dark .section-text   { color: rgba(236,242,247,0.80); }
 
     /* ============================================================
        REVEAL ANIMATIONS
     ============================================================ */
     .reveal {
       opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(40px);
+      transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .reveal.visible { opacity: 1; transform: none; }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-36px);
+      transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-left.visible { opacity: 1; transform: none; }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(36px);
+      transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-right.visible { opacity: 1; transform: none; }
     .reveal-delay-1 { transition-delay: 0.10s; }
     .reveal-delay-2 { transition-delay: 0.22s; }
     .reveal-delay-3 { transition-delay: 0.36s; }
@@ -262,7 +288,7 @@
     .nav-links a {
       font-size: 13px;
       font-weight: 500;
-      color: var(--dark-muted);
+      color: rgba(236,242,247,0.60);
       letter-spacing: 0.01em;
       transition: color var(--transition);
     }
@@ -419,7 +445,7 @@
     .hero-subtitle {
       font-size: clamp(15px, 1.8vw, 18px);
       line-height: 1.7;
-      color: rgba(214,219,226,0.6);
+      color: rgba(236,242,247,0.75);
       max-width: 500px;
       margin-bottom: 48px;
     }
@@ -428,27 +454,47 @@
     .hero-actions {
       display: flex;
       align-items: center;
-      gap: 36px;
+      gap: 16px;
       flex-wrap: wrap;
     }
 
     .hero-link-primary {
+      display: inline-flex;
+      align-items: center;
       font-family: 'Space Grotesk', sans-serif;
       font-size: 15px;
-      font-weight: 600;
-      color: var(--cyan);
-      letter-spacing: 0.01em;
-      transition: opacity var(--transition);
+      font-weight: 700;
+      color: #080D14;
+      background: var(--cyan);
+      letter-spacing: 0.03em;
+      padding: 14px 28px;
+      border-radius: 4px;
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .hero-link-primary:hover { opacity: 0.7; }
+    .hero-link-primary:hover {
+      opacity: 1;
+      background: #2CDEFF;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 36px rgba(0,212,255,0.45);
+    }
 
     .hero-link-secondary {
+      display: inline-flex;
+      align-items: center;
       font-size: 15px;
-      font-weight: 400;
-      color: rgba(214,219,226,0.45);
-      transition: color var(--transition);
+      font-weight: 500;
+      color: rgba(236,242,247,0.70);
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 14px 28px;
+      border-radius: 4px;
+      letter-spacing: 0.01em;
+      transition: all 0.25s ease;
     }
-    .hero-link-secondary:hover { color: rgba(214,219,226,0.8); }
+    .hero-link-secondary:hover {
+      color: rgba(236,242,247,0.95);
+      border-color: rgba(255,255,255,0.38);
+      background: rgba(255,255,255,0.06);
+    }
 
     /* Hero stats bar */
     .hero-stats {
@@ -470,23 +516,32 @@
 
     .hero-stat-num {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(24px, 3vw, 40px);
+      font-size: clamp(32px, 4vw, 52px);
       font-weight: 700;
-      letter-spacing: -0.025em;
-      color: #fff;
+      letter-spacing: -0.03em;
+      color: var(--cyan);
       line-height: 1;
-      margin-bottom: 7px;
+      margin-bottom: 8px;
       position: relative;
       z-index: 1;
+      text-shadow: 0 0 24px rgba(0,212,255,0.45);
     }
 
     .hero-stat-label {
       font-size: 12px;
-      color: var(--dark-muted);
-      letter-spacing: 0.01em;
+      color: rgba(236,242,247,0.75);
+      letter-spacing: 0.02em;
       line-height: 1.4;
       position: relative;
       z-index: 1;
+      font-weight: 500;
+    }
+
+    .hero-stat {
+      transition: background 0.3s ease;
+    }
+    .hero-stat:hover {
+      background: rgba(0,212,255,0.05);
     }
 
 
@@ -515,22 +570,57 @@
     .team-intro-right p {
       font-size: 16px;
       line-height: 1.75;
-      color: var(--light-muted);
+      color: rgba(236,242,247,0.78);
       margin-top: 16px;
     }
     .team-intro-right p:first-child { margin-top: 0; }
+
+    .team-photo {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: -32px;
+    }
+    .team-photo img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .team-photo img { height: 260px; }
+    }
+
+    .monaco-photo {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 56px;
+    }
+    .monaco-photo img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .monaco-photo img { height: 240px; }
+    }
 
     /* Sub-teams heading */
     .subteams-heading {
       margin-bottom: 0;
     }
 
-    /* Subteam typographic list */
+    /* Subteam card grid */
     .subteams-list {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      border-top: 1px solid var(--light-border);
+      gap: 16px;
       margin-bottom: 80px;
+      border-top: none;
     }
 
     @media (max-width: 600px) {
@@ -538,39 +628,49 @@
     }
 
     .subteam-item {
-      padding: 36px 0;
-      border-bottom: 1px solid var(--light-border);
+      padding: 28px 32px;
+      border-bottom: none;
+      background: rgba(0,212,255,0.03);
+      border: 1px solid rgba(0,212,255,0.11);
+      border-radius: 10px;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .subteam-item:hover {
+      background: rgba(0,212,255,0.08);
+      border-color: rgba(0,212,255,0.32);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 48px rgba(0,212,255,0.13);
     }
 
     .subteams-list .subteam-item:nth-child(odd) {
-      padding-right: 48px;
-      border-right: 1px solid var(--light-border);
+      padding-right: 32px;
+      border-right: 1px solid rgba(0,212,255,0.11);
     }
     .subteams-list .subteam-item:nth-child(even) {
-      padding-left: 48px;
+      padding-left: 32px;
     }
 
     @media (max-width: 600px) {
       .subteams-list .subteam-item:nth-child(odd),
       .subteams-list .subteam-item:nth-child(even) {
-        padding-right: 0;
-        padding-left: 0;
-        border-right: none;
+        padding: 24px 24px;
+        border-right: 1px solid rgba(0,212,255,0.11);
       }
     }
 
     .subteam-item-name {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 17px;
-      font-weight: 600;
-      color: var(--light-text);
-      margin-bottom: 6px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
       letter-spacing: -0.01em;
     }
 
     .subteam-item-members {
       font-size: 13px;
-      color: var(--light-muted);
+      color: rgba(236,242,247,0.72);
       line-height: 1.65;
     }
 
@@ -606,62 +706,92 @@
       .mission-grid { grid-template-columns: 1fr; gap: 56px; }
     }
 
-    /* Mission numbered goals */
+    /* Mission numbered goals — 2×2 grid on desktop */
     .mission-goals {
-      margin-top: 48px;
-      border-top: 1px solid var(--light-border);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+      align-content: start;
+    }
+
+    @media (max-width: 640px) {
+      .mission-goals { grid-template-columns: 1fr; }
     }
 
     .mission-goal {
       display: flex;
       gap: 20px;
-      padding: 24px 0;
-      border-bottom: 1px solid var(--light-border);
+      padding: 20px 24px;
+      border-bottom: none;
+      border-left: 2px solid rgba(0,212,255,0.20);
+      background: rgba(0,212,255,0.03);
+      border-radius: 0 8px 8px 0;
       align-items: flex-start;
+      transition: all 0.25s ease;
+    }
+
+    .mission-goal:hover {
+      border-left-color: var(--cyan);
+      background: rgba(0,212,255,0.07);
+      transform: translateX(4px);
     }
 
     .mission-goal-num {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 11px;
       font-weight: 700;
-      color: var(--light-muted);
+      color: var(--cyan);
       letter-spacing: 0.05em;
       padding-top: 3px;
       flex-shrink: 0;
       width: 26px;
-      opacity: 0.6;
+      opacity: 1;
     }
 
     .mission-goal-content h4 {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 15px;
       font-weight: 600;
-      color: var(--light-text);
+      color: #ffffff;
       margin-bottom: 4px;
       letter-spacing: -0.01em;
     }
 
     .mission-goal-content p {
       font-size: 13px;
-      color: var(--light-muted);
+      color: rgba(236,242,247,0.72);
       line-height: 1.6;
     }
 
     /* Mission right — key technologies */
     .mission-tech {
-      border-top: 1px solid var(--light-border);
+      border-top: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
     .mission-tech-item {
-      padding: 28px 0;
-      border-bottom: 1px solid var(--light-border);
+      padding: 24px 28px;
+      border-bottom: none;
+      background: rgba(0,212,255,0.03);
+      border: 1px solid rgba(0,212,255,0.11);
+      border-radius: 10px;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .mission-tech-item:hover {
+      background: rgba(0,212,255,0.08);
+      border-color: rgba(0,212,255,0.30);
+      transform: translateX(6px);
+      box-shadow: 0 8px 32px rgba(0,212,255,0.10);
     }
 
     .mission-tech-item h4 {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 15px;
-      font-weight: 600;
-      color: var(--light-text);
+      font-weight: 700;
+      color: #ffffff;
       margin-bottom: 8px;
       letter-spacing: -0.01em;
     }
@@ -669,7 +799,7 @@
     .mission-tech-item p {
       font-size: 14px;
       line-height: 1.68;
-      color: var(--light-muted);
+      color: rgba(236,242,247,0.75);
     }
 
     /* Timeline */
@@ -734,6 +864,208 @@
     }
 
     /* ============================================================
+       ROADMAP TIMELINE — Ajakava section
+    ============================================================ */
+    .roadmap-scroll {
+      overflow-x: auto;
+      margin-top: 72px;
+      padding-bottom: 16px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.08) transparent;
+    }
+    .roadmap-scroll::-webkit-scrollbar { height: 3px; }
+    .roadmap-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+    .roadmap-track {
+      display: flex;
+      min-width: 900px;
+      position: relative;
+      padding-bottom: 8px;
+    }
+
+    /* Grey background track line */
+    .roadmap-track::before {
+      content: '';
+      position: absolute;
+      top: 31px;
+      left: calc(100% / 12);
+      right: calc(100% / 12);
+      height: 2px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 1px;
+      z-index: 0;
+    }
+
+    /* Animated orange progress fill (step 1 → step 2 = 1/5 of line = 16.67%) */
+    .roadmap-track::after {
+      content: '';
+      position: absolute;
+      top: 31px;
+      left: calc(100% / 12);
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--orange), rgba(232,104,44,0.55));
+      border-radius: 1px;
+      z-index: 1;
+      transition: width 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+    }
+    .roadmap-scroll.visible .roadmap-track::after { width: 16.67%; }
+
+    .roadmap-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Fixed-height wrapper so all circles align to same track height */
+    .roadmap-node-wrap {
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+      flex-shrink: 0;
+    }
+
+    .roadmap-node {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid rgba(255,255,255,0.1);
+      background: var(--dark);
+      position: relative;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    /* Done: orange fill with checkmark */
+    .step--done .roadmap-node {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+    .step--done .roadmap-node::after {
+      content: '';
+      display: block;
+      width: 11px;
+      height: 7px;
+      border-left: 2.5px solid rgba(255,255,255,0.95);
+      border-bottom: 2.5px solid rgba(255,255,255,0.95);
+      transform: rotate(-45deg) translate(1px, -1px);
+    }
+
+    /* Active: larger, orange, pulsing glow */
+    .step--active .roadmap-node {
+      width: 60px;
+      height: 60px;
+      background: var(--orange);
+      border: none;
+      box-shadow:
+        0 0 0 7px rgba(232,104,44,0.18),
+        0 0 0 16px rgba(232,104,44,0.07),
+        0 6px 40px rgba(232,104,44,0.45);
+      animation: roadmap-pulse 2.8s ease-in-out infinite;
+    }
+    .step--active .roadmap-node::after {
+      content: '';
+      display: block;
+      width: 14px;
+      height: 14px;
+      background: rgba(255,255,255,0.92);
+      border-radius: 50%;
+    }
+
+    /* Final step: cyan accent */
+    .step--final .roadmap-node {
+      border-color: rgba(60,200,232,0.45);
+      background: rgba(60,200,232,0.05);
+    }
+    .step--final .roadmap-node::after {
+      content: '★';
+      font-size: 16px;
+      color: rgba(60,200,232,0.55);
+      line-height: 1;
+    }
+
+    @keyframes roadmap-pulse {
+      0%, 100% {
+        box-shadow:
+          0 0 0 7px rgba(232,104,44,0.18),
+          0 0 0 16px rgba(232,104,44,0.07),
+          0 6px 40px rgba(232,104,44,0.45);
+      }
+      50% {
+        box-shadow:
+          0 0 0 11px rgba(232,104,44,0.13),
+          0 0 0 24px rgba(232,104,44,0.04),
+          0 6px 56px rgba(232,104,44,0.6);
+      }
+    }
+
+    .roadmap-info { text-align: center; padding: 0 4px; }
+
+    .roadmap-date {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+      margin-bottom: 5px;
+    }
+    .step--done .roadmap-date { color: rgba(232,104,44,0.65); }
+    .step--active .roadmap-date { color: var(--orange); }
+    .step--final .roadmap-date { color: rgba(60,200,232,0.65); }
+
+    .roadmap-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.22);
+      letter-spacing: -0.01em;
+      margin-bottom: 7px;
+    }
+    .step--done .roadmap-title { color: rgba(255,255,255,0.6); }
+    .step--active .roadmap-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--dark-text);
+      letter-spacing: -0.02em;
+    }
+    .step--final .roadmap-title { color: rgba(255,255,255,0.55); }
+
+    .roadmap-desc {
+      font-size: 11px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.14);
+      max-width: 100px;
+      margin: 0 auto;
+    }
+    .step--done .roadmap-desc { color: rgba(255,255,255,0.28); }
+    .step--active .roadmap-desc { color: rgba(255,255,255,0.48); font-size: 12px; max-width: 120px; }
+    .step--final .roadmap-desc { color: rgba(60,200,232,0.38); }
+
+    .roadmap-badge {
+      display: inline-block;
+      margin-top: 6px;
+      margin-bottom: 7px;
+      padding: 3px 10px;
+      background: rgba(232,104,44,0.12);
+      border: 1px solid rgba(232,104,44,0.3);
+      border-radius: 20px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+
+    /* ============================================================
        PARTNERS — Dark
     ============================================================ */
     .partners-header {
@@ -748,49 +1080,46 @@
       .partners-header { grid-template-columns: 1fr; gap: 32px; }
     }
 
-    .partners-list {
-      border-top: 1px solid var(--dark-border);
-      margin-bottom: 72px;
-    }
-
-    .partner-item {
-      padding: 44px 0;
-      border-bottom: 1px solid var(--dark-border);
-      transition: background var(--transition);
-      cursor: default;
-    }
-    .partner-item:hover { background: rgba(60,200,232,0.04); }
-
-    .partner-item-header {
+    .partners-logos {
       display: flex;
-      align-items: baseline;
-      gap: 16px;
-      margin-bottom: 14px;
       flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 48px 56px;
+      margin-bottom: 72px;
+      padding: 16px 0;
     }
 
-    .partner-item-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(18px, 2.2vw, 24px);
-      font-weight: 600;
-      color: var(--dark-text);
-      letter-spacing: -0.015em;
+    .partner-logo-card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .partner-item-tag {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--dark-muted);
+    .partner-logo-card {
+      padding: 20px 28px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(0,212,255,0.09);
+      border-radius: 8px;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .partner-item p {
-      font-size: 15px;
-      line-height: 1.72;
-      color: var(--dark-muted);
-      max-width: 580px;
+    .partner-logo-card:hover {
+      background: rgba(0,212,255,0.06);
+      border-color: rgba(0,212,255,0.25);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,212,255,0.10);
     }
+
+    .partner-logo-card img {
+      max-height: 36px;
+      max-width: 110px;
+      width: auto;
+      object-fit: contain;
+      opacity: 0.80;
+      transition: opacity var(--transition);
+    }
+    .partner-logo-card:hover img { opacity: 1; }
 
     /* Partner CTA */
     .partners-cta {
@@ -823,14 +1152,25 @@
     }
 
     .text-link {
+      display: inline-flex;
+      align-items: center;
       font-family: 'Space Grotesk', sans-serif;
       font-size: 15px;
-      font-weight: 600;
-      color: var(--cyan);
+      font-weight: 700;
+      color: #080D14;
+      background: var(--cyan);
       white-space: nowrap;
-      transition: opacity var(--transition);
+      padding: 14px 28px;
+      border-radius: 4px;
+      letter-spacing: 0.02em;
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .text-link:hover { opacity: 0.65; }
+    .text-link:hover {
+      opacity: 1;
+      background: #2CDEFF;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,212,255,0.40);
+    }
 
     /* ============================================================
        NEWS — Light
@@ -1108,20 +1448,25 @@
     .btn-submit {
       width: 100%;
       background: var(--cyan);
-      color: #07090C;
+      color: #080D14;
       font-family: 'Space Grotesk', sans-serif;
       font-size: 13px;
       font-weight: 700;
-      letter-spacing: 0.07em;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
       border: none;
-      padding: 14px 24px;
+      padding: 16px 24px;
       cursor: pointer;
-      transition: opacity var(--transition);
-      border-radius: 0;
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      border-radius: 4px;
     }
-    .btn-submit:hover { opacity: 0.82; }
-    .btn-submit:disabled { opacity: 0.35; cursor: not-allowed; }
+    .btn-submit:hover {
+      opacity: 1;
+      background: #2CDEFF;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,212,255,0.45);
+    }
+    .btn-submit:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
 
     /* Toast */
     .toast {
@@ -1194,7 +1539,7 @@
     .footer-brand p {
       font-size: 14px;
       line-height: 1.72;
-      color: var(--dark-muted);
+      color: rgba(236,242,247,0.55);
       margin-top: 16px;
       max-width: 300px;
     }
@@ -1202,10 +1547,10 @@
     .footer-col h4 {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+      font-weight: 700;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--dark-muted);
+      color: var(--cyan);
       margin-bottom: 20px;
     }
 
@@ -1213,10 +1558,10 @@
 
     .footer-col a {
       font-size: 14px;
-      color: var(--dark-muted);
+      color: rgba(236,242,247,0.55);
       transition: color var(--transition);
     }
-    .footer-col a:hover { color: var(--dark-text); }
+    .footer-col a:hover { color: rgba(236,242,247,0.95); }
 
     .footer-bottom {
       display: flex;
@@ -1224,8 +1569,7 @@
       flex-wrap: wrap;
       gap: 8px;
       font-size: 12px;
-      color: var(--dark-muted);
-      opacity: 0.7;
+      color: rgba(236,242,247,0.40);
     }
   </style>
 </head>
@@ -1241,11 +1585,12 @@
     </a>
 
     <ul class="nav-links" id="navLinks" role="list">
-      <li><a href="#team">Meeskond</a></li>
       <li><a href="#mission">Missioon</a></li>
+      <li><a href="#team">Meeskond</a></li>
+      <li><a href="#tech">Tehnoloogiad</a></li>
+      <li><a href="#monaco">Monaco EBC</a></li>
+      <li><a href="#ajakava">Ajakava</a></li>
       <li><a href="#partners">Partnerid</a></li>
-      <li><a href="#news">Uudised</a></li>
-      <li><a href="#gallery">Galerii</a></li>
       <li><a href="#contact">Kontakt</a></li>
     </ul>
 
@@ -1317,92 +1662,13 @@
 
 
 <!-- ============================================================
-     TEAM — Light
-============================================================ -->
-<section class="section section--light" id="team" aria-labelledby="team-heading">
-  <div class="container">
-
-    <div class="team-intro-grid">
-      <div class="team-intro-left reveal">
-        <span class="section-label">Meeskond</span>
-        <h2 class="section-title" id="team-heading">Insenerid, kes<br>unistavad suurelt</h2>
-      </div>
-      <div class="team-intro-right reveal reveal-delay-1">
-        <p>
-          Merendussektor on liigselt sõltuv fossiilkütustest, kuigi maailm pürgib üha enam süsinikuvabade lahenduste suunas. Samuti pole Eesti mereriigina rakendanud oma potentsiaali meretehnoloogiate innovatsiooni eestvedajana rahvusvahelisel tasandil, samal ajal kui noored inseneritudengid otsivad võimalusi töötada päris probleemidega tegelevate projektide kallal. HydroRaceri eesmärk on need lüngad täita, tuues kokku ambitsioonikad tudengid ja komplekssed insenertehnilised väljakutsed ning seeläbi kujundada meretehnoloogiate arengu tulevikku.
-        </p>
-        <p>
-          HydroRacer on TalTechi tudengimeeskond, kelle südames põleb kirg inseneeria, rohetehnoloogiate ja innovatsiooni vastu. Projektis kohtuvad elektroenergeetika, laevamehaanika, tootearenduse ning majanduse eriala tudengid.
-        </p>
-      </div>
-    </div>
-
-    <div class="subteams-heading reveal" style="margin-bottom: 0;">
-      <span class="section-label">Alammeeskonnad</span>
-      <h3 class="section-title">Viis spetsialiseerunud tiimi</h3>
-    </div>
-
-    <div class="subteams-list">
-
-      <div class="subteam-item reveal">
-        <div class="subteam-item-name">Vesiniksüsteemid</div>
-        <div class="subteam-item-members">
-          Arendab metallhüdriidtehnoloogial põhinevat HydroSave salvestuslahendust.<br>
-          Vladislav Musakko · Markus Valkna
-        </div>
-      </div>
-
-      <div class="subteam-item reveal reveal-delay-1">
-        <div class="subteam-item-name">Elektrisüsteemid</div>
-        <div class="subteam-item-members">
-          Projekteerib kõrg- ja madalpingesüsteemid ning juhtloogika.<br>
-          Erik-Rennes Pihlak · Mark-Mathias Vuuk · Hans Erik Kulla · Janis Novikov · Kaspar Ulla
-        </div>
-      </div>
-
-      <div class="subteam-item reveal">
-        <div class="subteam-item-name">Kere ja Konstruktsioon</div>
-        <div class="subteam-item-members">
-          Vastutab paadi kere disaini ja komposiitmaterjalide eest.<br>
-          Joonas Lember · Lisell Tamm · Oskar Johannes Laht
-        </div>
-      </div>
-
-      <div class="subteam-item reveal reveal-delay-1">
-        <div class="subteam-item-name">Propulsioon ja Dünaamika</div>
-        <div class="subteam-item-members">
-          Arendab hüdrofoilide süsteemi ja propulsioonilahendust.<br>
-          Erik Suuk · Egert Veldi · Karl Teder
-        </div>
-      </div>
-
-      <div class="subteam-item reveal" style="border-right: none; padding-right: 0;">
-        <div class="subteam-item-name">Administratsioon</div>
-        <div class="subteam-item-members">
-          Projekti koordinatsioon, kommunikatsioon ja rahastus.<br>
-          Mark Mehilane · Henri Kalvik · Kati Mändmets
-        </div>
-      </div>
-
-    </div>
-
-    <div class="team-photo-block reveal" role="img" aria-label="Meeskonna ühispilt – tulemas">
-      <p>Meeskonna ühispilt lisatakse peagi</p>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ============================================================
-     MISSION — Light alt
+     MISSIOON — Light alt
 ============================================================ -->
 <section class="section section--light-alt" id="mission" aria-labelledby="mission-heading">
   <div class="container">
 
     <div class="mission-grid">
-
-      <div class="reveal">
+      <div class="reveal-left">
         <span class="section-label">Missioon</span>
         <h2 class="section-title" id="mission-heading">Puhas energia,<br>täisvõimsusel</h2>
         <p class="section-text">
@@ -1415,91 +1681,35 @@
           arendamiseks ning viib Eesti inseneeria Monaco Energy Boat Challenge'i
           kaardile — maailma prestiižseimale väikelaevade energiavõistlusele.
         </p>
-
-        <div class="mission-goals">
-          <div class="mission-goal reveal reveal-delay-1">
-            <div class="mission-goal-num">01</div>
-            <div class="mission-goal-content">
-              <h4>Eesti esimene vesinikuvõistluspaat</h4>
-              <p>Ehitame reaalselt töötava prototüübi, mille tuumaks on HydroSave metallhüdriidsalvestus.</p>
-            </div>
-          </div>
-          <div class="mission-goal reveal reveal-delay-2">
-            <div class="mission-goal-num">02</div>
-            <div class="mission-goal-content">
-              <h4>Monaco Energy Boat Challenge 2027</h4>
-              <p>Võistleme maailma parimate üliõpilasmeeskondadega Monacos.</p>
-            </div>
-          </div>
-          <div class="mission-goal reveal reveal-delay-3">
-            <div class="mission-goal-num">03</div>
-            <div class="mission-goal-content">
-              <h4>Hüdrofoilide kompetentsikeskus</h4>
-              <p>Loome Eestis uue teadmiste baasi, millel on patendivõimalus.</p>
-            </div>
-          </div>
-          <div class="mission-goal reveal reveal-delay-4">
-            <div class="mission-goal-num">04</div>
-            <div class="mission-goal-content">
-              <h4>Noorte inseneride areng</h4>
-              <p>Pakume üliõpilastele käegakatsutavat, maailmatasemel väljakutset.</p>
-            </div>
-          </div>
-        </div>
       </div>
-
-      <div class="reveal reveal-delay-2">
-        <span class="section-label">Põhitehnoloogiad</span>
-        <div class="mission-tech">
-          <div class="mission-tech-item">
-            <h4>HydroSave metallhüdriid</h4>
-            <p>Vesinik seotakse keemiliselt metalliga — salvestamine madalal rõhul,
-            suurem volümeetriline energiatihedus kui suruvesinikul, ja turvalisem kui vedelal vesinikul.</p>
-          </div>
-          <div class="mission-tech-item">
-            <h4>Hüdrofoilid</h4>
-            <p>Hüdrofoilid tõstavad paadi veest välja, vähendades takistust kuni 80%.
-            Tehnoloogia on Eestis uus — me arendame seda ise nullist.</p>
-          </div>
-          <div class="mission-tech-item">
-            <h4>Kütuselement + elektrimootor</h4>
-            <p>Vesinik muundatakse kütuselemendis elektriks, mis toidab elektrimootorit.
-            Ainus heitgaas on puhas vesi.</p>
+      <div class="mission-goals reveal-right reveal-delay-1">
+        <div class="mission-goal">
+          <div class="mission-goal-num">01</div>
+          <div class="mission-goal-content">
+            <h4>Projekti väärtuspakkumise arendamine</h4>
+            <p>Tõestame, et vesinikutehnoloogia ja hüdrofoilid on täna toimiv kombinatsioon — mitte ainult visioon, vaid reaalne prototüüp.</p>
           </div>
         </div>
-      </div>
-
-    </div>
-
-    <div class="mission-timeline reveal">
-      <span class="section-label">Ajakava</span>
-      <h3 class="section-title">Tee Monaconi</h3>
-
-      <div class="timeline-row">
-        <div class="timeline-entry">
-          <div class="timeline-entry-date">Nov 2025</div>
-          <div class="timeline-entry-title">Hydraton häkaton</div>
-          <div class="timeline-entry-desc">Algkontepti loomine ja meeskonna kokkupanek</div>
+        <div class="mission-goal">
+          <div class="mission-goal-num">02</div>
+          <div class="mission-goal-content">
+            <h4>Inseneride arendamine</h4>
+            <p>Anname Eesti üliõpilastele võimaluse lahendada maailmatasemel inseneeriprobleeme päriselt, mitte ainult õpikust.</p>
+          </div>
         </div>
-        <div class="timeline-entry">
-          <div class="timeline-entry-date">Veebr–Mai 2026</div>
-          <div class="timeline-entry-title">Disain ja projekteerimine</div>
-          <div class="timeline-entry-desc">Hüdrofoilid, elektrisüsteemid, kontseptuaalne disain</div>
+        <div class="mission-goal">
+          <div class="mission-goal-num">03</div>
+          <div class="mission-goal-content">
+            <h4>Tehnoloogia arendus</h4>
+            <p>Arendame HydroSave metallhüdriidsalvestustehnoloogiat, millel on patendipotentsiaal ja rakendused väljaspool võistlussporti.</p>
+          </div>
         </div>
-        <div class="timeline-entry">
-          <div class="timeline-entry-date">Mai–Okt 2026</div>
-          <div class="timeline-entry-title">Detailprojekteerimine</div>
-          <div class="timeline-entry-desc">Komponentide hanked, laboritestid</div>
-        </div>
-        <div class="timeline-entry">
-          <div class="timeline-entry-date">Jaan–Apr 2027</div>
-          <div class="timeline-entry-title">Tootmine ja veekatsed</div>
-          <div class="timeline-entry-desc">Hüdrofoilide tootmine, koormustestid, bassein</div>
-        </div>
-        <div class="timeline-entry">
-          <div class="timeline-entry-date">Juuli 2027</div>
-          <div class="timeline-entry-title">Monaco EBC</div>
-          <div class="timeline-entry-desc">Monaco Energy Boat Challenge</div>
+        <div class="mission-goal">
+          <div class="mission-goal-num">04</div>
+          <div class="mission-goal-content">
+            <h4>Eesti kui mereriigi reputatsioon</h4>
+            <p>Viime Eesti inseneeria Monaco Energy Boat Challenge'i kaardile — maailma prestiižseimale väikelaevade energiavõistlusele.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1509,7 +1719,253 @@
 
 
 <!-- ============================================================
-     PARTNERS — Dark
+     MEESKOND — Light
+============================================================ -->
+<section class="section section--light" id="team" aria-labelledby="team-heading">
+  <div class="container">
+
+    <div class="team-intro-grid">
+      <div class="team-intro-left reveal-left">
+        <span class="section-label">Meeskond</span>
+        <h2 class="section-title" id="team-heading">Insenerid, kes<br>unistavad suurelt</h2>
+      </div>
+      <div class="team-intro-right reveal-right reveal-delay-1">
+        <p>
+          Merendussektor on liigselt sõltuv fossiilkütustest, kuigi maailm pürgib üha enam süsinikuvabade lahenduste suunas. Samuti pole Eesti mereriigina rakendanud oma potentsiaali meretehnoloogiate innovatsiooni eestvedajana rahvusvahelisel tasandil, samal ajal kui noored inseneritudengid otsivad võimalusi töötada päris probleemidega tegelevate projektide kallal. HydroRaceri eesmärk on need lüngad täita, tuues kokku ambitsioonikad tudengid ja komplekssed insenertehnilised väljakutsed ning seeläbi kujundada meretehnoloogiate arengu tulevikku.
+        </p>
+        <p>
+          HydroRacer on TalTechi tudengimeeskond, kelle südames põleb kirg inseneeria, rohetehnoloogiate ja innovatsiooni vastu. Projektis kohtuvad elektroenergeetika, laevamehaanika, tootearenduse ning majanduse eriala tudengid.
+        </p>
+      </div>
+    </div>
+
+    <div class="team-photo reveal reveal-delay-2">
+      <img src="images/hydroteam.jpeg" alt="HydroRacer meeskond">
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     ALAMMEESKONNAD — Dark
+============================================================ -->
+<section class="section section--dark" id="subteams" aria-labelledby="subteams-heading">
+  <div class="container">
+
+    <div class="subteams-heading reveal" style="margin-bottom: 0;">
+      <span class="section-label">Alammeeskonnad</span>
+      <h2 class="section-title" id="subteams-heading">Viis spetsialiseerunud tiimi</h2>
+    </div>
+
+    <div class="subteams-list">
+      <div class="subteam-item reveal">
+        <div class="subteam-item-name">Vesiniksüsteemid</div>
+        <div class="subteam-item-members">
+          Arendab metallhüdriidtehnoloogial põhinevat HydroSave salvestuslahendust.<br>
+          Vladislav Musakko · Markus Valkna
+        </div>
+      </div>
+      <div class="subteam-item reveal reveal-delay-1">
+        <div class="subteam-item-name">Elektrisüsteemid</div>
+        <div class="subteam-item-members">
+          Projekteerib kõrg- ja madalpingesüsteemid ning juhtloogika.<br>
+          Erik-Rennes Pihlak · Mark-Mathias Vuuk · Hans Erik Kulla · Janis Novikov · Kaspar Ulla
+        </div>
+      </div>
+      <div class="subteam-item reveal">
+        <div class="subteam-item-name">Kere ja Konstruktsioon</div>
+        <div class="subteam-item-members">
+          Vastutab paadi kere disaini ja komposiitmaterjalide eest.<br>
+          Joonas Lember · Lisell Tamm · Oskar Johannes Laht
+        </div>
+      </div>
+      <div class="subteam-item reveal reveal-delay-1">
+        <div class="subteam-item-name">Propulsioon ja Dünaamika</div>
+        <div class="subteam-item-members">
+          Arendab hüdrofoilide süsteemi ja propulsioonilahendust.<br>
+          Erik Suuk · Egert Veldi · Karl Teder
+        </div>
+      </div>
+      <div class="subteam-item reveal" style="border-right: none; padding-right: 0;">
+        <div class="subteam-item-name">Administratsioon</div>
+        <div class="subteam-item-members">
+          Projekti koordinatsioon, kommunikatsioon ja rahastus.<br>
+          Mark Mehilane · Henri Kalvik · Kati Mändmets
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     TEHNOLOOGIAD — Light alt
+============================================================ -->
+<section class="section section--light-alt" id="tech" aria-labelledby="tech-heading">
+  <div class="container">
+
+    <div class="reveal">
+      <span class="section-label">Tehnoloogiad</span>
+      <h2 class="section-title" id="tech-heading">Meie põhitehnoloogiad</h2>
+      <p class="section-text">
+        HydroRacer ühendab kolm tipptasemel tehnoloogiat, mis koos loovad maailmatasemel
+        võistluspaadi — nullist Eestis arendatuna.
+      </p>
+    </div>
+
+    <div class="mission-tech reveal reveal-delay-1">
+      <div class="mission-tech-item">
+        <h4>HydroSave metallhüdriid</h4>
+        <p>Vesinik seotakse keemiliselt metalliga — salvestamine madalal rõhul,
+        suurem volümeetriline energiatihedus kui suruvesinikul, ja turvalisem kui vedelal vesinikul.</p>
+      </div>
+      <div class="mission-tech-item">
+        <h4>Hüdrofoilid</h4>
+        <p>Hüdrofoilid tõstavad paadi veest välja, vähendades takistust kuni 80%.
+        Tehnoloogia on Eestis uus — me arendame seda ise nullist.</p>
+      </div>
+      <div class="mission-tech-item">
+        <h4>Kütuselement + elektrimootor</h4>
+        <p>Vesinik muundatakse kütuselemendis elektriks, mis toidab elektrimootorit.
+        Ainus heitgaas on puhas vesi.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     MONACO ENERGY BOAT CHALLENGE — Light
+============================================================ -->
+<section class="section section--light" id="monaco" aria-labelledby="monaco-heading">
+  <div class="container">
+
+    <div class="team-intro-grid">
+      <div class="team-intro-left reveal-left">
+        <span class="section-label">Monaco Energy Boat Challenge</span>
+        <h2 class="section-title" id="monaco-heading">Maailma parimad<br>ühel rajal</h2>
+      </div>
+      <div class="team-intro-right reveal-right reveal-delay-1">
+        <p>
+          Monaco Energy Boat Challenge on maailma prestiižseim null-emissiooniga laevade võistlus,
+          mida korraldab Yacht Club de Monaco alates 2014. aastast. Igal suvel koguneb Monacose
+          sadamasse 40–60 meeskonda üle maailma, et tõestada, kuidas puhas energia töötab ka
+          päris merel.
+        </p>
+        <p>HydroRacer osaleb kahes võistlusklassis:</p>
+        <div class="mission-goals" style="margin-top: 16px;">
+          <div class="mission-goal reveal reveal-delay-1">
+            <div class="mission-goal-num" style="font-size: 0.7em; letter-spacing: 0.05em;">E</div>
+            <div class="mission-goal-content">
+              <h4>Energy Endurance</h4>
+              <p>Vastupidavusvõistlus, kus võidab kõige energiatõhusam paat.</p>
+            </div>
+          </div>
+          <div class="mission-goal reveal reveal-delay-2">
+            <div class="mission-goal-num" style="font-size: 0.7em; letter-spacing: 0.05em;">S</div>
+            <div class="mission-goal-content">
+              <h4>Speed Challenge</h4>
+              <p>Kiirussõit, kus mõõdetakse maksimaalset jõudlust.</p>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top: 24px;">
+          Võistlus ei ole pelgalt sport. See on rahvusvaheline valideerimisplatvorm, kus uued
+          meretehnoloogiad saavad esimest korda reaalse meretesti. Üritust jälgivad aktiivselt
+          Euroopa merendus- ja energeetikasektori investorid ja tööstuspartnerid.
+        </p>
+      </div>
+    </div>
+
+    <div class="monaco-photo reveal reveal-delay-2">
+      <img src="images/boat challenge.jpg" alt="Monaco Energy Boat Challenge">
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     AJAKAVA — Dark
+============================================================ -->
+<section class="section section--dark" id="ajakava" aria-labelledby="ajakava-heading">
+  <div class="container">
+
+    <div class="reveal">
+      <span class="section-label">Ajakava</span>
+      <h2 class="section-title" id="ajakava-heading">Tee Monaconi</h2>
+    </div>
+
+    <div class="roadmap-scroll reveal reveal-delay-1">
+      <div class="roadmap-track">
+
+        <div class="roadmap-step step--done">
+          <div class="roadmap-node-wrap"><div class="roadmap-node"></div></div>
+          <div class="roadmap-info">
+            <div class="roadmap-date">Veebr 2026</div>
+            <div class="roadmap-title">Kontsept</div>
+            <div class="roadmap-desc">Meeskond, esialgne kontseptsioon, teostatavuse analüüs</div>
+          </div>
+        </div>
+
+        <div class="roadmap-step step--active">
+          <div class="roadmap-node-wrap"><div class="roadmap-node"></div></div>
+          <div class="roadmap-info">
+            <div class="roadmap-date">Märts–Mai 2026</div>
+            <div class="roadmap-title">Disainperiood</div>
+            <div class="roadmap-badge">Praegu</div>
+            <div class="roadmap-desc">CAD mudel, hüdrofoilid, elektrisüsteemid</div>
+          </div>
+        </div>
+
+        <div class="roadmap-step">
+          <div class="roadmap-node-wrap"><div class="roadmap-node"></div></div>
+          <div class="roadmap-info">
+            <div class="roadmap-date">Juuni–Aug 2026</div>
+            <div class="roadmap-title">Ehitusperiood</div>
+            <div class="roadmap-desc">Kere valmistamine, komponentide koostamine</div>
+          </div>
+        </div>
+
+        <div class="roadmap-step">
+          <div class="roadmap-node-wrap"><div class="roadmap-node"></div></div>
+          <div class="roadmap-info">
+            <div class="roadmap-date">Sept 2026</div>
+            <div class="roadmap-title">Hooaja algus</div>
+            <div class="roadmap-desc">Esimene veekatsetus, süsteemide valideerimine</div>
+          </div>
+        </div>
+
+        <div class="roadmap-step">
+          <div class="roadmap-node-wrap"><div class="roadmap-node"></div></div>
+          <div class="roadmap-info">
+            <div class="roadmap-date">Sept–Nov 2026</div>
+            <div class="roadmap-title">Testid</div>
+            <div class="roadmap-desc">Jõudlustestid, optimeerimine, viimistlus</div>
+          </div>
+        </div>
+
+        <div class="roadmap-step step--final">
+          <div class="roadmap-node-wrap"><div class="roadmap-node"></div></div>
+          <div class="roadmap-info">
+            <div class="roadmap-date">Juuli 2027</div>
+            <div class="roadmap-title">Monaco EBC</div>
+            <div class="roadmap-desc">Monaco Energy Boat Challenge 2027</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PARTNERID — Dark
 ============================================================ -->
 <section class="section section--dark" id="partners" aria-labelledby="partners-heading">
   <div class="container">
@@ -1519,38 +1975,17 @@
         <span class="section-label">Partnerid</span>
         <h2 class="section-title" id="partners-heading">Koos ehitame<br>tulevikku</h2>
       </div>
-      <p class="section-text">
-        Meie partnerid toovad projekti tööstuskogemuse, töövahendid ja mentoorluse.
-        Koostöö tähendab nii teadmiste jagamist kui ka reaalsetes tingimustes töötamist.
-      </p>
     </div>
 
-    <div class="partners-list">
-
-      <div class="partner-item reveal">
-        <div class="partner-item-header">
-          <span class="partner-item-name">Luksusjaht AS</span>
-          <span class="partner-item-tag">Paadiehitus</span>
-        </div>
-        <p>
-          Eesti juhtiv paadiehitusettevõte annab meile ligipääsu kere
-          tootmisvormidele ja vahendab vajalikke komponente. Nende praktilised
-          teadmised jahi- ja võistluspaatide ehitusest on asendamatud.
-        </p>
-      </div>
-
-      <div class="partner-item reveal reveal-delay-1">
-        <div class="partner-item-header">
-          <span class="partner-item-name">Composite Plus OÜ</span>
-          <span class="partner-item-tag">Komposiitmaterjalid</span>
-        </div>
-        <p>
-          Plasttoodete ja komposiitmaterjalide töötlemise spetsialist.
-          Annab meile ligipääsu töövahendite baasile ning mentoorluse
-          komposiitmaterjalide kasutamisel kere valmistamisel.
-        </p>
-      </div>
-
+    <div class="partners-logos reveal">
+      <div class="partner-logo-card"><img src="images/sponsorid/taltech.png" alt="TalTech"></div>
+      <div class="partner-logo-card"><img src="images/sponsorid/luksusjaht.png" alt="Luksusjaht AS"></div>
+      <div class="partner-logo-card"><img src="images/sponsorid/cp.png" alt="Composite Plus"></div>
+      <div class="partner-logo-card"><img src="images/sponsorid/abb.png" alt="ABB"></div>
+      <div class="partner-logo-card"><img src="images/sponsorid/hundipea.png" alt="Hundipea"></div>
+      <div class="partner-logo-card"><img src="images/sponsorid/incap.jpeg" alt="Incap"></div>
+      <div class="partner-logo-card"><img src="images/sponsorid/notion.png" alt="Notion"></div>
+      <div class="partner-logo-card"><img src="images/sponsorid/onshape.png" alt="Onshape"></div>
     </div>
 
     <div class="partners-cta reveal">
@@ -1565,108 +2000,6 @@
       </div>
       <a href="#contact" class="text-link">Räägi meiega →</a>
     </div>
-
-  </div>
-</section>
-
-
-<!-- ============================================================
-     NEWS — Light
-============================================================ -->
-<section class="section section--light" id="news" aria-labelledby="news-heading">
-  <div class="container">
-
-    <div class="news-header reveal">
-      <div>
-        <span class="section-label">Uudised</span>
-        <h2 class="section-title" id="news-heading">Viimased uudised</h2>
-      </div>
-    </div>
-
-    <div class="news-list">
-
-      <article class="news-item reveal">
-        <div class="news-item-meta">
-          <span class="news-item-tag">Algus</span>
-          <time class="news-item-date" datetime="2025-11-15">15. nov 2025</time>
-        </div>
-        <div class="news-item-body">
-          <h3>Hydraton 2025 — HydroRaceri algus</h3>
-          <p>
-            TalTechi häkkatonil Hydraton 2025 pandi paika esimesed
-            disainkontseptid ja moodustati tuumikmeeskond, kellest sai
-            HydroRaceri selgroog.
-          </p>
-        </div>
-        <div class="news-item-link">Loe →</div>
-      </article>
-
-      <article class="news-item reveal reveal-delay-1">
-        <div class="news-item-meta">
-          <span class="news-item-tag">Tehnika</span>
-          <time class="news-item-date" datetime="2026-02-01">Veebr 2026</time>
-        </div>
-        <div class="news-item-body">
-          <h3>Hüdrofoilide arendustöö algab</h3>
-          <p>
-            Propulsiooni- ja dünaamikatiim alustas hüdrofoilide kontseptuaalse
-            disainiga. Esimest korda arendatakse seda tehnoloogiat
-            süstemaatiliselt Eestis.
-          </p>
-        </div>
-        <div class="news-item-link">Loe →</div>
-      </article>
-
-      <article class="news-item reveal reveal-delay-2">
-        <div class="news-item-meta">
-          <span class="news-item-tag">Partnerlus</span>
-          <time class="news-item-date" datetime="2026-02-01">Veebr 2026</time>
-        </div>
-        <div class="news-item-body">
-          <h3>Uued partnerid toovad projekti uuele tasemele</h3>
-          <p>
-            Luksusjaht AS ja Composite Plus OÜ liitusid ametlike partneritena,
-            andes meile ligipääsu tootmisvõimekusele ja komposiitmaterjalide
-            ekspertiisile.
-          </p>
-        </div>
-        <div class="news-item-link">Loe →</div>
-      </article>
-
-    </div>
-
-    <p class="news-footer-text reveal">
-      Uudised uuenevad projekti edenedes. Jälgi meid sotsiaalmeedias värskete uudiste saamiseks.
-    </p>
-
-  </div>
-</section>
-
-
-<!-- ============================================================
-     GALLERY — Light alt
-============================================================ -->
-<section class="section section--light-alt" id="gallery" aria-labelledby="gallery-heading">
-  <div class="container">
-
-    <div class="gallery-intro reveal">
-      <span class="section-label">Galerii</span>
-      <h2 class="section-title" id="gallery-heading">Projekti pildid</h2>
-      <p class="section-text">Galerii täieneb projekti edenedes — siin saad jälgida paadi sündi.</p>
-    </div>
-
-    <div class="gallery-grid reveal" role="list" aria-label="Galeriiruudustik">
-      <div class="gallery-item" role="listitem"><p>Pilt tulemas</p></div>
-      <div class="gallery-item" role="listitem"><p>Pilt tulemas</p></div>
-      <div class="gallery-item" role="listitem"><p>Pilt tulemas</p></div>
-      <div class="gallery-item" role="listitem"><p>Pilt tulemas</p></div>
-      <div class="gallery-item" role="listitem"><p>Pilt tulemas</p></div>
-      <div class="gallery-item" role="listitem"><p>Pilt tulemas</p></div>
-    </div>
-
-    <p class="gallery-coming-text reveal">
-      Jälgi meid <a href="#contact">sotsiaalmeedias</a> — jagame ehitamise käiku reaalajas.
-    </p>
 
   </div>
 </section>
@@ -1860,7 +2193,7 @@
     });
   });
 
-  const revealEls = document.querySelectorAll('.reveal');
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
