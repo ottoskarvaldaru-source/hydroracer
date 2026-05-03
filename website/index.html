@@ -57,7 +57,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     /* ============================================================
@@ -89,16 +89,33 @@
     html { scroll-behavior: smooth; font-size: 16px; }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       background-color: var(--dark);
-      background-image: url('images/upscalemedia-transformed.jpeg');
-      background-attachment: fixed;
-      background-size: cover;
-      background-position: center;
       color: var(--dark-text);
       line-height: 1.65;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-image: url('images/upscalemedia-transformed.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: brightness(1.4) contrast(1.25) saturate(1.15);
+      opacity: 1;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(ellipse at center, rgba(6,9,13,0) 0%, rgba(6,9,13,0.35) 70%, rgba(6,9,13,0.7) 100%);
+      pointer-events: none;
     }
 
     /* background-attachment: fixed is broken on iOS — fall back to scroll */
@@ -131,7 +148,7 @@
     }
 
     .section {
-      padding: 160px 0;
+      padding: 200px 0;
       position: relative;
     }
 
@@ -139,17 +156,29 @@
     .section > .container { position: relative; z-index: 1; }
 
     .section--light {
-      background: rgba(8, 18, 32, 0.78);
+      background: linear-gradient(180deg,
+        rgba(8, 18, 32, 0) 0%,
+        rgba(8, 18, 32, 0.55) 18%,
+        rgba(8, 18, 32, 0.55) 82%,
+        rgba(8, 18, 32, 0) 100%);
       color: var(--light-text);
     }
 
     .section--light-alt {
-      background: rgba(10, 22, 36, 0.82);
+      background: linear-gradient(180deg,
+        rgba(10, 22, 36, 0) 0%,
+        rgba(10, 22, 36, 0.62) 18%,
+        rgba(10, 22, 36, 0.62) 82%,
+        rgba(10, 22, 36, 0) 100%);
       color: var(--light-text);
     }
 
     .section--dark {
-      background: rgba(4, 8, 14, 0.84);
+      background: linear-gradient(180deg,
+        rgba(4, 8, 14, 0) 0%,
+        rgba(4, 8, 14, 0.7) 18%,
+        rgba(4, 8, 14, 0.7) 82%,
+        rgba(4, 8, 14, 0) 100%);
       color: var(--dark-text);
     }
 
@@ -174,7 +203,7 @@
 
     .section-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(30px, 3.8vw, 50px);
+      font-size: clamp(42px, 5.5vw, 72px);
       font-weight: 700;
       letter-spacing: -0.025em;
       line-height: 1.08;
@@ -236,20 +265,37 @@
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 1000;
-      background: rgba(6,9,13,0.90);
+      background: transparent;
+      transition: background var(--transition), border-color var(--transition);
+      border-bottom: 1px solid transparent;
+    }
+    .nav.scrolled {
+      background: rgba(6,9,13,0.25);
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      border-bottom-color: rgba(255,255,255,0.06);
+    }
+    .nav.menu-open {
+      background: rgba(6,9,13,0.92);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--dark-border);
+      border-bottom-color: var(--dark-border);
     }
 
     .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 60px;
+      height: 72px;
+      gap: 16px;
     }
 
-    .nav-logo { display: flex; align-items: center; }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      position: relative;
+      z-index: 1002;
+    }
 
     .brand-logo-sm {
       font-family: 'Space Grotesk', sans-serif;
@@ -260,56 +306,93 @@
     }
     .brand-logo-sm .o { color: var(--orange); }
 
-    .nav-links {
+    .nav-actions {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 18px;
+      position: relative;
+      z-index: 1002;
     }
 
-    .nav-links a {
-      font-size: 13px;
-      font-weight: 500;
-      color: #ffffff;
-      letter-spacing: 0.01em;
-      transition: color var(--transition);
+    /* Fullscreen overlay menu */
+    .nav-links {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: clamp(4px, 0.8vh, 14px);
+      padding: clamp(140px, 18vh, 220px) clamp(24px, 8vw, 120px) 80px;
+      background: rgba(6,9,13,0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      list-style: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-12px);
+      transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
+      overflow-y: auto;
     }
-    .nav-links a.active { color: #fff; }
+    .nav-links.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .nav-links li { width: 100%; }
+    .nav-links a {
+      display: inline-block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(40px, 7.5vw, 96px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: rgba(255,255,255,0.18);
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-links a.active {
+      color: #ffffff;
+    }
 
     .nav-burger {
-      display: none;
+      display: flex;
       flex-direction: column;
-      gap: 5px;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      width: 44px;
+      height: 44px;
       background: none;
-      border: none;
+      border: 1px solid rgba(255,255,255,0.25);
       cursor: pointer;
-      padding: 6px;
+      padding: 0;
+      transition: border-color var(--transition), background var(--transition);
     }
+    .nav-burger:hover { border-color: rgba(255,255,255,0.6); }
     .nav-burger span {
       display: block;
-      width: 22px;
+      width: 20px;
       height: 1.5px;
-      background: rgba(255,255,255,0.75);
+      background: #ffffff;
       transition: var(--transition);
     }
-    .nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-burger.open { border-color: rgba(255,255,255,0.6); }
+    .nav-burger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
     .nav-burger.open span:nth-child(2) { opacity: 0; }
-    .nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
-    @media (max-width: 760px) {
-      .nav-burger { display: flex; }
+    body.menu-open { overflow: hidden; }
+
+    @media (max-width: 600px) {
+      .nav-inner { height: 64px; }
       .nav-links {
-        display: none;
-        position: absolute;
-        top: 60px; left: 0; right: 0;
-        flex-direction: column;
-        align-items: flex-start;
-        background: rgba(6,9,13,0.98);
-        padding: 24px 32px;
-        gap: 20px;
-        border-bottom: 1px solid var(--dark-border);
+        padding: 100px 28px 60px;
+        justify-content: flex-start;
       }
-      .nav-links.open { display: flex; }
-      .nav-links a { font-size: 15px; color: var(--dark-text); }
+      .nav-links a { font-size: clamp(36px, 11vw, 64px); }
     }
 
     /* ============================================================
@@ -401,12 +484,12 @@
     /* Title */
     .hero-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(40px, 7.2vw, 100px);
+      font-size: clamp(56px, 9vw, 128px);
       font-weight: 700;
       letter-spacing: -0.03em;
       line-height: 1.0;
       color: #fff;
-      margin-bottom: 28px;
+      margin-bottom: 52px;
       max-width: 860px;
     }
     .hero-title sub {
@@ -420,14 +503,6 @@
       background-clip: text;
       -webkit-text-fill-color: transparent;
       color: transparent;
-    }
-
-    .hero-subtitle {
-      font-size: clamp(15px, 1.8vw, 18px);
-      line-height: 1.7;
-      color: rgba(236,242,247,0.75);
-      max-width: 500px;
-      margin-bottom: 48px;
     }
 
     /* Hero CTA links */
@@ -691,8 +766,59 @@
     }
 
     /* ============================================================
-       MISSION — Light alt
+       MISSION — headline overlay
     ============================================================ */
+    .mission-hero {
+      padding: clamp(120px, 18vh, 220px) 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+      overflow: hidden;
+    }
+    .mission-hero-bg {
+      position: absolute;
+      left: 50%;
+      top: 28%;
+      transform: translate(-50%, -50%);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(56px, 12vw, 200px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+      color: rgba(255,255,255,0.13);
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+      margin: 0;
+      z-index: 0;
+      width: max-content;
+      max-width: 95vw;
+      text-align: center;
+      -webkit-text-fill-color: rgba(255,255,255,0.13);
+      background: none;
+    }
+    .mission-hero-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+    }
+    .mission-hero-text {
+      max-width: 900px;
+      text-align: center;
+      font-size: clamp(20px, 2.2vw, 32px);
+      line-height: 1.45;
+      font-weight: 500;
+      color: #ffffff;
+      letter-spacing: -0.005em;
+      margin: 0;
+    }
+    @media (max-width: 600px) {
+      .mission-hero { min-height: auto; padding: 100px 0; }
+      .mission-hero-text { font-size: 18px; line-height: 1.5; }
+    }
+
     .mission-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -718,15 +844,12 @@
 
     .mission-goal {
       display: flex;
-      gap: 16px;
-      padding: 24px 20px;
-      border-bottom: none;
-      border-left: 2px solid rgba(0,212,255,0.20);
-      background: rgba(0,212,255,0.03);
-      border-radius: 0 8px 8px 0;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
       align-items: flex-start;
-      transition: all 0.25s ease;
     }
+    .mission-goal:last-child { border-bottom: none; }
 
     .mission-goal-num {
       font-family: 'Space Grotesk', sans-serif;
@@ -1393,58 +1516,35 @@
        FOOTER
     ============================================================ */
     .footer {
-      background: rgba(4, 8, 14, 0.90);
+      background: rgba(4, 8, 14, 0.55);
       border-top: 1px solid var(--dark-border);
-      padding: 64px 0 40px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 64px;
-      padding-bottom: 56px;
-      border-bottom: 1px solid var(--dark-border);
-      margin-bottom: 32px;
-    }
-
-    @media (max-width: 680px) {
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
-      .footer-brand { grid-column: 1 / -1; }
-    }
-
-    .footer-brand p {
-      font-size: 14px;
-      line-height: 1.72;
-      color: rgba(236,242,247,0.55);
-      margin-top: 16px;
-      max-width: 300px;
-    }
-
-    .footer-col h4 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 20px;
-    }
-
-    .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
-
-    .footer-col a {
-      font-size: 14px;
-      color: rgba(236,242,247,0.55);
-      transition: color var(--transition);
+      padding: 32px 0;
     }
 
     .footer-bottom {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       flex-wrap: wrap;
-      gap: 8px;
-      font-size: 12px;
-      color: rgba(236,242,247,0.40);
+      gap: 16px;
+      font-size: 13px;
+      color: rgba(236,242,247,0.50);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 22px;
+    }
+
+    .footer-social a {
+      font-size: 13px;
+      color: rgba(236,242,247,0.55);
+      transition: color var(--transition);
+    }
+    .footer-social a:hover { color: #fff; }
+
+    @media (max-width: 600px) {
+      .footer-bottom { flex-direction: column; gap: 14px; text-align: center; }
     }
     /* ============================================================
        FLIP CARDS
@@ -1533,6 +1633,12 @@
       margin: 0 0 10px;
       letter-spacing: -0.01em;
       line-height: 1.25;
+    }
+
+    .subteam-flip-grid .flip-card-front h4 {
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
     .flip-card-tagline {
@@ -1628,27 +1734,29 @@
       <span class="brand-logo-sm" aria-label="HydroRacer">H<span class="o">Y</span>DROR<span class="o">A</span>CER</span>
     </a>
 
-    <ul class="nav-links" id="navLinks" role="list">
-      <li><a href="#mission" data-i18n="nav.mission">Missioon</a></li>
-      <li><a href="#team" data-i18n="nav.team">Meeskond</a></li>
-      <li><a href="#tech" data-i18n="nav.tech">Tehnoloogiad</a></li>
-      <li><a href="#monaco">Monaco EBC</a></li>
-      <li><a href="#ajakava" data-i18n="nav.timeline">Ajakava</a></li>
-      <li><a href="#partners" data-i18n="nav.partners">Partnerid</a></li>
-      <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
-    </ul>
+    <div class="nav-actions">
+      <div class="lang-switcher" role="group" aria-label="Language / Keel">
+        <button class="lang-btn active" data-lang="et" onclick="switchLang('et')">ET</button>
+        <span class="lang-divider" aria-hidden="true">|</span>
+        <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
+      </div>
 
-    <div class="lang-switcher" role="group" aria-label="Language / Keel">
-      <button class="lang-btn active" data-lang="et" onclick="switchLang('et')">ET</button>
-      <span class="lang-divider" aria-hidden="true">|</span>
-      <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
+      <button class="nav-burger" id="navBurger" data-i18n-attr="aria-label:nav.burger" aria-label="Ava menüü" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-
-    <button class="nav-burger" id="navBurger" data-i18n-attr="aria-label:nav.burger" aria-label="Ava menüü" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </nav>
+
+<ul class="nav-links" id="navLinks" role="list">
+  <li><a href="#mission" data-i18n="nav.mission">Missioon</a></li>
+  <li><a href="#team" data-i18n="nav.team">Meeskond</a></li>
+  <li><a href="#tech" data-i18n="nav.tech">Tehnoloogiad</a></li>
+  <li><a href="#monaco">Monaco Energy Boat Challenge</a></li>
+  <li><a href="#ajakava" data-i18n="nav.timeline">Ajakava</a></li>
+  <li><a href="#partners" data-i18n="nav.partners">Partnerid</a></li>
+  <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
+</ul>
 
 
 <!-- ============================================================
@@ -1679,13 +1787,8 @@
       <span class="ocean-clip">H<sub>2</sub> <span data-i18n="hero.title.line2">võistluspaat</span></span>
     </h1>
 
-    <p class="hero-subtitle" data-i18n="hero.subtitle">
-      HydroRacer on TalTechi tudengimeeskonna poolt nullist ehitatav vesinikuvõistluspaat Monaco Energy Boat Challenge'ile.
-    </p>
-
     <div class="hero-actions">
       <a href="#mission" class="btn btn--primary btn--lg" data-i18n="hero.cta.primary">Tutvu projektiga →</a>
-      <a href="#contact" class="btn btn--outline btn--lg" data-i18n="hero.cta.secondary">Võta ühendust</a>
     </div>
 
   </div>
@@ -1712,61 +1815,16 @@
 
 
 <!-- ============================================================
-     MISSIOON — Light alt
+     MISSIOON — Dark, headline-overlay
 ============================================================ -->
-<section class="section section--light-alt" id="mission" aria-labelledby="mission-heading">
-  <div class="container">
-
-    <div class="mission-grid">
-      <div class="reveal-left">
-        <span class="section-label" data-i18n="mission.label">Missioon</span>
-        <h2 class="section-title" id="mission-heading">
-          <span data-i18n="mission.title.line1">Puhas energia,</span><br>
-          <span data-i18n="mission.title.line2">täisvõimsusel</span>
-        </h2>
-        <p class="section-text" data-i18n="mission.text1">
-          Meretransport vastutab ligikaudu miljardi tonni CO₂ eest aastas.
-          HydroRacer tõestab, et vesinikukütuselement koos metallhüdriidtehnoloogiaga
-          ja hüdrofoilidega on toimiv alternatiiv — mitte tuleviku, vaid tänase tehnoloogiaga.
-        </p>
-        <p class="section-text" style="margin-top: 16px;" data-i18n="mission.text2">
-          Meie projekt loob Eestisse ainulaadse kompetentsikeskuse hüdrofoilide
-          arendamiseks ning viib Eesti inseneeria Monaco Energy Boat Challenge'i
-          kaardile — maailma prestiižseimale väikelaevade energiavõistlusele.
-        </p>
-      </div>
-      <div class="mission-goals reveal-right reveal-delay-1">
-        <div class="mission-goal">
-          <div class="mission-goal-num">01</div>
-          <div class="mission-goal-content">
-            <h4 data-i18n="mission.goal1.title">Tõestame</h4>
-            <p data-i18n="mission.goal1.desc">Vesinikutehnoloogia ja hüdrofoilid koos — toimiv prototüüp, mitte ainult pabervisioon.</p>
-          </div>
-        </div>
-        <div class="mission-goal">
-          <div class="mission-goal-num">02</div>
-          <div class="mission-goal-content">
-            <h4 data-i18n="mission.goal2.title">Kasvatame</h4>
-            <p data-i18n="mission.goal2.desc">Üliõpilased lahendavad päris inseneeriprobleeme — käed küljes, tulemused reaalsed ja mõõdetavad.</p>
-          </div>
-        </div>
-        <div class="mission-goal">
-          <div class="mission-goal-num">03</div>
-          <div class="mission-goal-content">
-            <h4 data-i18n="mission.goal3.title">Leiutame</h4>
-            <p data-i18n="mission.goal3.desc">HydroSave metallhüdriidsalvestus — patenteeritav lahendus, millel on rakendusi kaugelt väljaspool sporti.</p>
-          </div>
-        </div>
-        <div class="mission-goal">
-          <div class="mission-goal-num">04</div>
-          <div class="mission-goal-content">
-            <h4 data-i18n="mission.goal4.title">Jõuame Monaconi</h4>
-            <p data-i18n="mission.goal4.desc">Eesti inseneeria Monaco Energy Boat Challenge'il — maailmakaardil 2027.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
+<section class="section section--dark mission-hero" id="mission" aria-labelledby="mission-heading">
+  <h2 class="mission-hero-bg" id="mission-heading" aria-hidden="true" data-i18n="mission.bg">MEIE MISSIOON</h2>
+  <div class="container mission-hero-inner">
+    <p class="mission-hero-text reveal" data-i18n="mission.statement">
+      Meie missioon on ehitada Eestis nullist vesinikupõhine hüdrofoilpaat ja tõestada,
+      et Eesti inseneritöö kuulub maailma parimate hulka. Soovime 2027. aastal jõuda
+      sellega Monaco Energy Boat Challenge'i stardijoonele.
+    </p>
   </div>
 </section>
 
@@ -1819,7 +1877,6 @@
       <div class="flip-card reveal" onclick="this.classList.toggle('flipped')" role="button">
         <div class="flip-card-inner">
           <div class="flip-card-front">
-            <span class="flip-card-num" data-i18n="subteams.team1.num">Tiim 01</span>
             <h4 data-i18n="subteams.team1.name">Vesiniksüsteemid</h4>
             <p class="flip-card-tagline" data-i18n="subteams.team1.tagline">HydroSave salvestuslahendus</p>
             <span class="flip-hint" data-i18n="flip.click">Kliki rohkem →</span>
@@ -1836,7 +1893,6 @@
       <div class="flip-card reveal reveal-delay-1" onclick="this.classList.toggle('flipped')" role="button">
         <div class="flip-card-inner">
           <div class="flip-card-front">
-            <span class="flip-card-num" data-i18n="subteams.team2.num">Tiim 02</span>
             <h4 data-i18n="subteams.team2.name">Elektrisüsteemid</h4>
             <p class="flip-card-tagline" data-i18n="subteams.team2.tagline">Kõrg- ja madalpingesüsteemid</p>
             <span class="flip-hint" data-i18n="flip.click">Kliki rohkem →</span>
@@ -1853,7 +1909,6 @@
       <div class="flip-card reveal reveal-delay-2" onclick="this.classList.toggle('flipped')" role="button">
         <div class="flip-card-inner">
           <div class="flip-card-front">
-            <span class="flip-card-num" data-i18n="subteams.team3.num">Tiim 03</span>
             <h4 data-i18n="subteams.team3.name">Kere ja Konstruktsioon</h4>
             <p class="flip-card-tagline" data-i18n="subteams.team3.tagline">Paadikere disain ja komposiitmaterjalid</p>
             <span class="flip-hint" data-i18n="flip.click">Kliki rohkem →</span>
@@ -1870,7 +1925,6 @@
       <div class="flip-card reveal reveal-delay-1" onclick="this.classList.toggle('flipped')" role="button">
         <div class="flip-card-inner">
           <div class="flip-card-front">
-            <span class="flip-card-num" data-i18n="subteams.team4.num">Tiim 04</span>
             <h4 data-i18n="subteams.team4.name">Propulsioon ja Dünaamika</h4>
             <p class="flip-card-tagline" data-i18n="subteams.team4.tagline">Hüdrofoilid ja propulsioonilahendus</p>
             <span class="flip-hint" data-i18n="flip.click">Kliki rohkem →</span>
@@ -1887,7 +1941,6 @@
       <div class="flip-card reveal reveal-delay-2" onclick="this.classList.toggle('flipped')" role="button">
         <div class="flip-card-inner">
           <div class="flip-card-front">
-            <span class="flip-card-num" data-i18n="subteams.team5.num">Tiim 05</span>
             <h4 data-i18n="subteams.team5.name">Administratsioon</h4>
             <p class="flip-card-tagline" data-i18n="subteams.team5.tagline">Koordinatsioon, kommunikatsioon ja rahastus</p>
             <span class="flip-hint" data-i18n="flip.click">Kliki rohkem →</span>
@@ -2129,7 +2182,7 @@
             </div>
             <div class="ajakava-step-body">
               <div class="ajakava-step-date" data-i18n="timeline.step6.date">Juuli 2027</div>
-              <div class="ajakava-step-title" data-i18n="timeline.step6.title">Monaco EBC</div>
+              <div class="ajakava-step-title" data-i18n="timeline.step6.title">Monaco Energy Boat Challenge</div>
               <div class="ajakava-step-desc" data-i18n="timeline.step6.desc">Monaco Energy Boat Challenge 2027</div>
             </div>
           </div>
@@ -2262,33 +2315,11 @@
      FOOTER
 ============================================================ -->
 <footer class="footer" role="contentinfo">
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <span class="brand-logo-sm" style="font-size:14px; letter-spacing:0.1em;" aria-label="HydroRacer">H<span class="o">Y</span>DROR<span class="o">A</span>CER</span>
-        <p data-i18n="footer.brand.text">
-          Eesti esimene vesinikukütusel töötav võistluspaat.
-          TalTechi TiVo üliõpilasmeeskond, teel Monaco Energy Boat Challenge'ile 2027.
-        </p>
-      </div>
-
-      <div class="footer-col">
-        <h4 data-i18n="footer.sections">Sektsioonid</h4>
-        <ul>
-          <li><a href="#mission" data-i18n="nav.mission">Missioon</a></li>
-          <li><a href="#team" data-i18n="nav.team">Meeskond</a></li>
-          <li><a href="#tech" data-i18n="nav.tech">Tehnoloogiad</a></li>
-          <li><a href="#monaco">Monaco EBC</a></li>
-          <li><a href="#ajakava" data-i18n="nav.timeline">Ajakava</a></li>
-          <li><a href="#partners" data-i18n="nav.partners">Partnerid</a></li>
-          <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p data-i18n="footer.copyright">© 2026 HydroRacer · TalTech TiVo · Kõik õigused kaitstud</p>
-      <p data-i18n="footer.tagline">Ehitatud Tallinnas, teel Monaconi</p>
+  <div class="container footer-bottom">
+    <p data-i18n="footer.copyright">© 2026 HydroRacer · TalTech TiVo</p>
+    <div class="footer-social">
+      <a href="https://www.linkedin.com/company/hydroracer/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://www.instagram.com/taltechtivo/" target="_blank" rel="noopener noreferrer">Instagram</a>
     </div>
   </div>
 </footer>
@@ -2349,19 +2380,25 @@
     nav.classList.toggle('scrolled', window.scrollY > 40);
   }, { passive: true });
 
-  burger.addEventListener('click', () => {
-    const isOpen = navLinks.classList.toggle('open');
+  function setMenu(isOpen) {
+    navLinks.classList.toggle('open', isOpen);
     burger.classList.toggle('open', isOpen);
+    nav.classList.toggle('menu-open', isOpen);
+    document.body.classList.toggle('menu-open', isOpen);
     burger.setAttribute('aria-expanded', isOpen);
+    burger.setAttribute('aria-label', isOpen ? 'Sulge menüü' : 'Ava menüü');
+  }
+
+  burger.addEventListener('click', () => {
+    setMenu(!navLinks.classList.contains('open'));
   });
 
-  // Close nav on link click (mobile)
   navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      burger.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-    });
+    a.addEventListener('click', () => setMenu(false));
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navLinks.classList.contains('open')) setMenu(false);
   });
 
   // === ACTIVE NAV LINK on scroll ===
