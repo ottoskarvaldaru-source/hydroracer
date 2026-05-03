@@ -490,7 +490,13 @@
       line-height: 1.0;
       color: #fff;
       margin-bottom: 52px;
-      max-width: 860px;
+      max-width: 1000px;
+    }
+    .hero-title .ocean-clip {
+      white-space: nowrap;
+    }
+    @media (max-width: 700px) {
+      .hero-title .ocean-clip { white-space: normal; }
     }
     .hero-title sub {
       font-size: 0.55em;
@@ -591,57 +597,49 @@
       padding: 0;
     }
 
-    /* Hero stats bar */
-    .hero-stats {
-      position: relative;
-      z-index: 1;
+    /* ============================================================
+       STATS — Dark
+    ============================================================ */
+    .stats-section {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+
+    .stats-list {
       display: flex;
+      flex-direction: column;
       border-top: 1px solid var(--dark-border);
     }
 
-    .hero-stat {
-      flex: 1;
-      padding: 32px 24px;
+    .stat-row {
+      padding: 90px 0 70px;
+      border-bottom: 1px solid var(--dark-border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       text-align: center;
-      border-right: 1px solid var(--dark-border);
-      position: relative;
-      overflow: hidden;
+      gap: 56px;
     }
-    .hero-stat:last-child { border-right: none; }
 
-    .hero-stat-num {
+    .stat-num {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(32px, 4vw, 52px);
-      font-weight: 700;
+      font-size: clamp(80px, 13vw, 200px);
+      font-weight: 300;
       letter-spacing: -0.03em;
-      color: var(--cyan);
-      line-height: 1;
-      margin-bottom: 8px;
-      position: relative;
-      z-index: 1;
-      text-shadow: 0 0 24px rgba(0,212,255,0.45);
+      color: #fff;
+      line-height: 0.9;
+      text-shadow: 0 0 40px rgba(60,200,232,0.18);
     }
 
-    .hero-stat-label {
-      font-size: 12px;
-      color: rgba(236,242,247,0.75);
+    .stat-label {
+      font-size: clamp(15px, 1.1vw, 18px);
       letter-spacing: 0.02em;
-      line-height: 1.4;
-      position: relative;
-      z-index: 1;
-      font-weight: 500;
+      color: rgba(236,242,247,0.85);
+      font-weight: 400;
     }
-
-    .hero-stat {
-      transition: background 0.3s ease;
-    }
-
 
     @media (max-width: 600px) {
-      .hero-stats { flex-wrap: wrap; }
-      .hero-stat { flex: 1 1 50%; border-bottom: 1px solid var(--dark-border); }
-      .hero-stat:nth-child(even) { border-right: none; }
-      .hero-stat:nth-last-child(-n+2) { border-bottom: none; }
+      .stat-row { padding: 60px 0 48px; gap: 36px; }
     }
 
     /* ============================================================
@@ -660,12 +658,25 @@
     }
 
     .team-intro-right p {
-      font-size: 16px;
-      line-height: 1.75;
+      font-size: clamp(17px, 1.35vw, 20px);
+      line-height: 1.7;
       color: rgba(236,242,247,0.78);
-      margin-top: 16px;
+      margin-top: 20px;
     }
     .team-intro-right p:first-child { margin-top: 0; }
+
+    /* Scroll-linked progressive word reveal */
+    [data-scroll-words] .word {
+      color: rgba(236,242,247,0.18);
+      transition: color 0.35s ease;
+      will-change: color;
+    }
+    [data-scroll-words] .word.lit {
+      color: rgba(236,242,247,0.95);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [data-scroll-words] .word { transition: none; color: rgba(236,242,247,0.78); }
+    }
 
     .team-photo {
       width: 100%;
@@ -677,7 +688,7 @@
       width: 100%;
       height: 480px;
       object-fit: cover;
-      object-position: center top;
+      object-position: center 60%;
       display: block;
     }
     @media (max-width: 768px) {
@@ -712,14 +723,14 @@
       .monaco-grid { grid-template-columns: 1fr; gap: 48px; }
     }
     .monaco-intro-text {
-      font-size: 15px;
-      line-height: 1.78;
+      font-size: clamp(16px, 1.2vw, 18px);
+      line-height: 1.7;
       color: rgba(236,242,247,0.75);
       margin-top: 24px;
     }
     .monaco-right > p {
-      font-size: 16px;
-      line-height: 1.75;
+      font-size: clamp(17px, 1.35vw, 20px);
+      line-height: 1.7;
       color: rgba(236,242,247,0.78);
       margin-top: 20px;
     }
@@ -1181,7 +1192,7 @@
       align-items: center;
       justify-content: center;
       padding: 16px 20px;
-      background: rgba(255,255,255,0.04);
+      background: #ffffff;
       border-radius: 8px;
     }
 
@@ -1351,126 +1362,6 @@
       text-underline-offset: 3px;
     }
 
-    /* ============================================================
-       CONTACT — Dark
-    ============================================================ */
-    .contact-intro {
-      margin-bottom: 64px;
-    }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-
-    @media (max-width: 768px) {
-      .contact-grid { grid-template-columns: 1fr; gap: 56px; }
-    }
-
-    .contact-email-link {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(20px, 2.8vw, 34px);
-      font-weight: 600;
-      color: var(--dark-text);
-      letter-spacing: -0.02em;
-      display: block;
-      margin-bottom: 48px;
-      transition: color var(--transition);
-      line-height: 1.2;
-    }
-
-    .contact-details {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-      border-top: 1px solid var(--dark-border);
-      padding-top: 32px;
-    }
-
-    .contact-detail-label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--dark-muted);
-      margin-bottom: 8px;
-      display: block;
-    }
-
-    .contact-detail-value {
-      font-size: 15px;
-      color: var(--dark-text);
-      line-height: 1.6;
-    }
-
-    .social-text-links {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .social-text-link {
-      font-size: 15px;
-      color: var(--dark-muted);
-      transition: color var(--transition);
-    }
-
-    /* Contact card */
-    .contact-card {
-      background: var(--dark-s);
-      border: 1px solid var(--dark-border);
-      border-radius: 4px;
-      padding: 40px;
-    }
-    @media (max-width: 480px) {
-      .contact-card { padding: 28px 24px; }
-    }
-    .contact-card-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--dark-text);
-      letter-spacing: -0.01em;
-      margin-bottom: 14px;
-    }
-    .contact-card-text {
-      font-size: 15px;
-      line-height: 1.72;
-      color: rgba(236,242,247,0.60);
-      margin-bottom: 32px;
-    }
-    .contact-card-email {
-      display: block;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(17px, 2vw, 22px);
-      font-weight: 700;
-      color: var(--cyan);
-      letter-spacing: -0.01em;
-      padding-bottom: 28px;
-      margin-bottom: 28px;
-      border-bottom: 1px solid rgba(0,212,255,0.15);
-      transition: color var(--transition);
-    }
-    .contact-card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 32px;
-    }
-    .contact-tag {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(236,242,247,0.45);
-      border: 1px solid rgba(255,255,255,0.10);
-      padding: 5px 12px;
-      border-radius: 20px;
-    }
-
     /* Toast */
     .toast {
       position: fixed;
@@ -1516,19 +1407,113 @@
        FOOTER
     ============================================================ */
     .footer {
-      background: rgba(4, 8, 14, 0.55);
+      position: relative;
+      overflow: hidden;
+      padding: 140px 0 28px;
+      background:
+        radial-gradient(ellipse at 50% 100%, rgba(60,200,232,0.32) 0%, rgba(60,200,232,0.10) 40%, transparent 75%),
+        linear-gradient(180deg, var(--dark) 0%, #07111a 35%, #0a2433 100%);
       border-top: 1px solid var(--dark-border);
-      padding: 32px 0;
     }
 
+    .footer-bg-text {
+      position: absolute;
+      top: 70px;
+      left: 0;
+      right: 0;
+      display: flex;
+      gap: 0;
+      pointer-events: none;
+      white-space: nowrap;
+      overflow: hidden;
+      user-select: none;
+      z-index: 0;
+    }
+
+    .footer-bg-text span {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(80px, 13vw, 190px);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: rgba(60, 200, 232, 0.10);
+      flex-shrink: 0;
+      padding: 0 30px;
+    }
+
+    .footer-bg-text span::after {
+      content: " /";
+      color: rgba(60, 200, 232, 0.10);
+    }
+
+    .footer-cards {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-bottom: 60px;
+    }
+
+    .footer-card {
+      position: relative;
+      padding: 32px 30px;
+      min-height: 320px;
+      background:
+        linear-gradient(to right, rgba(255,255,255,0.45) 14px, transparent 14px) top left / 16px 1px no-repeat,
+        linear-gradient(to bottom, rgba(255,255,255,0.45) 14px, transparent 14px) top left / 1px 16px no-repeat,
+        linear-gradient(to left, rgba(255,255,255,0.45) 14px, transparent 14px) top right / 16px 1px no-repeat,
+        linear-gradient(to bottom, rgba(255,255,255,0.45) 14px, transparent 14px) top right / 1px 16px no-repeat,
+        linear-gradient(to right, rgba(255,255,255,0.45) 14px, transparent 14px) bottom left / 16px 1px no-repeat,
+        linear-gradient(to top, rgba(255,255,255,0.45) 14px, transparent 14px) bottom left / 1px 16px no-repeat,
+        linear-gradient(to left, rgba(255,255,255,0.45) 14px, transparent 14px) bottom right / 16px 1px no-repeat,
+        linear-gradient(to top, rgba(255,255,255,0.45) 14px, transparent 14px) bottom right / 1px 16px no-repeat,
+        linear-gradient(180deg, rgba(60,200,232,0.10) 0%, rgba(60,200,232,0.04) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 22px;
+      color: #fff;
+      margin: 0 0 auto;
+      letter-spacing: -0.01em;
+    }
+
+    .footer-card-content {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: rgba(236,242,247,0.78);
+    }
+
+    .footer-card-content a {
+      color: rgba(236,242,247,0.78);
+      transition: color var(--transition);
+      display: inline-block;
+    }
+
+    .footer-card-content a:hover { color: var(--cyan); }
+
     .footer-bottom {
+      position: relative;
+      z-index: 1;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 16px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
       font-size: 13px;
-      color: rgba(236,242,247,0.50);
+      color: rgba(236,242,247,0.55);
     }
 
     .footer-social {
@@ -1538,13 +1523,20 @@
 
     .footer-social a {
       font-size: 13px;
-      color: rgba(236,242,247,0.55);
+      color: rgba(236,242,247,0.65);
       transition: color var(--transition);
     }
     .footer-social a:hover { color: #fff; }
 
+    @media (max-width: 900px) {
+      .footer-cards { grid-template-columns: 1fr; gap: 16px; }
+      .footer-card { min-height: 220px; padding: 26px 24px; }
+      .footer { padding: 100px 0 24px; }
+    }
+
     @media (max-width: 600px) {
       .footer-bottom { flex-direction: column; gap: 14px; text-align: center; }
+      .footer-bg-text span { font-size: clamp(60px, 18vw, 120px); }
     }
     /* ============================================================
        FLIP CARDS
@@ -1588,7 +1580,7 @@
       transform-style: preserve-3d;
     }
 
-    .flip-card.flipped .flip-card-inner {
+    .flip-card:hover .flip-card-inner {
       transform: rotateY(180deg);
     }
 
@@ -1755,7 +1747,6 @@
   <li><a href="#monaco">Monaco Energy Boat Challenge</a></li>
   <li><a href="#ajakava" data-i18n="nav.timeline">Ajakava</a></li>
   <li><a href="#partners" data-i18n="nav.partners">Partnerid</a></li>
-  <li><a href="#contact" data-i18n="nav.contact">Kontakt</a></li>
 </ul>
 
 
@@ -1792,25 +1783,6 @@
     </div>
 
   </div>
-
-  <div class="hero-stats" aria-label="Projekti statistika">
-    <div class="hero-stat">
-      <div class="hero-stat-num" data-count="40">40</div>
-      <div class="hero-stat-label" data-i18n="hero.stat.team">Meeskonnaliiget</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num" data-count="5">5</div>
-      <div class="hero-stat-label" data-i18n="hero.stat.subteams">Alammeeskonda</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num" data-count="2027">2027</div>
-      <div class="hero-stat-label">Monaco Energy Boat Challenge</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num" data-count="9">9</div>
-      <div class="hero-stat-label" data-i18n="hero.stat.partners">Partnerit</div>
-    </div>
-  </div>
 </section>
 
 
@@ -1830,6 +1802,33 @@
 
 
 <!-- ============================================================
+     STATS — Dark
+============================================================ -->
+<section class="section section--dark stats-section" aria-label="Projekti statistika">
+  <div class="container">
+    <div class="stats-list">
+      <div class="stat-row">
+        <div class="stat-num">40</div>
+        <div class="stat-label" data-i18n="hero.stat.team">Meeskonnaliiget</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-num">5</div>
+        <div class="stat-label" data-i18n="hero.stat.subteams">Alammeeskonda</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-num">2027</div>
+        <div class="stat-label">Monaco Energy Boat Challenge</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-num">9</div>
+        <div class="stat-label" data-i18n="hero.stat.partners">Partnerit</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
      MEESKOND — Light
 ============================================================ -->
 <section class="section section--light" id="team" aria-labelledby="team-heading">
@@ -1843,7 +1842,7 @@
           <span data-i18n="team.title.line2">unistavad suurelt</span>
         </h2>
       </div>
-      <div class="team-intro-right reveal-right reveal-delay-1">
+      <div class="team-intro-right reveal-right reveal-delay-1" data-scroll-words>
         <p data-i18n="team.text1">
           Merendussektor on liigselt sõltuv fossiilkütustest, kuigi maailm pürgib üha enam süsinikuvabade lahenduste suunas. Samuti pole Eesti mereriigina rakendanud oma potentsiaali meretehnoloogiate innovatsiooni eestvedajana rahvusvahelisel tasandil, samal ajal kui noored inseneritudengid otsivad võimalusi töötada päris probleemidega tegelevate projektide kallal. HydroRaceri eesmärk on need lüngad täita, tuues kokku ambitsioonikad tudengid ja komplekssed insenertehnilised väljakutsed ning seeläbi kujundada meretehnoloogiate arengu tulevikku.
         </p>
@@ -1874,12 +1873,12 @@
 
     <div class="flip-cards-grid subteam-flip-grid">
 
-      <div class="flip-card reveal" onclick="this.classList.toggle('flipped')" role="button">
+      <div class="flip-card reveal" role="button">
         <div class="flip-card-inner">
           <div class="flip-card-front">
             <h4 data-i18n="subteams.team1.name">Vesiniksüsteemid</h4>
             <p class="flip-card-tagline" data-i18n="subteams.team1.tagline">HydroSave salvestuslahendus</p>
-            <span class="flip-hint" data-i18n="flip.click">Kliki rohkem →</span>
+            <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
           </div>
           <div class="flip-card-back">
             <h4 data-i18n="subteams.back.label">Meeskond</h4>
@@ -1890,12 +1889,12 @@
         </div>
       </div>
 
-      <div class="flip-card reveal reveal-delay-1" onclick="this.classList.toggle('flipped')" role="button">
+      <div class="flip-card reveal reveal-delay-1" role="button">
         <div class="flip-card-inner">
           <div class="flip-card-front">
             <h4 data-i18n="subteams.team2.name">Elektrisüsteemid</h4>
             <p class="flip-card-tagline" data-i18n="subteams.team2.tagline">Kõrg- ja madalpingesüsteemid</p>
-            <span class="flip-hint" data-i18n="flip.click">Kliki rohkem →</span>
+            <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
           </div>
           <div class="flip-card-back">
             <h4 data-i18n="subteams.back.label">Meeskond</h4>
@@ -1906,12 +1905,12 @@
         </div>
       </div>
 
-      <div class="flip-card reveal reveal-delay-2" onclick="this.classList.toggle('flipped')" role="button">
+      <div class="flip-card reveal reveal-delay-2" role="button">
         <div class="flip-card-inner">
           <div class="flip-card-front">
             <h4 data-i18n="subteams.team3.name">Kere ja Konstruktsioon</h4>
             <p class="flip-card-tagline" data-i18n="subteams.team3.tagline">Paadikere disain ja komposiitmaterjalid</p>
-            <span class="flip-hint" data-i18n="flip.click">Kliki rohkem →</span>
+            <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
           </div>
           <div class="flip-card-back">
             <h4 data-i18n="subteams.back.label">Meeskond</h4>
@@ -1922,12 +1921,12 @@
         </div>
       </div>
 
-      <div class="flip-card reveal reveal-delay-1" onclick="this.classList.toggle('flipped')" role="button">
+      <div class="flip-card reveal reveal-delay-1" role="button">
         <div class="flip-card-inner">
           <div class="flip-card-front">
             <h4 data-i18n="subteams.team4.name">Propulsioon ja Dünaamika</h4>
             <p class="flip-card-tagline" data-i18n="subteams.team4.tagline">Hüdrofoilid ja propulsioonilahendus</p>
-            <span class="flip-hint" data-i18n="flip.click">Kliki rohkem →</span>
+            <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
           </div>
           <div class="flip-card-back">
             <h4 data-i18n="subteams.back.label">Meeskond</h4>
@@ -1938,12 +1937,12 @@
         </div>
       </div>
 
-      <div class="flip-card reveal reveal-delay-2" onclick="this.classList.toggle('flipped')" role="button">
+      <div class="flip-card reveal reveal-delay-2" role="button">
         <div class="flip-card-inner">
           <div class="flip-card-front">
             <h4 data-i18n="subteams.team5.name">Administratsioon</h4>
             <p class="flip-card-tagline" data-i18n="subteams.team5.tagline">Koordinatsioon, kommunikatsioon ja rahastus</p>
-            <span class="flip-hint" data-i18n="flip.click">Kliki rohkem →</span>
+            <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
           </div>
           <div class="flip-card-back">
             <h4 data-i18n="subteams.back.label">Meeskond</h4>
@@ -1977,13 +1976,13 @@
 
     <div class="flip-cards-grid tech-flip-grid reveal reveal-delay-1">
 
-      <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button">
+      <div class="flip-card" role="button">
         <div class="flip-card-inner">
           <div class="flip-card-front">
             <span class="flip-card-num" data-i18n="tech.card1.num">01 / Salvestus</span>
             <h4 data-i18n="tech.card1.name">HydroSave metallhüdriid</h4>
             <p class="flip-card-tagline" data-i18n="tech.card1.tagline">Ohutu vesinikusalvestus madalal rõhul — patenteeritav lahendus</p>
-            <span class="flip-hint" data-i18n="flip.click">Kliki rohkem →</span>
+            <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
           </div>
           <div class="flip-card-back">
             <h4 data-i18n="tech.back.label">Tehnoloogia</h4>
@@ -1993,13 +1992,13 @@
         </div>
       </div>
 
-      <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button">
+      <div class="flip-card" role="button">
         <div class="flip-card-inner">
           <div class="flip-card-front">
             <span class="flip-card-num" data-i18n="tech.card2.num">02 / Liikumine</span>
             <h4 data-i18n="tech.card2.name">Hüdrofoilid</h4>
             <p class="flip-card-tagline" data-i18n="tech.card2.tagline">Tõstab paadi veest välja, vähendades takistust kuni 80%</p>
-            <span class="flip-hint" data-i18n="flip.click">Kliki rohkem →</span>
+            <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
           </div>
           <div class="flip-card-back">
             <h4 data-i18n="tech.back.label">Tehnoloogia</h4>
@@ -2009,13 +2008,13 @@
         </div>
       </div>
 
-      <div class="flip-card" onclick="this.classList.toggle('flipped')" role="button">
+      <div class="flip-card" role="button">
         <div class="flip-card-inner">
           <div class="flip-card-front">
             <span class="flip-card-num" data-i18n="tech.card3.num">03 / Energia</span>
             <h4 data-i18n="tech.card3.name">Kütuselement + elektrimootor</h4>
             <p class="flip-card-tagline" data-i18n="tech.card3.tagline">Vesinikust elekter — ainus heitgaas on puhas vesi</p>
-            <span class="flip-hint" data-i18n="flip.click">Kliki rohkem →</span>
+            <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
           </div>
           <div class="flip-card-back">
             <h4 data-i18n="tech.back.label">Tehnoloogia</h4>
@@ -2039,7 +2038,7 @@
 
     <div class="monaco-grid">
 
-      <div class="monaco-left reveal-left">
+      <div class="monaco-left reveal-left" data-scroll-words>
         <span class="section-label" data-i18n="monaco.label">Monaco Energy Boat Challenge</span>
         <h2 class="section-title" id="monaco-heading">
           <span data-i18n="monaco.title.line1">Maailma parimad</span><br>
@@ -2052,7 +2051,7 @@
         </p>
       </div>
 
-      <div class="monaco-right reveal-right reveal-delay-1">
+      <div class="monaco-right reveal-right reveal-delay-1" data-scroll-words>
         <p data-i18n="monaco.text1">
           Monaco Energy Boat Challenge on maailma prestiižseim null-emissiooniga laevade võistlus,
           mida korraldab Yacht Club de Monaco alates 2014. aastast. Igal suvel koguneb Monacose
@@ -2232,79 +2231,7 @@
           Eesti merendustehnoloogia tulevikku.
         </p>
       </div>
-      <a href="#contact" class="btn btn--primary btn--lg" data-i18n="partners.cta.link">Räägi meiega →</a>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ============================================================
-     CONTACT — Dark
-============================================================ -->
-<section class="section section--dark" id="contact" aria-labelledby="contact-heading">
-  <div class="container">
-
-    <div class="contact-intro reveal">
-      <span class="section-label" data-i18n="contact.label">Kontakt</span>
-      <h2 class="section-title" id="contact-heading" data-i18n="contact.title">Võta meiega ühendust</h2>
-      <p class="section-text" data-i18n="contact.intro">
-        Oled huvitatud partnerlusest, koostööst, meediakajastusest
-        või soovid lihtsalt rohkem teada?
-      </p>
-    </div>
-
-    <div class="contact-grid">
-
-      <div class="contact-info reveal">
-        <a href="mailto:hydroracer@taltech.ee" class="contact-email-link">
-          hydroracer@taltech.ee
-        </a>
-        <div class="contact-details">
-          <div>
-            <span class="contact-detail-label" data-i18n="contact.location.label">Asukoht</span>
-            <div class="contact-detail-value">
-              Tallinna Tehnikaülikool (TalTech)<br>
-              Ehitajate tee 5, Tallinn 19086
-            </div>
-          </div>
-          <div>
-            <span class="contact-detail-label" data-i18n="contact.social.label">Sotsiaalmeedia</span>
-            <div class="social-text-links">
-              <a href="https://www.linkedin.com/company/hydroracer/" target="_blank" rel="noopener noreferrer" class="social-text-link" aria-label="HydroRacer LinkedInis">LinkedIn</a>
-              <a href="https://www.instagram.com/taltechtivo/" target="_blank" rel="noopener noreferrer" class="social-text-link" aria-label="HydroRacer Instagramis">Instagram</a>
-              <a href="https://www.facebook.com/TalTechTiVo/" target="_blank" rel="noopener noreferrer" class="social-text-link" aria-label="HydroRacer Facebookis">Facebook</a>
-            </div>
-          </div>
-          <div>
-            <span class="contact-detail-label">TalTech TiVo</span>
-            <div class="contact-detail-value">
-              <a href="https://taltech.ee" target="_blank" rel="noopener noreferrer" style="color: var(--cyan);">taltech.ee →</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="contact-card reveal reveal-delay-2">
-        <p class="contact-card-title" data-i18n="contact.card.title">Kirjuta meile</p>
-        <p class="contact-card-text" data-i18n="contact.card.text">
-          Kui soovid rääkida partnerlusest, koostööst, meediakajastusest
-          või projekti toetamisest, võta meiega ühendust e-posti teel.
-        </p>
-        <a href="mailto:hydroracer@taltech.ee" class="contact-card-email">
-          hydroracer@taltech.ee
-        </a>
-        <div class="contact-card-tags">
-          <span class="contact-tag" data-i18n="contact.tag1">Partnerlus</span>
-          <span class="contact-tag" data-i18n="contact.tag2">Koostöö</span>
-          <span class="contact-tag" data-i18n="contact.tag3">Meedia</span>
-          <span class="contact-tag">TalTech TiVo</span>
-        </div>
-        <a href="mailto:hydroracer@taltech.ee" class="btn btn--primary btn--lg" data-i18n="contact.card.btn">
-          Ava e-post →
-        </a>
-      </div>
-
+      <a href="mailto:hydroracer@taltech.ee" class="btn btn--primary btn--lg" data-i18n="partners.cta.link">Räägi meiega →</a>
     </div>
 
   </div>
@@ -2315,11 +2242,39 @@
      FOOTER
 ============================================================ -->
 <footer class="footer" role="contentinfo">
-  <div class="container footer-bottom">
-    <p data-i18n="footer.copyright">© 2026 HydroRacer · TalTech TiVo</p>
-    <div class="footer-social">
-      <a href="https://www.linkedin.com/company/hydroracer/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="https://www.instagram.com/taltechtivo/" target="_blank" rel="noopener noreferrer">Instagram</a>
+  <div class="footer-bg-text" aria-hidden="true">
+    <span>HYDRORACER</span>
+    <span>HYDRORACER</span>
+    <span>HYDRORACER</span>
+  </div>
+
+  <div class="container">
+    <div class="footer-cards">
+
+      <div class="footer-card">
+        <h3 class="footer-card-title" data-i18n="footer.location.title">Asukoht</h3>
+        <div class="footer-card-content">
+          <p>Tallinna Tehnikaülikool<br>Ehitajate tee 5<br>Tallinn 19086, Eesti</p>
+        </div>
+      </div>
+
+      <div class="footer-card">
+        <h3 class="footer-card-title" data-i18n="footer.contact.title">Kontakt</h3>
+        <div class="footer-card-content">
+          <a href="mailto:hydroracer@taltech.ee">hydroracer@taltech.ee</a>
+          <span data-i18n="footer.contact.team">TalTech TiVo üliõpilasmeeskond</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p data-i18n="footer.copyright">© 2026 HydroRacer · TalTech TiVo · Kõik õigused kaitstud</p>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/company/hydroracer/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://www.instagram.com/taltechtivo/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://www.facebook.com/TalTechTiVo/" target="_blank" rel="noopener noreferrer">Facebook</a>
+      </div>
     </div>
   </div>
 </footer>
@@ -2358,6 +2313,7 @@
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.lang === _currentLang);
     });
+    document.dispatchEvent(new CustomEvent('i18n:changed', { detail: { lang: _currentLang } }));
   }
 
   async function switchLang(lang) {
@@ -2450,6 +2406,78 @@
 
   revealEls.forEach(el => observer.observe(el));
 
+  // === SCROLL-LINKED PROGRESSIVE WORD REVEAL ===
+  (function() {
+    const containers = document.querySelectorAll('[data-scroll-words]');
+    if (!containers.length) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+
+    const sets = [];
+
+    function buildWords() {
+      sets.length = 0;
+      containers.forEach(container => {
+        const paragraphs = container.querySelectorAll(':scope > p');
+        const words = [];
+        paragraphs.forEach(p => {
+          const text = p.textContent.trim().replace(/\s+/g, ' ');
+          p.textContent = '';
+          const tokens = text.split(' ');
+          tokens.forEach((tok, i) => {
+            if (!tok) return;
+            const span = document.createElement('span');
+            span.className = 'word';
+            span.textContent = tok;
+            p.appendChild(span);
+            if (i < tokens.length - 1) p.appendChild(document.createTextNode(' '));
+            words.push(span);
+          });
+        });
+        sets.push({ container, words });
+      });
+    }
+
+    let ticking = false;
+    function update() {
+      const vh = window.innerHeight;
+      sets.forEach(({ container, words }) => {
+        const rect = container.getBoundingClientRect();
+        const start = vh * 0.80;
+        const end = vh * 0.25;
+        const span = rect.height + (start - end);
+        const progress = Math.max(0, Math.min(1, (start - rect.top) / span));
+        const litCount = Math.round(progress * words.length);
+        words.forEach((w, i) => {
+          const shouldLit = i < litCount;
+          if (w.classList.contains('lit') !== shouldLit) {
+            w.classList.toggle('lit', shouldLit);
+          }
+        });
+      });
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    buildWords();
+
+    // Re-build when i18n swaps text content
+    document.addEventListener('i18n:changed', () => {
+      requestAnimationFrame(() => { buildWords(); update(); });
+    });
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
+
   // === CONTACT FORM ===
   const form = document.getElementById('contactForm');
   const toast = document.getElementById('toast');
@@ -2499,34 +2527,6 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // === COUNTER ANIMATION ===
-  function animateCounter(el) {
-    const target = parseInt(el.dataset.count, 10);
-    const suffix = el.dataset.suffix || '';
-    if (target === 0) { el.textContent = '0' + suffix; return; }
-    const duration = 1400;
-    const start = performance.now();
-    const tick = (now) => {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
-      el.textContent = Math.round(eased * target) + suffix;
-      if (progress < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }
-
-  const heroStats = document.querySelector('.hero-stats');
-  if (heroStats) {
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.querySelectorAll('[data-count]').forEach(animateCounter);
-          counterObserver.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.6 });
-    counterObserver.observe(heroStats);
-  }
 </script>
 
 <button class="back-to-top" id="backToTop" aria-label="Tagasi üles">
