@@ -152,6 +152,14 @@
       position: relative;
     }
 
+    #partners.section {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+    #mission.section {
+      padding-bottom: 0;
+    }
+
     /* Ensure content stays above section transition gradients */
     .section > .container { position: relative; z-index: 1; }
 
@@ -401,10 +409,6 @@
     .hero {
       position: relative;
       min-height: 100vh;
-      background: var(--dark);
-      background-image: url('images/hydroracer-logo.jpg');
-      background-size: cover;
-      background-position: center 40%;
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -414,13 +418,11 @@
       position: absolute;
       inset: 0;
       background: linear-gradient(180deg,
-        rgba(6,9,13,0.65) 0%,
-        rgba(6,9,13,0.40) 18%,
-        rgba(6,9,13,0.96) 36%,
-        rgba(6,9,13,0.97) 64%,
-        rgba(6,9,13,0.86) 76%,
-        rgba(6,9,13,0.99) 100%
+        rgba(6,9,13,0.55) 0%,
+        rgba(6,9,13,0.30) 40%,
+        rgba(6,9,13,0.55) 100%
       );
+      pointer-events: none;
     }
 
     .hero-content {
@@ -484,19 +486,16 @@
     /* Title */
     .hero-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(56px, 9vw, 128px);
+      font-size: clamp(48px, 7.5vw, 112px);
       font-weight: 700;
       letter-spacing: -0.03em;
-      line-height: 1.0;
+      line-height: 1.05;
       color: #fff;
       margin-bottom: 52px;
-      max-width: 1000px;
+      max-width: 1200px;
     }
     .hero-title .ocean-clip {
-      white-space: nowrap;
-    }
-    @media (max-width: 700px) {
-      .hero-title .ocean-clip { white-space: normal; }
+      white-space: normal;
     }
     .hero-title sub {
       font-size: 0.55em;
@@ -632,10 +631,10 @@
     }
 
     .stat-label {
-      font-size: clamp(15px, 1.1vw, 18px);
-      letter-spacing: 0.02em;
-      color: rgba(236,242,247,0.85);
-      font-weight: 400;
+      font-size: clamp(18px, 1.4vw, 22px);
+      letter-spacing: 0.04em;
+      color: rgba(236,242,247,1);
+      font-weight: 500;
     }
 
     @media (max-width: 600px) {
@@ -647,14 +646,21 @@
     ============================================================ */
     .team-intro-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 0.85fr 1.4fr;
       gap: 80px;
       align-items: start;
       margin-bottom: 96px;
     }
 
+    .team-intro-left {
+      position: sticky;
+      top: 120px;
+      align-self: start;
+    }
+
     @media (max-width: 768px) {
-      .team-intro-grid { grid-template-columns: 1fr; gap: 48px; }
+      .team-intro-grid { grid-template-columns: 1fr; gap: 32px; }
+      .team-intro-left { position: static; top: auto; }
     }
 
     .team-intro-right p {
@@ -678,38 +684,66 @@
       [data-scroll-words] .word { transition: none; color: rgba(236,242,247,0.78); }
     }
 
-    .team-photo {
+    .team-image-container {
+      position: relative;
       width: 100%;
-      border-radius: 12px;
-      overflow: hidden;
-      margin-top: -32px;
-    }
-    .team-photo img {
-      width: 100%;
-      height: 480px;
-      object-fit: cover;
-      object-position: center 60%;
-      display: block;
-    }
-    @media (max-width: 768px) {
-      .team-photo img { height: 260px; }
+      margin-top: 48px;
     }
 
-    .monaco-photo {
+    .team-image-container img {
       width: 100%;
-      border-radius: 12px;
-      overflow: hidden;
+      display: block;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .team-image-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        to bottom,
+        #0a0a0f 0%,
+        transparent 20%,
+        transparent 80%,
+        #0a0a0f 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .monaco-image-container {
+      position: relative;
+      width: 100%;
       margin-top: 56px;
     }
-    .monaco-photo img {
+
+    .monaco-image-container img {
       width: 100%;
-      height: 420px;
-      object-fit: cover;
-      object-position: center;
       display: block;
+      border-radius: 0;
+      box-shadow: none;
     }
-    @media (max-width: 768px) {
-      .monaco-photo img { height: 240px; }
+
+    .monaco-image-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        to bottom,
+        #0a0a0f 0%,
+        transparent 20%,
+        transparent 80%,
+        #0a0a0f 100%
+      );
+      pointer-events: none;
+      z-index: 1;
     }
 
     /* Monaco section — 2-column layout */
@@ -780,24 +814,25 @@
        MISSION — headline overlay
     ============================================================ */
     .mission-hero {
-      padding: clamp(120px, 18vh, 220px) 0;
+      padding: clamp(140px, 20vh, 220px) 0 clamp(60px, 10vh, 120px);
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 70vh;
+      min-height: auto;
       overflow: hidden;
+      position: relative;
     }
     .mission-hero-bg {
       position: absolute;
       left: 50%;
-      top: 28%;
+      top: 38%;
       transform: translate(-50%, -50%);
       font-family: 'Space Grotesk', sans-serif;
       font-size: clamp(56px, 12vw, 200px);
       font-weight: 700;
       letter-spacing: -0.04em;
       line-height: 0.9;
-      color: rgba(255,255,255,0.13);
+      color: rgba(255,255,255,0.18);
       pointer-events: none;
       user-select: none;
       white-space: nowrap;
@@ -806,7 +841,7 @@
       width: max-content;
       max-width: 95vw;
       text-align: center;
-      -webkit-text-fill-color: rgba(255,255,255,0.13);
+      -webkit-text-fill-color: rgba(255,255,255,0.18);
       background: none;
     }
     .mission-hero-inner {
@@ -1186,22 +1221,23 @@
     }
 
     .partner-logo-card {
-      width: 160px;
-      height: 80px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 16px 20px;
-      background: #ffffff;
-      border-radius: 8px;
+      padding: 0;
+      background: transparent;
     }
 
     .partner-logo-card img {
-      width: 100%;
-      height: 100%;
+      width: auto;
+      height: 48px;
+      max-width: 200px;
       object-fit: contain;
-      opacity: 0.80;
+      filter: brightness(0) invert(1);
+      opacity: 0.85;
+      transition: opacity 0.25s ease;
     }
+    .partner-logo-card img:hover { opacity: 1; }
 
     /* Partner CTA */
     .partners-cta {
@@ -1743,10 +1779,8 @@
 <ul class="nav-links" id="navLinks" role="list">
   <li><a href="#mission" data-i18n="nav.mission">Missioon</a></li>
   <li><a href="#team" data-i18n="nav.team">Meeskond</a></li>
-  <li><a href="#tech" data-i18n="nav.tech">Tehnoloogiad</a></li>
   <li><a href="#monaco">Monaco Energy Boat Challenge</a></li>
   <li><a href="#ajakava" data-i18n="nav.timeline">Ajakava</a></li>
-  <li><a href="#partners" data-i18n="nav.partners">Partnerid</a></li>
 </ul>
 
 
@@ -1775,12 +1809,8 @@
 
     <h1 class="hero-title">
       <span data-i18n="hero.title.line1">Eesti esimene</span><br>
-      <span class="ocean-clip">H<sub>2</sub> <span data-i18n="hero.title.line2">võistluspaat</span></span>
+      <span class="ocean-clip" data-i18n="hero.title.line2">järgmise põlvkonna võistluspaat</span>
     </h1>
-
-    <div class="hero-actions">
-      <a href="#mission" class="btn btn--primary btn--lg" data-i18n="hero.cta.primary">Tutvu projektiga →</a>
-    </div>
 
   </div>
 </section>
@@ -1793,10 +1823,33 @@
   <h2 class="mission-hero-bg" id="mission-heading" aria-hidden="true" data-i18n="mission.bg">MEIE MISSIOON</h2>
   <div class="container mission-hero-inner">
     <p class="mission-hero-text reveal" data-i18n="mission.statement">
-      Meie missioon on ehitada Eestis nullist vesinikupõhine hüdrofoilpaat ja tõestada,
-      et Eesti inseneritöö kuulub maailma parimate hulka. Soovime 2027. aastal jõuda
-      sellega Monaco Energy Boat Challenge'i stardijoonele.
+      Ehitame Eesti esimese roheenergial töötava võistluspaadi ning viime Eesti inseneeria
+      rahvusvahelisele areenile Monaco Energy Boat Challenge’il. Rajame kompetentsikeskuse
+      järgmise põlvkonna roheenergia- ja meretehnoloogia inseneritalendi kasvatamiseks.
     </p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PARTNERID — Dark
+============================================================ -->
+<section class="section section--dark" id="partners" aria-labelledby="partners-heading">
+  <div class="container">
+
+    <div class="partners-logos reveal">
+      <div class="partner-logo-card"><img src="images/sponsorid/taltech.png" alt="TalTech"></div>
+      <div class="partner-logo-card"><img src="images/sponsorid/luksusjaht.png" alt="Luksusjaht AS"></div>
+      <div class="partner-logo-card"><img src="images/sponsorid/cp.png" alt="Composite Plus"></div>
+      <div class="partner-logo-card"><img src="images/sponsorid/abb.png" alt="ABB"></div>
+      <div class="partner-logo-card"><img src="images/sponsorid/hundipea.png" alt="Hundipea"></div>
+      <div class="partner-logo-card"><img src="images/sponsorid/notion.png" alt="Notion"></div>
+      <div class="partner-logo-card"><img src="images/sponsorid/onshape.png" alt="Onshape"></div>
+      <div class="partner-logo-card"><img src="images/sponsorid/Phoenix_Contact_Logo.svg.png" alt="Phoenix Contact"></div>
+      <div class="partner-logo-card"><img src="images/sponsorid/ICP1V.HE_BIG.D-f375a59f.png" alt="Incap"></div>
+      <div class="partner-logo-card"><img src="images/sponsorid/ATRADO-LOGO-new-2021-1920w.png" alt="Atrado"></div>
+    </div>
+
   </div>
 </section>
 
@@ -1838,24 +1891,23 @@
       <div class="team-intro-left reveal-left">
         <span class="section-label" data-i18n="team.label">Meeskond</span>
         <h2 class="section-title" id="team-heading">
-          <span data-i18n="team.title.line1">Insenerid, kes</span><br>
-          <span data-i18n="team.title.line2">unistavad suurelt</span>
+          <span data-i18n="team.title.line1">PROBLEEM</span>
         </h2>
       </div>
       <div class="team-intro-right reveal-right reveal-delay-1" data-scroll-words>
         <p data-i18n="team.text1">
-          Merendussektor on liigselt sõltuv fossiilkütustest, kuigi maailm pürgib üha enam süsinikuvabade lahenduste suunas. Samuti pole Eesti mereriigina rakendanud oma potentsiaali meretehnoloogiate innovatsiooni eestvedajana rahvusvahelisel tasandil, samal ajal kui noored inseneritudengid otsivad võimalusi töötada päris probleemidega tegelevate projektide kallal. HydroRaceri eesmärk on need lüngad täita, tuues kokku ambitsioonikad tudengid ja komplekssed insenertehnilised väljakutsed ning seeläbi kujundada meretehnoloogiate arengu tulevikku.
+          Meretransport sõltub tänaseni suurel määral fossiilkütustest nagu diisel ja raskekütus, mille kasutamine põhjustab märkimisväärseid kasvuhoonegaaside heitmeid. Laevandussektor paiskab atmosfääri ligikaudu miljard tonni CO₂ aastas ning dekarboniseerimine on muutunud üheks suurimaks väljakutseks tuleviku transpordis. Vajadus roheliste kütuste järele, mis võimaldavad keskkonnasõbralikumat meretransporti, on muutunud kriitiliseks.
         </p>
         <p data-i18n="team.text2">
-          HydroRacer on TalTechi tudengimeeskond, kelle südames põleb kirg inseneeria, rohetehnoloogiate ja innovatsiooni vastu. Projektis kohtuvad elektroenergeetika, laevamehaanika, tootearenduse ning majanduse eriala tudengid.
+          HydroRacer on TalTechi tudengimeeskond, mis ühendab elektriinseneeria, mehaanika, materjali- ja rohetehnoloogia interdistsiplinaarseks arendusprojektiks. Projekt loob viljaka pinnase keskkonnateadlike inseneritalentide kultiveerimiseks ning annab noortele võimaluse anda oma panus tulevikku vaatavate tehnoloogiate arengusse. Projektist kujunev kompetents ja talent aitavad edendada Eestis rohe- ja meretehnoloogia valdkondi ning loovad eeldused nende sektoritega seotud innovatsiooni ja ettevõtluse kasvuks.
         </p>
       </div>
     </div>
 
-    <div class="team-photo reveal reveal-delay-2">
-      <img src="images/hydroteam.jpeg" alt="HydroRacer meeskond">
-    </div>
+  </div>
 
+  <div class="team-image-container reveal reveal-delay-2">
+    <img src="images/hydroteam.jpeg" alt="HydroRacer meeskond">
   </div>
 </section>
 
@@ -1876,15 +1928,14 @@
       <div class="flip-card reveal" role="button">
         <div class="flip-card-inner">
           <div class="flip-card-front">
-            <h4 data-i18n="subteams.team1.name">Vesiniksüsteemid</h4>
-            <p class="flip-card-tagline" data-i18n="subteams.team1.tagline">HydroSave salvestuslahendus</p>
+            <h4 data-i18n="subteams.team1.name">ENERGIASÜSTEEMID</h4>
+            <p class="flip-card-tagline" data-i18n="subteams.team1.tagline">Alternatiivkütusel põhinev jõuallikas</p>
             <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
           </div>
           <div class="flip-card-back">
             <h4 data-i18n="subteams.back.label">Meeskond</h4>
-            <p data-i18n="subteams.team1.desc">Arendab metallhüdriidtehnoloogial põhinevat HydroSave salvestuslahendust.</p>
+            <p data-i18n="subteams.team1.desc">Vastutab paadi alternatiivkütusel põhineva jõuallika arendamise ja integreerimise eest. Meeskonna ülesandeks on välja töötada metanoolil põhinev lahendus elektrienergia tootmiseks pardal ning tagada efektiivne ja süsinikneutraalne energiatarve.</p>
             <p class="flip-card-members">Vladislav Musakko · Markus Valkna</p>
-            <span class="flip-hint" data-i18n="flip.close">← Sulge</span>
           </div>
         </div>
       </div>
@@ -1898,9 +1949,8 @@
           </div>
           <div class="flip-card-back">
             <h4 data-i18n="subteams.back.label">Meeskond</h4>
-            <p data-i18n="subteams.team2.desc">Projekteerib kõrg- ja madalpingesüsteemid ning juhtloogika.</p>
+            <p data-i18n="subteams.team2.desc">Vastutab paadi elektri-, juhtimis- ja automaatikasüsteemide projekteerimise eest. Meeskonna ülesandeks on välja töötada ja integreerida lahendusi, mis tagavad kõrge- ja madalpingesüsteemide töökindluse ning paadi kriitiliste seadmete stabiilse elektrivarustuse.</p>
             <p class="flip-card-members">Erik-Rennes Pihlak · Mark-Mathias Vuuk · Hans Erik Kulla · Janis Novikov · Kaspar Ulla</p>
-            <span class="flip-hint" data-i18n="flip.close">← Sulge</span>
           </div>
         </div>
       </div>
@@ -1914,9 +1964,8 @@
           </div>
           <div class="flip-card-back">
             <h4 data-i18n="subteams.back.label">Meeskond</h4>
-            <p data-i18n="subteams.team3.desc">Vastutab paadi kere disaini ja komposiitmaterjalide eest.</p>
+            <p data-i18n="subteams.team3.desc">Vastutab paadi kere ja konstruktsiooniliste lahenduste projekteerimise ning tootmise eest. Tegeletakse materjalide valiku, konstruktsioonide tugevusanalüüside ja valmistatavuse ning vastupidavuse analüüsiga.</p>
             <p class="flip-card-members">Joonas Lember · Lisell Tamm · Oskar Johannes Laht</p>
-            <span class="flip-hint" data-i18n="flip.close">← Sulge</span>
           </div>
         </div>
       </div>
@@ -1930,9 +1979,8 @@
           </div>
           <div class="flip-card-back">
             <h4 data-i18n="subteams.back.label">Meeskond</h4>
-            <p data-i18n="subteams.team4.desc">Arendab hüdrofoilide süsteemi ja propulsioonilahendust.</p>
+            <p data-i18n="subteams.team4.desc">Vastutab paadi hüdrodünaamilise käitumise, propulsioonilahenduse ja hüdrofoilide arendamise eest. Meeskonna töö hõlmab foilide geomeetria, materjali tugevuse analüüsi ning paadi stabiilsuse ja energiaefektiivsuse optimeerimist erinevates sõidutingimustes.</p>
             <p class="flip-card-members">Erik Suuk · Egert Veldi · Karl Teder</p>
-            <span class="flip-hint" data-i18n="flip.close">← Sulge</span>
           </div>
         </div>
       </div>
@@ -1940,86 +1988,14 @@
       <div class="flip-card reveal reveal-delay-2" role="button">
         <div class="flip-card-inner">
           <div class="flip-card-front">
-            <h4 data-i18n="subteams.team5.name">Administratsioon</h4>
+            <h4 data-i18n="subteams.team5.name">ADMINISTRATIIVMEESKOND</h4>
             <p class="flip-card-tagline" data-i18n="subteams.team5.tagline">Koordinatsioon, kommunikatsioon ja rahastus</p>
             <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
           </div>
           <div class="flip-card-back">
             <h4 data-i18n="subteams.back.label">Meeskond</h4>
-            <p data-i18n="subteams.team5.desc">Projekti koordinatsioon, kommunikatsioon ja rahastus.</p>
+            <p data-i18n="subteams.team5.desc">Vastutab projektijuhtimise, rahastuse tagamise, partnersuhete sõlmimise, turunduse elluviimise eest ning toetab meeskonda läbi koolituste ja meeskonnaürituste organiseerimise.</p>
             <p class="flip-card-members">Mark Mehilane · Henri Kalvik · Kati Mändmets</p>
-            <span class="flip-hint" data-i18n="flip.close">← Sulge</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ============================================================
-     TEHNOLOOGIAD — Light alt
-============================================================ -->
-<section class="section section--light-alt" id="tech" aria-labelledby="tech-heading">
-  <div class="container">
-
-    <div class="reveal">
-      <span class="section-label" data-i18n="tech.label">Tehnoloogiad</span>
-      <h2 class="section-title" id="tech-heading" data-i18n="tech.title">Meie põhitehnoloogiad</h2>
-      <p class="section-text" data-i18n="tech.intro">
-        HydroRacer ühendab kolm tipptasemel tehnoloogiat, mis koos loovad maailmatasemel
-        võistluspaadi — nullist Eestis arendatuna.
-      </p>
-    </div>
-
-    <div class="flip-cards-grid tech-flip-grid reveal reveal-delay-1">
-
-      <div class="flip-card" role="button">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <span class="flip-card-num" data-i18n="tech.card1.num">01 / Salvestus</span>
-            <h4 data-i18n="tech.card1.name">HydroSave metallhüdriid</h4>
-            <p class="flip-card-tagline" data-i18n="tech.card1.tagline">Ohutu vesinikusalvestus madalal rõhul — patenteeritav lahendus</p>
-            <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
-          </div>
-          <div class="flip-card-back">
-            <h4 data-i18n="tech.back.label">Tehnoloogia</h4>
-            <p data-i18n="tech.card1.desc">Vesinik seotakse keemiliselt metalliga — salvestamine madalal rõhul, suurem volümeetriline energiatihedus kui suruvesinikul, ja turvalisem kui vedelal vesinikul.</p>
-            <span class="flip-hint" data-i18n="flip.close">← Sulge</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card" role="button">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <span class="flip-card-num" data-i18n="tech.card2.num">02 / Liikumine</span>
-            <h4 data-i18n="tech.card2.name">Hüdrofoilid</h4>
-            <p class="flip-card-tagline" data-i18n="tech.card2.tagline">Tõstab paadi veest välja, vähendades takistust kuni 80%</p>
-            <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
-          </div>
-          <div class="flip-card-back">
-            <h4 data-i18n="tech.back.label">Tehnoloogia</h4>
-            <p data-i18n="tech.card2.desc">Hüdrofoilid tõstavad paadi veest välja, vähendades takistust kuni 80%. Tehnoloogia on Eestis uus — me arendame seda ise nullist.</p>
-            <span class="flip-hint" data-i18n="flip.close">← Sulge</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card" role="button">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <span class="flip-card-num" data-i18n="tech.card3.num">03 / Energia</span>
-            <h4 data-i18n="tech.card3.name">Kütuselement + elektrimootor</h4>
-            <p class="flip-card-tagline" data-i18n="tech.card3.tagline">Vesinikust elekter — ainus heitgaas on puhas vesi</p>
-            <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
-          </div>
-          <div class="flip-card-back">
-            <h4 data-i18n="tech.back.label">Tehnoloogia</h4>
-            <p data-i18n="tech.card3.desc">Vesinik muundatakse kütuselemendis elektriks, mis toidab elektrimootorit. Ainus heitgaas on puhas vesi.</p>
-            <span class="flip-hint" data-i18n="flip.close">← Sulge</span>
           </div>
         </div>
       </div>
@@ -2041,13 +2017,10 @@
       <div class="monaco-left reveal-left" data-scroll-words>
         <span class="section-label" data-i18n="monaco.label">Monaco Energy Boat Challenge</span>
         <h2 class="section-title" id="monaco-heading">
-          <span data-i18n="monaco.title.line1">Maailma parimad</span><br>
-          <span data-i18n="monaco.title.line2">ühel rajal</span>
+          <span data-i18n="monaco.title.line1">MONACO ENERGY BOAT CHALLENGE</span>
         </h2>
         <p class="monaco-intro-text" data-i18n="monaco.intro">
-          Monaco Energy Boat Challenge toob samale areenile maailma juhtivad ülikoolid,
-          inseneritiimid ja meretehnoloogia arendajad. See ei ole ainult võidusõit,
-          vaid tulevikulahenduste katsepolügoon päris mereoludes.
+          Monaco Energy Boat Challenge on rahvusvaheline tudengi- ja innovatsioonivõistlus, mis keskendub kestlike meretehnoloogiate ja alternatiivsete energialahenduste arendamisele. Võistlus toob kokku maailma juhtivad ülikoolid, inseneritiimid ja merendussektori ettevõtted, et testida ja arendada järgmise põlvkonna nullheitega jõusüsteeme ning energiatõhusaid võistluspaate reaalses keskkonnas.
         </p>
       </div>
 
@@ -2084,10 +2057,10 @@
 
     </div>
 
-    <div class="monaco-photo reveal reveal-delay-2">
-      <img src="images/boat challenge.jpg" alt="Monaco Energy Boat Challenge">
-    </div>
+  </div>
 
+  <div class="monaco-image-container reveal reveal-delay-2">
+    <img src="images/monaco.jpg" alt="Monaco Energy Boat Challenge">
   </div>
 </section>
 
@@ -2189,49 +2162,6 @@
         </div>
       </div>
 
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ============================================================
-     PARTNERID — Dark
-============================================================ -->
-<section class="section section--dark" id="partners" aria-labelledby="partners-heading">
-  <div class="container">
-
-    <div class="partners-header reveal">
-      <div>
-        <span class="section-label" data-i18n="partners.label">Partnerid</span>
-        <h2 class="section-title" id="partners-heading">
-          <span data-i18n="partners.title.line1">Koos ehitame</span><br>
-          <span data-i18n="partners.title.line2">tulevikku</span>
-        </h2>
-      </div>
-    </div>
-
-    <div class="partners-logos reveal">
-      <div class="partner-logo-card"><img src="images/sponsorid/taltech.png" alt="TalTech"></div>
-      <div class="partner-logo-card"><img src="images/sponsorid/luksusjaht.png" alt="Luksusjaht AS"></div>
-      <div class="partner-logo-card"><img src="images/sponsorid/cp.png" alt="Composite Plus"></div>
-      <div class="partner-logo-card"><img src="images/sponsorid/abb.png" alt="ABB"></div>
-      <div class="partner-logo-card"><img src="images/sponsorid/hundipea.png" alt="Hundipea"></div>
-      <div class="partner-logo-card"><img src="images/sponsorid/notion.png" alt="Notion"></div>
-      <div class="partner-logo-card"><img src="images/sponsorid/onshape.png" alt="Onshape"></div>
-    </div>
-
-    <div class="partners-cta reveal">
-      <div>
-        <h3 data-i18n="partners.cta.title">Saa meie partneriks</h3>
-        <p data-i18n="partners.cta.text">
-          Otsime ettevõtteid, kes jagavad meie visiooni puhta energia
-          tulevikust. Partnerlusest saadav kasu: brändi nähtavus, ligipääs
-          andekale noorele inseneride kogukonnale ning võimalus kujundada
-          Eesti merendustehnoloogia tulevikku.
-        </p>
-      </div>
-      <a href="mailto:hydroracer@taltech.ee" class="btn btn--primary btn--lg" data-i18n="partners.cta.link">Räägi meiega →</a>
     </div>
 
   </div>
