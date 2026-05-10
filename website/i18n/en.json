@@ -1,5 +1,6 @@
 {
   "nav.mission": "Mission",
+  "nav.sponsors": "Sponsors",
   "nav.team": "Team",
   "nav.timeline": "Timeline",
   "nav.partners": "Partners",
@@ -55,9 +56,12 @@
   "monaco.title.line2": "",
   "monaco.intro": "Monaco Energy Boat Challenge is an international student and innovation competition focused on developing sustainable marine technologies and alternative energy solutions. The competition brings together the world's leading universities, engineering teams and maritime industry companies to test and develop next-generation zero-emission propulsion systems and energy-efficient racing boats in real conditions.",
   "monaco.text1": "Monaco Energy Boat Challenge is the world's most prestigious zero-emission vessel competition, organised by Yacht Club de Monaco since 2014. Every summer, 40–60 teams from around the world converge on Monaco harbour to prove that clean energy works at sea.",
-  "monaco.classes.intro": "HydroRacer competes in two classes:",
-  "monaco.class1.desc": "An endurance race where the most energy-efficient boat wins.",
-  "monaco.class2.desc": "A sprint race measuring maximum performance.",
+  "monaco.cta": "View the race →",
+  "monaco.classes.intro": "HydroRacer competes in the SeaLab category in two races:",
+  "monaco.class1.name": "ENDURANCE",
+  "monaco.class1.desc": "Long-duration race in which teams must complete as many laps as possible within the allocated time.",
+  "monaco.class2.name": "16 NM SPEED RACE",
+  "monaco.class2.desc": "Offshore speed race over 16 nautical miles testing long-range performance and reliability.",
   "monaco.text2": "The competition is more than sport. It is an international validation platform where new maritime technologies get their first real sea trial. The event is closely watched by European maritime and energy sector investors and industry partners.",
 
   "timeline.label": "Timeline",

@@ -715,34 +715,28 @@
       z-index: 1;
     }
 
-    .monaco-image-container {
+    #monaco {
       position: relative;
-      width: 100%;
-      margin-top: 56px;
+      background-image: url('images/monaco.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
-
-    .monaco-image-container img {
-      width: 100%;
-      display: block;
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    .monaco-image-container::before {
+    #monaco::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(
-        to bottom,
-        #0a0a0f 0%,
-        transparent 20%,
-        transparent 80%,
-        #0a0a0f 100%
-      );
+      background:
+        linear-gradient(to right, rgba(6,15,30,0.95) 0%, rgba(6,15,30,0.55) 25%, rgba(6,15,30,0.55) 75%, rgba(6,15,30,0.95) 100%),
+        linear-gradient(to bottom, rgba(6,15,30,1) 0%, rgba(6,15,30,0.55) 25%, rgba(6,15,30,0.55) 75%, rgba(6,15,30,1) 100%);
+      z-index: 0;
       pointer-events: none;
+    }
+    #monaco > .container {
+      position: relative;
       z-index: 1;
     }
 
@@ -769,20 +763,64 @@
       margin-top: 20px;
     }
     .monaco-right > p:first-child { margin-top: 0; }
+    .cta-button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 32px;
+      padding: 18px 44px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fff;
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.85);
+      overflow: hidden;
+      isolation: isolate;
+      transition: color 0.4s ease, border-color 0.4s ease;
+    }
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #fff;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+      z-index: -1;
+    }
+    .cta-button:hover {
+      color: var(--dark);
+      border-color: #fff;
+    }
+    .cta-button:hover::before {
+      transform: scaleX(1);
+    }
+
     .monaco-classes {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-top: 12px;
+      gap: 24px;
+      margin-top: 20px;
     }
-    .monaco-bullet {
-      width: 8px;
-      height: 8px;
-      min-width: 8px;
-      border-radius: 50%;
-      background: rgba(0,212,255,0.55);
-      margin-top: 6px;
-      flex-shrink: 0;
+    .monaco-class-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(18px, 1.5vw, 22px);
+      letter-spacing: 0.06em;
+      color: #fff;
+      margin: 0 0 6px;
+      text-transform: uppercase;
+    }
+    .monaco-class-desc {
+      font-size: clamp(15px, 1.1vw, 17px);
+      line-height: 1.55;
+      color: rgba(255,255,255,0.85);
+      margin: 0;
     }
 
     /* Sub-teams heading */
@@ -1444,112 +1482,78 @@
     ============================================================ */
     .footer {
       position: relative;
-      overflow: hidden;
-      padding: 140px 0 28px;
-      background:
-        radial-gradient(ellipse at 50% 100%, rgba(60,200,232,0.32) 0%, rgba(60,200,232,0.10) 40%, transparent 75%),
-        linear-gradient(180deg, var(--dark) 0%, #07111a 35%, #0a2433 100%);
-      border-top: 1px solid var(--dark-border);
+      padding: 100px 0 28px;
+      background: var(--dark);
     }
 
-    .footer-bg-text {
-      position: absolute;
-      top: 70px;
-      left: 0;
-      right: 0;
-      display: flex;
-      gap: 0;
-      pointer-events: none;
-      white-space: nowrap;
-      overflow: hidden;
-      user-select: none;
-      z-index: 0;
+    .footer-cta-wrap {
+      text-align: center;
+      margin-bottom: 40px;
     }
 
-    .footer-bg-text span {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-      font-size: clamp(80px, 13vw, 190px);
-      letter-spacing: -0.04em;
-      line-height: 1;
-      color: rgba(60, 200, 232, 0.10);
-      flex-shrink: 0;
-      padding: 0 30px;
-    }
-
-    .footer-bg-text span::after {
-      content: " /";
-      color: rgba(60, 200, 232, 0.10);
-    }
-
-    .footer-cards {
+    .footer-cta {
       position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-      margin-bottom: 60px;
-    }
-
-    .footer-card {
-      position: relative;
-      padding: 32px 30px;
-      min-height: 320px;
-      background:
-        linear-gradient(to right, rgba(255,255,255,0.45) 14px, transparent 14px) top left / 16px 1px no-repeat,
-        linear-gradient(to bottom, rgba(255,255,255,0.45) 14px, transparent 14px) top left / 1px 16px no-repeat,
-        linear-gradient(to left, rgba(255,255,255,0.45) 14px, transparent 14px) top right / 16px 1px no-repeat,
-        linear-gradient(to bottom, rgba(255,255,255,0.45) 14px, transparent 14px) top right / 1px 16px no-repeat,
-        linear-gradient(to right, rgba(255,255,255,0.45) 14px, transparent 14px) bottom left / 16px 1px no-repeat,
-        linear-gradient(to top, rgba(255,255,255,0.45) 14px, transparent 14px) bottom left / 1px 16px no-repeat,
-        linear-gradient(to left, rgba(255,255,255,0.45) 14px, transparent 14px) bottom right / 16px 1px no-repeat,
-        linear-gradient(to top, rgba(255,255,255,0.45) 14px, transparent 14px) bottom right / 1px 16px no-repeat,
-        linear-gradient(180deg, rgba(60,200,232,0.10) 0%, rgba(60,200,232,0.04) 100%);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .footer-card-title {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 22px 56px;
       font-family: 'Space Grotesk', sans-serif;
       font-weight: 600;
-      font-size: 22px;
+      font-size: clamp(15px, 1.1vw, 18px);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
       color: #fff;
-      margin: 0 0 auto;
-      letter-spacing: -0.01em;
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.85);
+      overflow: hidden;
+      isolation: isolate;
+      transition: color 0.4s ease, border-color 0.4s ease;
+    }
+    .footer-cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #fff;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+      z-index: -1;
+    }
+    .footer-cta:hover {
+      color: var(--dark);
+      border-color: #fff;
+    }
+    .footer-cta:hover::before {
+      transform: scaleX(1);
     }
 
-    .footer-card-content {
-      margin-top: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-size: 14px;
-      line-height: 1.55;
-      color: rgba(236,242,247,0.78);
+    .footer-info {
+      text-align: center;
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(236,242,247,0.7);
+      margin-bottom: 72px;
     }
-
-    .footer-card-content a {
-      color: rgba(236,242,247,0.78);
-      transition: color var(--transition);
-      display: inline-block;
+    .footer-info a {
+      color: rgba(236,242,247,0.7);
+      transition: color 0.25s ease;
     }
-
-    .footer-card-content a:hover { color: var(--cyan); }
+    .footer-info a:hover { color: var(--cyan); }
+    .footer-info .sep {
+      margin: 0 12px;
+      color: rgba(236,242,247,0.3);
+    }
 
     .footer-bottom {
-      position: relative;
-      z-index: 1;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 16px;
       padding-top: 24px;
-      border-top: 1px solid rgba(255,255,255,0.08);
       font-size: 13px;
-      color: rgba(236,242,247,0.55);
+      color: rgba(236,242,247,0.5);
     }
 
     .footer-social {
@@ -1559,20 +1563,16 @@
 
     .footer-social a {
       font-size: 13px;
-      color: rgba(236,242,247,0.65);
-      transition: color var(--transition);
+      color: rgba(236,242,247,0.6);
+      transition: color 0.25s ease;
     }
     .footer-social a:hover { color: #fff; }
 
-    @media (max-width: 900px) {
-      .footer-cards { grid-template-columns: 1fr; gap: 16px; }
-      .footer-card { min-height: 220px; padding: 26px 24px; }
-      .footer { padding: 100px 0 24px; }
-    }
-
     @media (max-width: 600px) {
+      .footer { padding: 72px 0 24px; }
       .footer-bottom { flex-direction: column; gap: 14px; text-align: center; }
-      .footer-bg-text span { font-size: clamp(60px, 18vw, 120px); }
+      .footer-info .sep { display: block; height: 4px; margin: 0; }
+      .footer-info .sep::before { content: ''; }
     }
     /* ============================================================
        FLIP CARDS
@@ -1778,6 +1778,7 @@
 
 <ul class="nav-links" id="navLinks" role="list">
   <li><a href="#mission" data-i18n="nav.mission">Missioon</a></li>
+  <li><a href="#partners" data-i18n="nav.sponsors">Sponsorid</a></li>
   <li><a href="#team" data-i18n="nav.team">Meeskond</a></li>
   <li><a href="#monaco">Monaco Energy Boat Challenge</a></li>
   <li><a href="#ajakava" data-i18n="nav.timeline">Ajakava</a></li>
@@ -2022,45 +2023,25 @@
         <p class="monaco-intro-text" data-i18n="monaco.intro">
           Monaco Energy Boat Challenge on rahvusvaheline tudengi- ja innovatsioonivõistlus, mis keskendub kestlike meretehnoloogiate ja alternatiivsete energialahenduste arendamisele. Võistlus toob kokku maailma juhtivad ülikoolid, inseneritiimid ja merendussektori ettevõtted, et testida ja arendada järgmise põlvkonna nullheitega jõusüsteeme ning energiatõhusaid võistluspaate reaalses keskkonnas.
         </p>
+        <a href="https://energyboatchallenge.com" target="_blank" rel="noopener noreferrer" class="cta-button" data-i18n="monaco.cta">Vaata võistlust →</a>
       </div>
 
-      <div class="monaco-right reveal-right reveal-delay-1" data-scroll-words>
-        <p data-i18n="monaco.text1">
-          Monaco Energy Boat Challenge on maailma prestiižseim null-emissiooniga laevade võistlus,
-          mida korraldab Yacht Club de Monaco alates 2014. aastast. Igal suvel koguneb Monacose
-          sadamasse 40–60 meeskonda üle maailma, et tõestada, kuidas puhas energia töötab ka
-          päris merel.
-        </p>
-        <p data-i18n="monaco.classes.intro">HydroRacer osaleb kahes võistlusklassis:</p>
+      <div class="monaco-right reveal-right reveal-delay-1">
+        <p data-i18n="monaco.classes.intro">HydroRacer osaleb SeaLab kategoorias kahel sõidul:</p>
         <div class="monaco-classes">
-          <div class="mission-goal reveal reveal-delay-1">
-            <div class="monaco-bullet"></div>
-            <div class="mission-goal-content">
-              <h4>Energy Endurance</h4>
-              <p data-i18n="monaco.class1.desc">Vastupidavusvõistlus, kus võidab kõige energiatõhusam paat.</p>
-            </div>
+          <div class="monaco-class reveal reveal-delay-1">
+            <h4 class="monaco-class-name" data-i18n="monaco.class1.name">ENDURANCE</h4>
+            <p class="monaco-class-desc" data-i18n="monaco.class1.desc">Vastupidavusvõistlus, kus meeskonnad peavad läbima maksimaalselt ringe etteantud aja jooksul.</p>
           </div>
-          <div class="mission-goal reveal reveal-delay-2">
-            <div class="monaco-bullet"></div>
-            <div class="mission-goal-content">
-              <h4>Speed Challenge</h4>
-              <p data-i18n="monaco.class2.desc">Kiirussõit, kus mõõdetakse maksimaalset jõudlust.</p>
-            </div>
+          <div class="monaco-class reveal reveal-delay-2">
+            <h4 class="monaco-class-name" data-i18n="monaco.class2.name">16 NM SPEED RACE</h4>
+            <p class="monaco-class-desc" data-i18n="monaco.class2.desc">16 meremiili kiirussõit avamerel, mis testib paadi pikamaajõudlust ja töökindlust.</p>
           </div>
         </div>
-        <p data-i18n="monaco.text2">
-          Võistlus ei ole pelgalt sport. See on rahvusvaheline valideerimisplatvorm, kus uued
-          meretehnoloogiad saavad esimest korda reaalse meretesti. Üritust jälgivad aktiivselt
-          Euroopa merendus- ja energeetikasektori investorid ja tööstuspartnerid.
-        </p>
       </div>
 
     </div>
 
-  </div>
-
-  <div class="monaco-image-container reveal reveal-delay-2">
-    <img src="images/monaco.jpg" alt="Monaco Energy Boat Challenge">
   </div>
 </section>
 
@@ -2172,31 +2153,17 @@
      FOOTER
 ============================================================ -->
 <footer class="footer" role="contentinfo">
-  <div class="footer-bg-text" aria-hidden="true">
-    <span>HYDRORACER</span>
-    <span>HYDRORACER</span>
-    <span>HYDRORACER</span>
-  </div>
-
   <div class="container">
-    <div class="footer-cards">
 
-      <div class="footer-card">
-        <h3 class="footer-card-title" data-i18n="footer.location.title">Asukoht</h3>
-        <div class="footer-card-content">
-          <p>Tallinna Tehnikaülikool<br>Ehitajate tee 5<br>Tallinn 19086, Eesti</p>
-        </div>
-      </div>
-
-      <div class="footer-card">
-        <h3 class="footer-card-title" data-i18n="footer.contact.title">Kontakt</h3>
-        <div class="footer-card-content">
-          <a href="mailto:hydroracer@taltech.ee">hydroracer@taltech.ee</a>
-          <span data-i18n="footer.contact.team">TalTech TiVo üliõpilasmeeskond</span>
-        </div>
-      </div>
-
+    <div class="footer-cta-wrap">
+      <a href="mailto:hydroracer@taltech.ee" class="footer-cta" data-i18n="footer.cta">Räägi meiega →</a>
     </div>
+
+    <p class="footer-info">
+      <a href="mailto:hydroracer@taltech.ee">hydroracer@taltech.ee</a>
+      <span class="sep">·</span>
+      <span data-i18n="footer.contact.team">TalTech TiVo üliõpilasmeeskond</span>
+    </p>
 
     <div class="footer-bottom">
       <p data-i18n="footer.copyright">© 2026 HydroRacer · TalTech TiVo · Kõik õigused kaitstud</p>

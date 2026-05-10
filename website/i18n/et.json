@@ -1,5 +1,6 @@
 {
   "nav.mission": "Missioon",
+  "nav.sponsors": "Sponsorid",
   "nav.team": "Meeskond",
   "nav.timeline": "Ajakava",
   "nav.partners": "Partnerid",
@@ -55,9 +56,12 @@
   "monaco.title.line2": "",
   "monaco.intro": "Monaco Energy Boat Challenge on rahvusvaheline tudengi- ja innovatsioonivõistlus, mis keskendub kestlike meretehnoloogiate ja alternatiivsete energialahenduste arendamisele. Võistlus toob kokku maailma juhtivad ülikoolid, inseneritiimid ja merendussektori ettevõtted, et testida ja arendada järgmise põlvkonna nullheitega jõusüsteeme ning energiatõhusaid võistluspaate reaalses keskkonnas.",
   "monaco.text1": "Monaco Energy Boat Challenge on maailma prestiižseim null-emissiooniga laevade võistlus, mida korraldab Yacht Club de Monaco alates 2014. aastast. Igal suvel koguneb Monacose sadamasse 40–60 meeskonda üle maailma, et tõestada, kuidas puhas energia töötab ka päris merel.",
-  "monaco.classes.intro": "HydroRacer osaleb kahes võistlusklassis:",
-  "monaco.class1.desc": "Vastupidavusvõistlus, kus võidab kõige energiatõhusam paat.",
-  "monaco.class2.desc": "Kiirussõit, kus mõõdetakse maksimaalset jõudlust.",
+  "monaco.cta": "Vaata võistlust →",
+  "monaco.classes.intro": "HydroRacer osaleb SeaLab kategoorias kahel sõidul:",
+  "monaco.class1.name": "ENDURANCE",
+  "monaco.class1.desc": "Vastupidavusvõistlus, kus meeskonnad peavad läbima maksimaalselt ringe etteantud aja jooksul.",
+  "monaco.class2.name": "16 NM SPEED RACE",
+  "monaco.class2.desc": "16 meremiili kiirussõit avamerel, mis testib paadi pikamaajõudlust ja töökindlust.",
   "monaco.text2": "Võistlus ei ole pelgalt sport. See on rahvusvaheline valideerimisplatvorm, kus uued meretehnoloogiad saavad esimest korda reaalse meretesti. Üritust jälgivad aktiivselt Euroopa merendus- ja energeetikasektori investorid ja tööstuspartnerid.",
 
   "timeline.label": "Ajakava",
