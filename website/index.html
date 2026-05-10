@@ -301,6 +301,7 @@
     .nav-logo {
       display: flex;
       align-items: center;
+      gap: 14px;
       position: relative;
       z-index: 1002;
     }
@@ -313,6 +314,19 @@
       color: var(--cyan);
     }
     .brand-logo-sm .o { color: var(--orange); }
+
+    .nav-logo-divider {
+      display: inline-block;
+      width: 1px;
+      height: 22px;
+      background: rgba(60,200,232,0.3);
+    }
+
+    .nav-tivo-img {
+      height: 24px;
+      width: auto;
+      display: block;
+    }
 
     .nav-actions {
       display: flex;
@@ -463,15 +477,11 @@
       flex-shrink: 0;
     }
 
-    .tivo-logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(17px, 2.4vw, 30px);
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: var(--cyan);
-      line-height: 1;
+    .tivo-logo-img {
+      height: clamp(36px, 4.5vw, 56px);
+      width: auto;
+      display: block;
     }
-    .tivo-logo .o { color: var(--orange); }
 
     .tivo-logo-sub {
       font-family: 'Space Grotesk', sans-serif;
@@ -804,8 +814,8 @@
     .monaco-classes {
       display: flex;
       flex-direction: column;
-      gap: 24px;
-      margin-top: 20px;
+      gap: 28px;
+      margin-top: clamp(80px, 14vh, 160px);
     }
     .monaco-class-name {
       font-family: 'Space Grotesk', sans-serif;
@@ -826,6 +836,200 @@
     /* Sub-teams heading */
     .subteams-heading {
       margin-bottom: 0;
+    }
+
+    /* ============================================================
+       SUBTEAMS CAROUSEL — iPod-style
+    ============================================================ */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .subteams-carousel {
+      position: relative;
+      background: #060f1e;
+      padding: clamp(120px, 16vh, 200px) 0 clamp(80px, 10vh, 140px);
+      overflow: hidden;
+    }
+
+    .subteams-arc {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: clamp(160px, 22vw, 280px);
+      pointer-events: none;
+    }
+
+    .subteams-stage {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .subteams-number {
+      width: clamp(64px, 7vw, 88px);
+      height: clamp(64px, 7vw, 88px);
+      border: 1.5px solid rgba(255,255,255,0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: clamp(40px, 6vh, 72px);
+      background: #060f1e;
+    }
+    .subteams-number-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: clamp(20px, 1.8vw, 26px);
+      color: var(--cyan);
+      letter-spacing: 0.04em;
+    }
+
+    .subteams-slides {
+      position: relative;
+      width: 100%;
+      max-width: 820px;
+      min-height: clamp(280px, 32vh, 360px);
+    }
+
+    .subteam-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.5, 0, 0.2, 1);
+      pointer-events: none;
+    }
+    .subteam-slide.is-active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+    .subteam-slide.is-leaving-left {
+      opacity: 0;
+      transform: translateX(-40px);
+    }
+    .subteams-slides[data-direction="prev"] .subteam-slide:not(.is-active):not(.is-leaving-left) {
+      transform: translateX(-40px);
+    }
+    .subteams-slides[data-direction="prev"] .subteam-slide.is-leaving-left {
+      transform: translateX(40px);
+    }
+
+    .subteams-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(48px, 4.4vw, 60px);
+      height: clamp(48px, 4.4vw, 60px);
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+      z-index: 3;
+    }
+    .subteams-arrow svg {
+      width: 38%;
+      height: 38%;
+    }
+    .subteams-arrow:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      background: rgba(60,200,232,0.08);
+    }
+    .subteams-arrow--prev {
+      left: clamp(16px, 4vw, 60px);
+    }
+    .subteams-arrow--prev:hover { transform: translateY(-50%) translateX(-3px); }
+    .subteams-arrow--next {
+      right: clamp(16px, 4vw, 60px);
+    }
+    .subteams-arrow--next:hover { transform: translateY(-50%) translateX(3px); }
+
+    @media (max-width: 600px) {
+      .subteams-arrow--prev { left: 8px; }
+      .subteams-arrow--next { right: 8px; }
+    }
+
+    .subteam-slide-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: clamp(32px, 4.6vw, 64px);
+      letter-spacing: -0.01em;
+      color: #fff;
+      margin: 0 0 clamp(20px, 3vh, 32px);
+      line-height: 1.05;
+    }
+
+    .subteam-slide-desc {
+      font-size: clamp(15px, 1.15vw, 18px);
+      line-height: 1.65;
+      color: rgba(255,255,255,0.75);
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .subteams-nav {
+      display: flex;
+      gap: clamp(20px, 3vw, 40px);
+      margin-top: clamp(48px, 7vh, 80px);
+    }
+
+    .subteams-dot {
+      background: transparent;
+      border: 0;
+      padding: 8px 4px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0.16em;
+      color: rgba(255,255,255,0.4);
+      cursor: pointer;
+      position: relative;
+      transition: color 0.25s ease;
+    }
+    .subteams-dot::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--cyan);
+      transform: translateX(-50%);
+      transition: width 0.3s ease;
+    }
+    .subteams-dot:hover { color: rgba(255,255,255,0.85); }
+    .subteams-dot.is-active {
+      color: var(--cyan);
+    }
+    .subteams-dot.is-active::after {
+      width: 100%;
+    }
+
+    @media (max-width: 600px) {
+      .subteam-slide-name { font-size: clamp(28px, 8vw, 40px); }
+      .subteams-nav { gap: 14px; }
+      .subteams-dot { font-size: 12px; padding: 8px 2px; }
     }
 
     /* Subteam card grid */
@@ -1032,13 +1236,26 @@
        AJAKAVA — 2-column editorial layout
     ============================================================ */
     .ajakava-grid {
-      display: grid;
-      grid-template-columns: 2fr 3fr;
-      gap: 80px;
-      align-items: start;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 64px;
+    }
+    .ajakava-left {
+      text-align: center;
+      max-width: 900px;
+    }
+    .ajakava-left .section-title {
+      font-size: clamp(48px, 7vw, 96px);
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+    .ajakava-right {
+      width: 100%;
+      max-width: 1000px;
     }
     @media (max-width: 768px) {
-      .ajakava-grid { grid-template-columns: 1fr; gap: 48px; }
+      .ajakava-grid { gap: 40px; }
     }
     .ajakava-intro-text {
       font-size: 15px;
@@ -1760,6 +1977,8 @@
   <div class="container nav-inner">
     <a href="#top" class="nav-logo" aria-label="HydroRacer avaleht">
       <span class="brand-logo-sm" aria-label="HydroRacer">H<span class="o">Y</span>DROR<span class="o">A</span>CER</span>
+      <span class="nav-logo-divider" aria-hidden="true"></span>
+      <img src="images/tivo.png.webp" alt="TiVo – TalTechi vesinikuorganisatsioon" class="nav-tivo-img">
     </a>
 
     <div class="nav-actions">
@@ -1798,13 +2017,6 @@
         <span class="brand-logo-lg" aria-label="HydroRacer">
           H<span class="o">Y</span>DROR<span class="o">A</span>CER
         </span>
-      </div>
-      <div class="hero-logo-divider" aria-hidden="true"></div>
-      <div class="hero-logo-tivo">
-        <div class="tivo-logo" aria-label="TiVo – TalTechi vesinikuorganisatsioon">
-          Ti<span class="o">V</span>o
-        </div>
-        <div class="tivo-logo-sub">TalTech</div>
       </div>
     </div>
 
@@ -1914,95 +2126,57 @@
 
 
 <!-- ============================================================
-     ALAMMEESKONNAD — Dark
+     ALAMMEESKONNAD — Dark, iPod-style carousel
 ============================================================ -->
-<section class="section section--dark" id="subteams" aria-labelledby="subteams-heading">
-  <div class="container">
+<section class="section subteams-carousel" id="subteams" aria-labelledby="subteams-heading">
+  <h2 class="visually-hidden" id="subteams-heading" data-i18n="subteams.title">Alammeeskonnad</h2>
 
-    <div class="subteams-heading reveal" style="margin-bottom: 0;">
-      <span class="section-label" data-i18n="subteams.label">Alammeeskonnad</span>
-      <h2 class="section-title" id="subteams-heading" data-i18n="subteams.title">Viis spetsialiseerunud tiimi</h2>
+  <svg class="subteams-arc" viewBox="0 0 1200 240" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M 0 240 Q 600 -100 1200 240" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.2"/>
+  </svg>
+
+  <div class="container subteams-stage">
+    <div class="subteams-number" aria-hidden="true">
+      <span class="subteams-number-text" id="subteamsNum">01</span>
     </div>
 
-    <div class="flip-cards-grid subteam-flip-grid">
+    <button type="button" class="subteams-arrow subteams-arrow--prev" id="subteamsPrev" aria-label="Eelmine meeskond">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 L7 12 L15 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button type="button" class="subteams-arrow subteams-arrow--next" id="subteamsNext" aria-label="Järgmine meeskond">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 L17 12 L9 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
 
-      <div class="flip-card reveal" role="button">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <h4 data-i18n="subteams.team1.name">ENERGIASÜSTEEMID</h4>
-            <p class="flip-card-tagline" data-i18n="subteams.team1.tagline">Alternatiivkütusel põhinev jõuallikas</p>
-            <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
-          </div>
-          <div class="flip-card-back">
-            <h4 data-i18n="subteams.back.label">Meeskond</h4>
-            <p data-i18n="subteams.team1.desc">Vastutab paadi alternatiivkütusel põhineva jõuallika arendamise ja integreerimise eest. Meeskonna ülesandeks on välja töötada metanoolil põhinev lahendus elektrienergia tootmiseks pardal ning tagada efektiivne ja süsinikneutraalne energiatarve.</p>
-            <p class="flip-card-members">Vladislav Musakko · Markus Valkna</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card reveal reveal-delay-1" role="button">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <h4 data-i18n="subteams.team2.name">Elektrisüsteemid</h4>
-            <p class="flip-card-tagline" data-i18n="subteams.team2.tagline">Kõrg- ja madalpingesüsteemid</p>
-            <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
-          </div>
-          <div class="flip-card-back">
-            <h4 data-i18n="subteams.back.label">Meeskond</h4>
-            <p data-i18n="subteams.team2.desc">Vastutab paadi elektri-, juhtimis- ja automaatikasüsteemide projekteerimise eest. Meeskonna ülesandeks on välja töötada ja integreerida lahendusi, mis tagavad kõrge- ja madalpingesüsteemide töökindluse ning paadi kriitiliste seadmete stabiilse elektrivarustuse.</p>
-            <p class="flip-card-members">Erik-Rennes Pihlak · Mark-Mathias Vuuk · Hans Erik Kulla · Janis Novikov · Kaspar Ulla</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card reveal reveal-delay-2" role="button">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <h4 data-i18n="subteams.team3.name">Kere ja Konstruktsioon</h4>
-            <p class="flip-card-tagline" data-i18n="subteams.team3.tagline">Paadikere disain ja komposiitmaterjalid</p>
-            <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
-          </div>
-          <div class="flip-card-back">
-            <h4 data-i18n="subteams.back.label">Meeskond</h4>
-            <p data-i18n="subteams.team3.desc">Vastutab paadi kere ja konstruktsiooniliste lahenduste projekteerimise ning tootmise eest. Tegeletakse materjalide valiku, konstruktsioonide tugevusanalüüside ja valmistatavuse ning vastupidavuse analüüsiga.</p>
-            <p class="flip-card-members">Joonas Lember · Lisell Tamm · Oskar Johannes Laht</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card reveal reveal-delay-1" role="button">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <h4 data-i18n="subteams.team4.name">Propulsioon ja Dünaamika</h4>
-            <p class="flip-card-tagline" data-i18n="subteams.team4.tagline">Hüdrofoilid ja propulsioonilahendus</p>
-            <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
-          </div>
-          <div class="flip-card-back">
-            <h4 data-i18n="subteams.back.label">Meeskond</h4>
-            <p data-i18n="subteams.team4.desc">Vastutab paadi hüdrodünaamilise käitumise, propulsioonilahenduse ja hüdrofoilide arendamise eest. Meeskonna töö hõlmab foilide geomeetria, materjali tugevuse analüüsi ning paadi stabiilsuse ja energiaefektiivsuse optimeerimist erinevates sõidutingimustes.</p>
-            <p class="flip-card-members">Erik Suuk · Egert Veldi · Karl Teder</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flip-card reveal reveal-delay-2" role="button">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <h4 data-i18n="subteams.team5.name">ADMINISTRATIIVMEESKOND</h4>
-            <p class="flip-card-tagline" data-i18n="subteams.team5.tagline">Koordinatsioon, kommunikatsioon ja rahastus</p>
-            <span class="flip-hint" data-i18n="flip.click">Hõljuta rohkem →</span>
-          </div>
-          <div class="flip-card-back">
-            <h4 data-i18n="subteams.back.label">Meeskond</h4>
-            <p data-i18n="subteams.team5.desc">Vastutab projektijuhtimise, rahastuse tagamise, partnersuhete sõlmimise, turunduse elluviimise eest ning toetab meeskonda läbi koolituste ja meeskonnaürituste organiseerimise.</p>
-            <p class="flip-card-members">Mark Mehilane · Henri Kalvik · Kati Mändmets</p>
-          </div>
-        </div>
-      </div>
-
+    <div class="subteams-slides" id="subteamsSlides" aria-live="polite">
+      <article class="subteam-slide is-active" data-index="0">
+        <h3 class="subteam-slide-name" data-i18n="subteams.team1.name">ENERGIASÜSTEEMID</h3>
+        <p class="subteam-slide-desc" data-i18n="subteams.team1.desc">Vastutab paadi alternatiivkütusel põhineva jõuallika arendamise ja integreerimise eest. Meeskonna ülesandeks on välja töötada metanoolil põhinev lahendus elektrienergia tootmiseks pardal ning tagada efektiivne ja süsinikneutraalne energiatarve.</p>
+      </article>
+      <article class="subteam-slide" data-index="1">
+        <h3 class="subteam-slide-name" data-i18n="subteams.team2.name">ELEKTRISÜSTEEMID</h3>
+        <p class="subteam-slide-desc" data-i18n="subteams.team2.desc">Vastutab paadi elektri-, juhtimis- ja automaatikasüsteemide projekteerimise eest. Meeskonna ülesandeks on välja töötada ja integreerida lahendusi, mis tagavad kõrge- ja madalpingesüsteemide töökindluse ning paadi kriitiliste seadmete stabiilse elektrivarustuse.</p>
+      </article>
+      <article class="subteam-slide" data-index="2">
+        <h3 class="subteam-slide-name" data-i18n="subteams.team3.name">KERE &amp; KONSTRUKTSIOON</h3>
+        <p class="subteam-slide-desc" data-i18n="subteams.team3.desc">Vastutab paadi kere ja konstruktsiooniliste lahenduste projekteerimise ning tootmise eest. Tegeletakse materjalide valiku, konstruktsioonide tugevusanalüüside ja valmistatavuse ning vastupidavuse analüüsiga.</p>
+      </article>
+      <article class="subteam-slide" data-index="3">
+        <h3 class="subteam-slide-name" data-i18n="subteams.team4.name">PROPULSIOON &amp; DÜNAAMIKA</h3>
+        <p class="subteam-slide-desc" data-i18n="subteams.team4.desc">Vastutab paadi hüdrodünaamilise käitumise, propulsioonilahenduse ja hüdrofoilide arendamise eest. Meeskonna töö hõlmab foilide geomeetria, materjali tugevuse analüüsi ning paadi stabiilsuse ja energiaefektiivsuse optimeerimist erinevates sõidutingimustes.</p>
+      </article>
+      <article class="subteam-slide" data-index="4">
+        <h3 class="subteam-slide-name" data-i18n="subteams.team5.name">ADMINISTRATIIVMEESKOND</h3>
+        <p class="subteam-slide-desc" data-i18n="subteams.team5.desc">Vastutab projektijuhtimise, rahastuse tagamise, partnersuhete sõlmimise, turunduse elluviimise eest ning toetab meeskonda läbi koolituste ja meeskonnaürituste organiseerimise.</p>
+      </article>
     </div>
 
+    <nav class="subteams-nav" aria-label="Alammeeskonnad">
+      <button type="button" class="subteams-dot is-active" data-go="0" aria-label="Tiim 01">01</button>
+      <button type="button" class="subteams-dot" data-go="1" aria-label="Tiim 02">02</button>
+      <button type="button" class="subteams-dot" data-go="2" aria-label="Tiim 03">03</button>
+      <button type="button" class="subteams-dot" data-go="3" aria-label="Tiim 04">04</button>
+      <button type="button" class="subteams-dot" data-go="4" aria-label="Tiim 05">05</button>
+    </nav>
   </div>
 </section>
 
@@ -2027,8 +2201,11 @@
       </div>
 
       <div class="monaco-right reveal-right reveal-delay-1">
-        <p data-i18n="monaco.classes.intro">HydroRacer osaleb SeaLab kategoorias kahel sõidul:</p>
         <div class="monaco-classes">
+          <div class="monaco-class reveal">
+            <h4 class="monaco-class-name" data-i18n="monaco.class0.name">MANOEUVRABILITY</h4>
+            <p class="monaco-class-desc" data-i18n="monaco.class0.desc">Madalkiiruse täpsuskatse marinas, mis testib täpset manööverdamist ja operatiivset kontrolli.</p>
+          </div>
           <div class="monaco-class reveal reveal-delay-1">
             <h4 class="monaco-class-name" data-i18n="monaco.class1.name">ENDURANCE</h4>
             <p class="monaco-class-desc" data-i18n="monaco.class1.desc">Vastupidavusvõistlus, kus meeskonnad peavad läbima maksimaalselt ringe etteantud aja jooksul.</p>
@@ -2054,17 +2231,12 @@
 
     <div class="ajakava-grid">
 
-      <div class="ajakava-left reveal-left">
+      <div class="ajakava-left reveal">
         <span class="section-label" data-i18n="timeline.label">Ajakava</span>
-        <h2 class="section-title" id="ajakava-heading" data-i18n="timeline.title">Tee Monaconi</h2>
-        <p class="ajakava-intro-text" data-i18n="timeline.intro">
-          HydroRaceri areng on üles ehitatud selge etapiloogika järgi. Kontseptsioonist disaini,
-          ehitusest testideni viib iga samm meeskonna lähemale Monaco Energy Boat Challenge
-          2027 stardijoonele.
-        </p>
+        <h2 class="section-title" id="ajakava-heading" data-i18n="timeline.title">TEE MONACONI</h2>
       </div>
 
-      <div class="ajakava-right reveal-right reveal-delay-1">
+      <div class="ajakava-right reveal reveal-delay-1">
         <div class="ajakava-steps">
 
           <div class="ajakava-step step--done">
@@ -2414,6 +2586,63 @@
       showToast('Sõnum saadetud! Võtame sinuga peagi ühendust.', 'success');
     }, 1200);
   });
+
+  // === SUBTEAMS CAROUSEL ===
+  (function () {
+    const slidesWrap = document.getElementById('subteamsSlides');
+    const slides = document.querySelectorAll('.subteam-slide');
+    const dots = document.querySelectorAll('.subteams-dot');
+    const numEl = document.getElementById('subteamsNum');
+    const prevBtn = document.getElementById('subteamsPrev');
+    const nextBtn = document.getElementById('subteamsNext');
+    if (!slides.length || !dots.length || !numEl || !slidesWrap) return;
+
+    let current = 0;
+    const total = slides.length;
+
+    const setActive = (idx, direction) => {
+      if (idx === current) return;
+      const dir = direction || (idx > current ? 'next' : 'prev');
+      slidesWrap.setAttribute('data-direction', dir);
+
+      slides.forEach((s, i) => {
+        s.classList.toggle('is-active', i === idx);
+        if (dir === 'next') {
+          s.classList.toggle('is-leaving-left', i === current);
+        } else {
+          s.classList.remove('is-leaving-left');
+        }
+      });
+
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+      numEl.textContent = String(idx + 1).padStart(2, '0');
+      current = idx;
+
+      window.setTimeout(() => {
+        slides.forEach((s) => s.classList.remove('is-leaving-left'));
+      }, 600);
+    };
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const idx = parseInt(dot.getAttribute('data-go'), 10);
+        if (!Number.isNaN(idx)) setActive(idx);
+      });
+    });
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        const idx = (current - 1 + total) % total;
+        setActive(idx, 'prev');
+      });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        const idx = (current + 1) % total;
+        setActive(idx, 'next');
+      });
+    }
+  })();
 
   // === BACK TO TOP ===
   const backToTop = document.getElementById('backToTop');
