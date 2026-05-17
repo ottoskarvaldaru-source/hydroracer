@@ -100,6 +100,7 @@
   "footer.contact.title": "Contact",
   "footer.contact.team": "TalTech TiVo student team",
   "footer.copyright": "© 2026 HydroRacer · TalTech TiVo · All rights reserved",
+  "footer.cta": "Get in touch →",
 
   "form.error.required": "Please fill in all required fields.",
   "form.error.email": "Please enter a valid email address.",

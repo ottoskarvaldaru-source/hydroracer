@@ -306,9 +306,15 @@
     .nav-logo {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       position: relative;
       z-index: 1002;
+    }
+
+    .nav-logo-mark {
+      height: 32px;
+      width: auto;
+      display: block;
     }
 
     .brand-logo-sm {
@@ -479,6 +485,7 @@
       gap: 28px;
       margin-bottom: 80px;
     }
+
 
     .brand-logo-lg {
       font-family: 'Space Grotesk', sans-serif;
@@ -977,7 +984,7 @@
       inset: 0;
       background-color: #0d1a2e;
       background-size: cover;
-      background-position: center;
+      background-position: center top;
       background-repeat: no-repeat;
       z-index: 0;
       backface-visibility: hidden;
@@ -1019,11 +1026,32 @@
       align-items: flex-start;
       padding: 28px;
       gap: 16px;
+      background:
+        linear-gradient(180deg, rgba(6,15,30,0.55) 0%, rgba(6,15,30,0.72) 100%),
+        url('images/upscalemedia-transformed.jpeg') center/cover no-repeat;
+    }
+    .subteam-card-back::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('images/upscalemedia-transformed.jpeg');
+      background-size: 220% auto;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: brightness(1.4) contrast(1.25) saturate(1.15);
+      mix-blend-mode: screen;
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .subteam-card-back > * {
+      position: relative;
+      z-index: 1;
     }
 
     .subteam-card-back h3 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: #fff;
       text-transform: uppercase;
@@ -1034,17 +1062,34 @@
       word-break: break-word;
     }
 
+    .subteam-card-lead {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin: 0;
+    }
+    .subteam-card-lead strong {
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
     .subteam-card-back p {
-      font-size: 1rem;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.88);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.9);
       margin: 0;
     }
 
     @media (max-width: 600px) {
       .subteam-card { flex: 0 0 320px; width: 320px; height: 460px; }
       .subteam-card-front { padding: 22px; }
-      .subteam-card-back { padding: 22px; }
+      .subteam-card-back { padding: 22px; gap: 12px; }
+      .subteam-card-back h3 { font-size: 1.15rem; }
+      .subteam-card-back p { font-size: 1rem; line-height: 1.55; }
     }
 
 
@@ -1255,7 +1300,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 64px;
+      gap: 80px;
     }
     .ajakava-left {
       text-align: center;
@@ -1268,202 +1313,207 @@
     }
     .ajakava-right {
       width: 100%;
-      max-width: 1000px;
+      max-width: 1100px;
     }
     @media (max-width: 768px) {
-      .ajakava-grid { gap: 40px; }
+      .ajakava-grid { gap: 48px; }
     }
-    .ajakava-intro-text {
-      font-size: 15px;
-      line-height: 1.78;
-      color: rgba(236,242,247,0.65);
-      margin-top: 24px;
+
+    .rt-timeline {
+      position: relative;
+      padding: 60px 0;
     }
-    .ajakava-steps {
+    .rt-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      margin-left: -1px;
+      background: rgba(255,255,255,0.08);
+      z-index: 0;
+      border-radius: 2px;
+    }
+    .rt-line-progress {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 0;
+      background: #fff;
+      border-radius: 2px;
+      will-change: height;
+    }
+
+    .rt-items {
+      position: relative;
       display: flex;
       flex-direction: column;
+      gap: 0;
     }
-    .ajakava-step {
-      display: flex;
-      gap: 20px;
+    .rt-item:not(:last-child) { padding-bottom: 220px; }
+
+    .rt-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(80px, 12vw, 160px);
+      align-items: start;
+      min-height: 220px;
     }
-    .ajakava-step-track {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex-shrink: 0;
-      width: 44px;
+    .rt-item-date {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(28px, 3.8vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: rgba(255,255,255,0.22);
+      transition: color 0.6s ease;
+      position: sticky;
+      top: 120px;
+      align-self: start;
+      text-align: right;
+      padding-right: 12px;
     }
-    .ajakava-node {
-      width: 32px;
-      height: 32px;
+
+    .rt-item-card {
+      padding: 0 0 0 16px;
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .rt-item.is-visible .rt-item-card { opacity: 1; transform: none; }
+
+    .rt-item-card h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.28);
+      margin: 0 0 10px;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      transition: color 0.5s ease;
+    }
+    .rt-item-card p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.22);
+      margin: 0;
+      transition: color 0.5s ease;
+    }
+
+    .rt-dot {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
-      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.20);
+      background: #06090D;
+      transform: translate(-50%, -50%);
+      z-index: 3;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.03);
-      position: relative;
-      z-index: 1;
-    }
-    .ajakava-line {
-      width: 1px;
-      flex: 1;
-      min-height: 16px;
-      background: rgba(255,255,255,0.08);
-      margin: 5px 0;
-    }
-    .ajakava-step:last-child .ajakava-line { display: none; }
-    .ajakava-step-body {
-      flex: 1;
-      padding-bottom: 24px;
-      padding-top: 4px;
-    }
-    .ajakava-step:last-child .ajakava-step-body { padding-bottom: 0; }
-    .ajakava-step-date {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.10em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.28);
-      margin-bottom: 3px;
-    }
-    .ajakava-step-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.42);
-      letter-spacing: -0.01em;
-      margin-bottom: 3px;
-    }
-    .ajakava-step-desc {
-      font-size: 12px;
-      line-height: 1.6;
-      color: rgba(255,255,255,0.26);
+      transition: background-color 0.4s ease, border-color 0.4s ease;
     }
 
     /* Done */
-    .ajakava-step.step--done .ajakava-node {
-      background: var(--orange);
-      border-color: var(--orange);
+    .rt-item.is-done .rt-dot {
+      background: #fff;
+      border-color: #fff;
     }
-    .ajakava-step.step--done .ajakava-node::after {
+    .rt-item.is-done .rt-dot::after {
       content: '';
       display: block;
-      width: 8px;
-      height: 5px;
-      border-left: 2px solid rgba(255,255,255,0.95);
-      border-bottom: 2px solid rgba(255,255,255,0.95);
+      width: 7px;
+      height: 4px;
+      border-left: 2px solid #06090D;
+      border-bottom: 2px solid #06090D;
       transform: rotate(-45deg) translate(1px, -1px);
     }
-    .ajakava-step.step--done .ajakava-step-date { color: rgba(232,104,44,0.60); }
-    .ajakava-step.step--done .ajakava-step-title { color: rgba(255,255,255,0.55); }
-    .ajakava-step.step--done .ajakava-step-desc { color: rgba(255,255,255,0.32); }
-    .ajakava-step.step--done .ajakava-line {
-      background: linear-gradient(to bottom, var(--orange), rgba(255,255,255,0.08));
-    }
+    .rt-item.is-done .rt-item-date { color: #fff; }
+    .rt-item.is-done .rt-item-card h3 { color: #fff; }
+    .rt-item.is-done .rt-item-card p { color: rgba(255,255,255,0.7); }
 
-    /* Active */
-    .ajakava-step.step--active .ajakava-node {
-      width: 40px;
-      height: 40px;
-      background: var(--orange);
-      border: none;
-      box-shadow:
-        0 0 0 6px rgba(232,104,44,0.18),
-        0 0 0 12px rgba(232,104,44,0.07),
-        0 4px 28px rgba(232,104,44,0.50);
-      animation: ajakava-pulse 2.8s ease-in-out infinite;
+    /* Active (PRAEGU) */
+    .rt-item.is-active .rt-dot {
+      background: #fff;
+      border-color: #fff;
     }
-    .ajakava-step.step--active .ajakava-node::after {
+    .rt-item.is-active .rt-dot::after {
       content: '';
       display: block;
-      width: 10px;
-      height: 10px;
-      background: rgba(255,255,255,0.92);
+      width: 7px;
+      height: 7px;
+      background: #06090D;
       border-radius: 50%;
     }
-    .ajakava-step.step--active .ajakava-step-body {
-      background: rgba(232,104,44,0.06);
-      border: 1px solid rgba(232,104,44,0.20);
-      border-radius: 8px;
-      padding: 14px 16px;
-      margin-top: -4px;
-    }
-    .ajakava-step.step--active .ajakava-step-date { color: var(--orange); }
-    .ajakava-step.step--active .ajakava-step-title {
-      font-size: 16px;
+    .rt-item.is-active .rt-item-date { color: #fff; }
+    .rt-item.is-active .rt-item-card h3 { color: #fff; }
+    .rt-item.is-active .rt-item-card p { color: rgba(255,255,255,0.78); }
+
+    .rt-badge {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 4px 12px;
+      background: var(--orange);
+      border-radius: 20px;
+      font-size: 10px;
       font-weight: 700;
-      color: #ffffff;
-      letter-spacing: -0.02em;
-      margin-bottom: 6px;
-    }
-    .ajakava-step.step--active .ajakava-step-desc {
-      color: rgba(236,242,247,0.60);
-      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #fff;
     }
 
-    /* Final */
-    .ajakava-step.step--final .ajakava-node {
-      border: 2px solid rgba(0,212,255,0.55);
-      background: rgba(0,212,255,0.06);
-      box-shadow: 0 0 0 4px rgba(0,212,255,0.08), 0 4px 20px rgba(0,212,255,0.22);
+    /* Final (Monaco) */
+    .rt-item.is-final .rt-dot {
+      background: #fff;
+      border-color: #fff;
     }
-    .ajakava-step.step--final .ajakava-node::after {
+    .rt-item.is-final .rt-dot::after {
       content: '★';
       font-size: 12px;
-      color: rgba(0,212,255,0.85);
+      color: #06090D;
       line-height: 1;
     }
-    .ajakava-step.step--final .ajakava-step-body {
-      background: rgba(0,212,255,0.04);
-      border: 1px solid rgba(0,212,255,0.20);
-      border-radius: 8px;
-      padding: 14px 16px;
-      margin-top: -4px;
-    }
-    .ajakava-step.step--final .ajakava-step-date { color: rgba(0,212,255,0.65); }
-    .ajakava-step.step--final .ajakava-step-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: -0.02em;
-      margin-bottom: 6px;
-    }
-    .ajakava-step.step--final .ajakava-step-desc {
-      color: rgba(0,212,255,0.50);
-      font-size: 13px;
-    }
+    .rt-item.is-final .rt-item-date { color: #fff; }
+    .rt-item.is-final .rt-item-card h3 { color: #fff; }
+    .rt-item.is-final .rt-item-card p { color: rgba(255,255,255,0.78); }
 
-    .ajakava-badge {
-      display: inline-block;
-      margin-bottom: 7px;
-      padding: 2px 9px;
-      background: rgba(232,104,44,0.12);
-      border: 1px solid rgba(232,104,44,0.30);
-      border-radius: 20px;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--orange);
-    }
-
-    @keyframes ajakava-pulse {
-      0%, 100% {
-        box-shadow:
-          0 0 0 6px rgba(232,104,44,0.18),
-          0 0 0 12px rgba(232,104,44,0.07),
-          0 4px 28px rgba(232,104,44,0.50);
+    @media (max-width: 768px) {
+      .rt-timeline { padding: 30px 0; }
+      .rt-line { left: 22px; margin-left: 0; }
+      .rt-items { gap: 56px; }
+      .rt-item {
+        display: block;
+        padding-left: 60px;
+        min-height: 0;
       }
-      50% {
-        box-shadow:
-          0 0 0 9px rgba(232,104,44,0.13),
-          0 0 0 18px rgba(232,104,44,0.04),
-          0 4px 40px rgba(232,104,44,0.65);
+      .rt-item-date {
+        text-align: left;
+        font-size: 22px;
+        margin-bottom: 14px;
+        color: rgba(255,255,255,0.45);
+        position: static;
+        top: auto;
+        padding-right: 0;
       }
+      .rt-item.is-done .rt-item-date,
+      .rt-item.is-active .rt-item-date,
+      .rt-item.is-final .rt-item-date { color: #fff; }
+      .rt-dot {
+        position: absolute;
+        left: 22px;
+        top: 28px;
+        transform: translate(-50%, 0);
+        grid-column: auto;
+        justify-self: auto;
+      }
+      .rt-item-card { padding: 0; }
+      .rt-item-card h3 { font-size: 1.2rem; }
+      .rt-item-card p { font-size: 0.95rem; }
     }
 
     /* ============================================================
@@ -1721,6 +1771,18 @@
       background: var(--dark);
     }
 
+    .footer-bottom-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .footer-logo {
+      height: 40px;
+      width: auto;
+      display: block;
+      opacity: 0.85;
+    }
+
     .footer-cta-wrap {
       text-align: center;
       margin-bottom: 40px;
@@ -1780,6 +1842,11 @@
       color: rgba(236,242,247,0.3);
     }
 
+    .footer-bottom-wrap {
+      width: 100%;
+      padding: 0 clamp(24px, 4vw, 56px);
+      box-sizing: border-box;
+    }
     .footer-bottom {
       display: flex;
       justify-content: space-between;
@@ -1994,7 +2061,7 @@
 <nav class="nav" id="mainNav" role="navigation" aria-label="Peamenüü">
   <div class="container nav-inner">
     <a href="#top" class="nav-logo" aria-label="HydroRacer avaleht">
-      <span class="brand-logo-sm" aria-label="HydroRacer">H<span class="o">Y</span>DROR<span class="o">A</span>CER</span>
+      <img src="hydroracerlogos/HR%20logo%20helesinine%20final(thick).png" alt="HydroRacer" class="nav-logo-mark">
       <span class="nav-logo-divider" aria-hidden="true"></span>
       <img src="images/tivo.png.webp" alt="TiVo – TalTechi vesinikuorganisatsioon" class="nav-tivo-img">
     </a>
@@ -2102,7 +2169,7 @@
         <div class="stat-label">Monaco Energy Boat Challenge</div>
       </div>
       <div class="stat-row">
-        <div class="stat-num">10</div>
+        <div class="stat-num">9</div>
         <div class="stat-label" data-i18n="hero.stat.partners">Partnerit</div>
       </div>
     </div>
@@ -2152,10 +2219,11 @@
     <div class="subteam-card" role="listitem" tabindex="0">
       <div class="subteam-card-inner">
         <div class="subteam-card-front">
-          <div class="team-card-bg" aria-hidden="true"></div>
+          <div class="team-card-bg" aria-hidden="true" style="background-image: url('images/tiimijuhid/Erik_Peainsener.jpg');"></div>
           <h3 data-i18n="subteams.team1.name">ENERGIASÜSTEEMID</h3>
         </div>
         <div class="subteam-card-back">
+          <p class="subteam-card-lead">Tiimijuht · <strong>Erik</strong></p>
           <h3 data-i18n="subteams.team1.name">ENERGIASÜSTEEMID</h3>
           <p data-i18n="subteams.team1.desc">Vastutab paadi alternatiivkütusel põhineva jõuallika arendamise ja integreerimise eest. Meeskonna ülesandeks on välja töötada metanoolil põhinev lahendus elektrienergia tootmiseks pardal ning tagada efektiivne ja süsinikneutraalne energiatarve.</p>
         </div>
@@ -2165,10 +2233,11 @@
     <div class="subteam-card" role="listitem" tabindex="0">
       <div class="subteam-card-inner">
         <div class="subteam-card-front">
-          <div class="team-card-bg" aria-hidden="true"></div>
+          <div class="team-card-bg" aria-hidden="true" style="background-image: url('images/tiimijuhid/Janis_Elektris%C3%BCsteemid.jpg');"></div>
           <h3 data-i18n="subteams.team2.name">ELEKTRISÜSTEEMID</h3>
         </div>
         <div class="subteam-card-back">
+          <p class="subteam-card-lead">Tiimijuht · <strong>Janis</strong></p>
           <h3 data-i18n="subteams.team2.name">ELEKTRISÜSTEEMID</h3>
           <p data-i18n="subteams.team2.desc">Vastutab paadi elektri-, juhtimis- ja automaatikasüsteemide projekteerimise eest. Meeskonna ülesandeks on välja töötada ja integreerida lahendusi, mis tagavad kõrge- ja madalpingesüsteemide töökindluse ning paadi kriitiliste seadmete stabiilse elektrivarustuse.</p>
         </div>
@@ -2178,10 +2247,11 @@
     <div class="subteam-card" role="listitem" tabindex="0">
       <div class="subteam-card-inner">
         <div class="subteam-card-front">
-          <div class="team-card-bg" aria-hidden="true"></div>
+          <div class="team-card-bg" aria-hidden="true" style="background-image: url('images/tiimijuhid/Joonas_Kere%26Konstruktsioon.jpg');"></div>
           <h3 data-i18n="subteams.team3.name">KERE &amp; KONSTRUKTSIOON</h3>
         </div>
         <div class="subteam-card-back">
+          <p class="subteam-card-lead">Tiimijuht · <strong>Joonas</strong></p>
           <h3 data-i18n="subteams.team3.name">KERE &amp; KONSTRUKTSIOON</h3>
           <p data-i18n="subteams.team3.desc">Vastutab paadi kere ja konstruktsiooniliste lahenduste projekteerimise ning tootmise eest. Tegeletakse materjalide valiku, konstruktsioonide tugevusanalüüside ja valmistatavuse ning vastupidavuse analüüsiga.</p>
         </div>
@@ -2191,10 +2261,11 @@
     <div class="subteam-card" role="listitem" tabindex="0">
       <div class="subteam-card-inner">
         <div class="subteam-card-front">
-          <div class="team-card-bg" aria-hidden="true"></div>
+          <div class="team-card-bg" aria-hidden="true" style="background-image: url('images/tiimijuhid/Lisell_Propulsioon%26D%C3%BCnaamika.jpg');"></div>
           <h3 data-i18n="subteams.team4.name">PROPULSIOON &amp; DÜNAAMIKA</h3>
         </div>
         <div class="subteam-card-back">
+          <p class="subteam-card-lead">Tiimijuht · <strong>Lisell</strong></p>
           <h3 data-i18n="subteams.team4.name">PROPULSIOON &amp; DÜNAAMIKA</h3>
           <p data-i18n="subteams.team4.desc">Vastutab paadi hüdrodünaamilise käitumise, propulsioonilahenduse ja hüdrofoilide arendamise eest. Meeskonna töö hõlmab foilide geomeetria, materjali tugevuse analüüsi ning paadi stabiilsuse ja energiaefektiivsuse optimeerimist erinevates sõidutingimustes.</p>
         </div>
@@ -2204,10 +2275,11 @@
     <div class="subteam-card" role="listitem" tabindex="0">
       <div class="subteam-card-inner">
         <div class="subteam-card-front">
-          <div class="team-card-bg" aria-hidden="true"></div>
+          <div class="team-card-bg" aria-hidden="true" style="background-image: url('images/tiimijuhid/Mark_Turundus%26Kommunikatsioon.jpg');"></div>
           <h3 data-i18n="subteams.team5.name">TURUNDUS &amp; KOMMUNIKATSIOON</h3>
         </div>
         <div class="subteam-card-back">
+          <p class="subteam-card-lead">Tiimijuht · <strong>Mark</strong></p>
           <h3 data-i18n="subteams.team5.name">TURUNDUS &amp; KOMMUNIKATSIOON</h3>
           <p data-i18n="subteams.team5.desc">Vastutab projektijuhtimise, rahastuse tagamise, partnersuhete sõlmimise, turunduse elluviimise eest ning toetab meeskonda läbi koolituste ja meeskonnaürituste organiseerimise.</p>
         </div>
@@ -2271,81 +2343,67 @@
       </div>
 
       <div class="ajakava-right reveal reveal-delay-1">
-        <div class="ajakava-steps">
-
-          <div class="ajakava-step step--done">
-            <div class="ajakava-step-track">
-              <div class="ajakava-node"></div>
-              <div class="ajakava-line"></div>
-            </div>
-            <div class="ajakava-step-body">
-              <div class="ajakava-step-date" data-i18n="timeline.step1.date">Veebr 2026</div>
-              <div class="ajakava-step-title" data-i18n="timeline.step1.title">Kontsept</div>
-              <div class="ajakava-step-desc" data-i18n="timeline.step1.desc">Meeskond, esialgne kontseptsioon, teostatavuse analüüs</div>
-            </div>
+        <div class="rt-timeline" id="rtTimeline">
+          <div class="rt-line" aria-hidden="true">
+            <div class="rt-line-progress"></div>
           </div>
+          <div class="rt-items">
 
-          <div class="ajakava-step step--active">
-            <div class="ajakava-step-track">
-              <div class="ajakava-node"></div>
-              <div class="ajakava-line"></div>
+            <div class="rt-item is-done">
+              <div class="rt-item-date" data-i18n="timeline.step1.date">Veebr 2026</div>
+              <div class="rt-dot" aria-hidden="true"></div>
+              <div class="rt-item-card">
+                <h3 data-i18n="timeline.step1.title">Kontsept</h3>
+                <p data-i18n="timeline.step1.desc">Meeskond, esialgne kontseptsioon, teostatavuse analüüs</p>
+              </div>
             </div>
-            <div class="ajakava-step-body">
-              <div class="ajakava-badge" data-i18n="timeline.now">Praegu</div>
-              <div class="ajakava-step-date" data-i18n="timeline.step2.date">Märts–Mai 2026</div>
-              <div class="ajakava-step-title" data-i18n="timeline.step2.title">Disainperiood</div>
-              <div class="ajakava-step-desc" data-i18n="timeline.step2.desc">CAD mudel, hüdrofoilid, elektrisüsteemid</div>
+
+            <div class="rt-item is-active">
+              <div class="rt-item-date" data-i18n="timeline.step2.date">Märts–Mai 2026</div>
+              <div class="rt-dot" aria-hidden="true"></div>
+              <div class="rt-item-card">
+                <h3 data-i18n="timeline.step2.title">Disainperiood</h3>
+                <p data-i18n="timeline.step2.desc">CAD mudel, hüdrofoilid, elektrisüsteemid</p>
+              </div>
             </div>
+
+            <div class="rt-item">
+              <div class="rt-item-date" data-i18n="timeline.step3.date">Juuni–Aug 2026</div>
+              <div class="rt-dot" aria-hidden="true"></div>
+              <div class="rt-item-card">
+                <h3 data-i18n="timeline.step3.title">Ehitusperiood</h3>
+                <p data-i18n="timeline.step3.desc">Kere valmistamine, komponentide koostamine</p>
+              </div>
+            </div>
+
+            <div class="rt-item">
+              <div class="rt-item-date" data-i18n="timeline.step4.date">Sept 2026</div>
+              <div class="rt-dot" aria-hidden="true"></div>
+              <div class="rt-item-card">
+                <h3 data-i18n="timeline.step4.title">Hooaja algus</h3>
+                <p data-i18n="timeline.step4.desc">Esimene veekatsetus, süsteemide valideerimine</p>
+              </div>
+            </div>
+
+            <div class="rt-item">
+              <div class="rt-item-date" data-i18n="timeline.step5.date">Sept–Nov 2026</div>
+              <div class="rt-dot" aria-hidden="true"></div>
+              <div class="rt-item-card">
+                <h3 data-i18n="timeline.step5.title">Testid</h3>
+                <p data-i18n="timeline.step5.desc">Jõudlustestid, optimeerimine, viimistlus</p>
+              </div>
+            </div>
+
+            <div class="rt-item is-final">
+              <div class="rt-item-date" data-i18n="timeline.step6.date">Juuli 2027</div>
+              <div class="rt-dot" aria-hidden="true"></div>
+              <div class="rt-item-card">
+                <h3 data-i18n="timeline.step6.title">Monaco Energy Boat Challenge</h3>
+                <p data-i18n="timeline.step6.desc">Monaco Energy Boat Challenge 2027</p>
+              </div>
+            </div>
+
           </div>
-
-          <div class="ajakava-step">
-            <div class="ajakava-step-track">
-              <div class="ajakava-node"></div>
-              <div class="ajakava-line"></div>
-            </div>
-            <div class="ajakava-step-body">
-              <div class="ajakava-step-date" data-i18n="timeline.step3.date">Juuni–Aug 2026</div>
-              <div class="ajakava-step-title" data-i18n="timeline.step3.title">Ehitusperiood</div>
-              <div class="ajakava-step-desc" data-i18n="timeline.step3.desc">Kere valmistamine, komponentide koostamine</div>
-            </div>
-          </div>
-
-          <div class="ajakava-step">
-            <div class="ajakava-step-track">
-              <div class="ajakava-node"></div>
-              <div class="ajakava-line"></div>
-            </div>
-            <div class="ajakava-step-body">
-              <div class="ajakava-step-date" data-i18n="timeline.step4.date">Sept 2026</div>
-              <div class="ajakava-step-title" data-i18n="timeline.step4.title">Hooaja algus</div>
-              <div class="ajakava-step-desc" data-i18n="timeline.step4.desc">Esimene veekatsetus, süsteemide valideerimine</div>
-            </div>
-          </div>
-
-          <div class="ajakava-step">
-            <div class="ajakava-step-track">
-              <div class="ajakava-node"></div>
-              <div class="ajakava-line"></div>
-            </div>
-            <div class="ajakava-step-body">
-              <div class="ajakava-step-date" data-i18n="timeline.step5.date">Sept–Nov 2026</div>
-              <div class="ajakava-step-title" data-i18n="timeline.step5.title">Testid</div>
-              <div class="ajakava-step-desc" data-i18n="timeline.step5.desc">Jõudlustestid, optimeerimine, viimistlus</div>
-            </div>
-          </div>
-
-          <div class="ajakava-step step--final">
-            <div class="ajakava-step-track">
-              <div class="ajakava-node"></div>
-              <div class="ajakava-line"></div>
-            </div>
-            <div class="ajakava-step-body">
-              <div class="ajakava-step-date" data-i18n="timeline.step6.date">Juuli 2027</div>
-              <div class="ajakava-step-title" data-i18n="timeline.step6.title">Monaco Energy Boat Challenge</div>
-              <div class="ajakava-step-desc" data-i18n="timeline.step6.desc">Monaco Energy Boat Challenge 2027</div>
-            </div>
-          </div>
-
         </div>
       </div>
 
@@ -2369,8 +2427,14 @@
       <a href="mailto:hydroracer@taltech.ee">hydroracer@taltech.ee</a>
     </p>
 
+  </div>
+
+  <div class="footer-bottom-wrap">
     <div class="footer-bottom">
-      <p data-i18n="footer.copyright">© 2026 HydroRacer · TalTech TiVo · Kõik õigused kaitstud</p>
+      <div class="footer-bottom-left">
+        <img src="hydroracerlogos/HR%20logo%20helesinine%20final(thick).png" alt="HydroRacer" class="footer-logo">
+        <p data-i18n="footer.copyright">© 2026 HydroRacer · TalTech TiVo · Kõik õigused kaitstud</p>
+      </div>
       <div class="footer-social">
         <a href="https://www.linkedin.com/company/hydroracer/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a href="https://www.instagram.com/taltechtivo/" target="_blank" rel="noopener noreferrer">Instagram</a>
@@ -2590,17 +2654,17 @@
             words.push(span);
           });
         });
-        sets.push({ container, words });
+        sets.push({ container, words, anchor: paragraphs[0] || container });
       });
     }
 
     let ticking = false;
     function update() {
       const vh = window.innerHeight;
-      sets.forEach(({ container, words }) => {
-        const rect = container.getBoundingClientRect();
-        const start = vh * 0.80;
-        const end = vh * 0.25;
+      sets.forEach(({ words, anchor }) => {
+        const rect = anchor.getBoundingClientRect();
+        const start = vh * 0.85;
+        const end = vh * 0.40;
         const span = rect.height + (start - end);
         const progress = Math.max(0, Math.min(1, (start - rect.top) / span));
         const litCount = Math.round(progress * words.length);
@@ -2672,6 +2736,41 @@
       showToast('Sõnum saadetud! Võtame sinuga peagi ühendust.', 'success');
     }, 1200);
   });
+
+  // === SCROLL-DRIVEN TIMELINE (AJAKAVA) ===
+  (function() {
+    const timeline = document.getElementById('rtTimeline');
+    if (!timeline) return;
+    const progressEl = timeline.querySelector('.rt-line-progress');
+    const items = Array.from(timeline.querySelectorAll('.rt-item'));
+    if (!progressEl || !items.length) return;
+
+    let ticking = false;
+    function update() {
+      const vh = window.innerHeight;
+      const rect = timeline.getBoundingClientRect();
+      const triggerLine = vh * 0.55;
+      const scrolled = triggerLine - rect.top;
+      const total = rect.height;
+      const progress = Math.max(0, Math.min(1, scrolled / total));
+      progressEl.style.height = (progress * 100) + '%';
+
+      items.forEach(item => {
+        const r = item.getBoundingClientRect();
+        if (r.top < vh * 0.88) item.classList.add('is-visible');
+      });
+      ticking = false;
+    }
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+  })();
 
   // === BACK TO TOP ===
   const backToTop = document.getElementById('backToTop');
