@@ -25,6 +25,14 @@
   "team.text1": "Today's technological challenges have grown increasingly complex and require combining knowledge from different fields, practical experience and rapid innovation. Many engineering students lack opportunities to participate in development projects that solve real-world problems, where the knowledge gained through coursework can find a practical outlet. The world increasingly needs deep-tech solutions that support climate neutrality, technological sovereignty and the growth of new high-tech industries. We need a strong new generation of engineers capable of working across disciplines, bridging science with applied engineering and taking ideas from the lab to working solutions.",
   "team.text2": "The project creates an environment where young engineers gain hands-on experience in real development processes, collaborate with specialists from different fields and develop technologies whose impact reaches far beyond the university and Estonia.",
 
+  "leaders.label": "Team leads",
+  "leaders.title": "The people leading the team",
+  "leaders.erik.role": "Project Lead",
+  "leaders.janis.role": "Electrical Systems",
+  "leaders.joonas.role": "Hull & Construction",
+  "leaders.lisell.role": "Propulsion & Dynamics",
+  "leaders.mark.role": "Marketing & Communications",
+
   "subteams.label": "Team",
   "subteams.title": "Five specialised teams",
   "subteams.intro": "The project brings together students of electrical power engineering, naval mechanics, product development and business.",

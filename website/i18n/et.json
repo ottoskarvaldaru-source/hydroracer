@@ -25,6 +25,14 @@
   "team.text1": "Tänapäeva tehnoloogilised väljakutsed on muutunud järjest keerukamaks ning vajavad eri valdkondade teadmiste ühendamist, praktilist kogemust ja kiiret innovatsiooni. Paljudel inseneritudengitel on puudu võimalustest osaleda reaalseid probleeme lahendavatest arendusprojektidest, kus õppetöö käigus omandatud teadmised saavad praktilise väljundi. Maailm vajab üha rohkem süvatehnoloogilisi lahendusi, mis toetaksid kliimaneutraalsust, tehnoloogilist sõltumatust ja uute kõrgtehnoloogiliste tööstuste arengut. Vajame tugevat järelkasvu inseneridest, kes suudavad töötada interdistsiplinaarselt, siduda teaduse praktilise inseneeriaga ning viia ideid laborist toimivate lahendusteni.",
   "team.text2": "Projekt loob keskkonna, kus noored insenerid saavad omandada praktilise kogemuse päris arendusprotsessides, teha koostööd eri valdkondade spetsialistidega ning arendada tehnoloogiaid, mille mõju ulatub kaugemale ülikoolist ja Eestist.",
 
+  "leaders.label": "Tiimijuhid",
+  "leaders.title": "Meeskonna eestvedajad",
+  "leaders.erik.role": "Projektijuht",
+  "leaders.janis.role": "Elektrisüsteemid",
+  "leaders.joonas.role": "Kere & Konstruktsioon",
+  "leaders.lisell.role": "Propulsioon & Dünaamika",
+  "leaders.mark.role": "Turundus & Kommunikatsioon",
+
   "subteams.label": "Meeskond",
   "subteams.title": "Viis spetsialiseerunud tiimi",
   "subteams.intro": "Projektis kohtuvad elektroenergeetika, laevamehaanika, tootearenduse ning majanduse tudengid.",
